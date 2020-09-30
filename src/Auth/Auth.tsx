@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
-class Packlist extends Component {
+class Auth extends Component {
 
     render() {
         return (
             <div>
-                <h1>Packlist</h1>
+                <h1>Auth</h1>
 
             </div>
         )
     }
 }
-export default Packlist;
+export default Auth;
