@@ -1,20 +1,16 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
+
 class Header extends Component {
 
     render() {
         return (
-            <div>
-                <p>Navbar</p>
+            <div id="nav-container">
                 <nav >
                     <div >
-                        <Link to="/" >
-                            Home
-                        </Link>
-
+                        <Link to="/" >Home</Link>
                         <div >
                             <ul >
-
                                 <li >
                                     <Link to="/auth">Auth</Link>
                                 </li>
@@ -28,7 +24,7 @@ class Header extends Component {
                         </div>
                     </div>
                 </nav>
-                <p>Weather</p>
+                <p>BRC Weather</p>
             </div>
         )
     }
