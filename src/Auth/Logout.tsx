@@ -1,10 +1,21 @@
 import React, {Component} from "react";
+import { Button } from "@material-ui/core";
 
-class Logout extends Component {
+type LogoutProps = {
+    updateToken: (token:string, authenticated:boolean)=>void
+}
+class Logout extends Component <LogoutProps> {
+
+    removeToken = ():void => {
+        window.localStorage.removeItem('token');
+        this.props.updateToken('', false)
+    }
 
     render(){
         return(
-            <div></div>
+            <div>
+                <Button onClick={this.removeToken}>Logout</Button>
+            </div>
         )
     }
 }

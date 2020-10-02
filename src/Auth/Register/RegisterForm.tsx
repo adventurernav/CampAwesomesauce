@@ -1,25 +1,26 @@
 import { Button, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
-import * as React from "react";
+import React, { Component } from "react";
 import RegisterSubmit from './RegisterSubmit'
 
-
-interface Values {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    role: string
+type RegisterFormProps = {
+    updateToken: (token:string, authenticated:boolean)=>void
 }
 
-export const RegisterForm: React.FC = () => {
-    return (
+export class RegisterForm extends Component <RegisterFormProps> {
+    
+    render(){return (
         <div>
             <h1>Register</h1>
             <Formik
-                initialValues={{ firstName: '', lastName: '', email: '', password: '', role: '' }}
+                initialValues={{ 
+                    firstName: '', 
+                    lastName: '', 
+                    email: '', 
+                    password: '', 
+                    role: '' }}
                 onSubmit={values => {
-                    RegisterSubmit(values)
+                    RegisterSubmit(values, this.props)
                 }}
             >
                 {({ values, handleChange, handleBlur }) => (
@@ -63,19 +64,11 @@ export const RegisterForm: React.FC = () => {
                                 onBlur={handleBlur}
                             />
                         </div>
-                        <div>
-                            <TextField
-                                name="role"
-                                label="Role"
-                                value={values.role}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        </div>
+                    
                         <Button type='submit'>Create Account</Button>
                     </Form>
                 )}
             </Formik>
         </div>
-    )
+    )}
 }

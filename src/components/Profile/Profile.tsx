@@ -1,13 +1,23 @@
-import React, {Component} from "react";
+import React, { Component } from 'react'
+import GetProfile from './GetProfile'
+import NewProfile from './NewProfile'
 
-class Profile extends Component {
-
-    render(){
-        return(
-            <div>
-                <h1>Profile</h1>
-            </div>
-        )
-    }
+type ProfileProps = {
+    appState: {authenticated: boolean, token: string}
 }
-export default Profile;
+
+class Profile extends Component <ProfileProps> {
+constructor(props: ProfileProps){
+    super(props)
+    
+}
+
+    render(){return(
+        <div>
+            <h1>Profile</h1>
+            <NewProfile appState={this.props}/>
+            <GetProfile appState={this.props} />
+        </div>
+    )}
+}
+export default Profile

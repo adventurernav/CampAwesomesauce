@@ -1,22 +1,24 @@
 import { Button, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
-import * as React from "react";
-interface Props {
-    onSubmit: (values:Values) => void;
-}
+import React, { Component } from "react";
+import LoginSubmit from "./LoginSubmit";
+
 interface Values {
     email: string, 
     password: string
 }
+type LoginFormProps = {
+    updateToken: (token:string, authenticated:boolean)=>void
+}
 
-export const Login: React.FC<Props> = ({onSubmit}) => {
-    return(
+export class LoginForm extends Component <LoginFormProps> {
+    render(){return(
         <div>
             <h1>Login</h1>
             <Formik 
             initialValues={{email: '', password: ''}} 
             onSubmit={values=> {
-                onSubmit(values);
+                LoginSubmit(values, this.props);
             }}
             >
                 {({values, handleChange, handleBlur}) => (
@@ -42,10 +44,9 @@ export const Login: React.FC<Props> = ({onSubmit}) => {
                     />
                 </div>
                 <Button type='submit'>Login</Button>
-                <pre>{JSON.stringify(values, null, 2)}</pre>
                 </Form>
             )}
             </Formik>
         </div>
-    )
+    )}
 }
