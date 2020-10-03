@@ -6,16 +6,17 @@ import Footer from './Site/Footer'
 import SwitchController from './Site/SwitchController'
 
 type AppState = {
-  token: string,
+  token: string|null,
   authenticated: boolean
 }
-
+let currentToken = window.localStorage.getItem('token')
+let authCheck = currentToken? true:false
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props)
     this.state = {
-      authenticated: false,
-      token: ''
+      authenticated: authCheck,
+      token: currentToken
     }
     this.updateToken = this.updateToken.bind(this)
   }

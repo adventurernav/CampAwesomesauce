@@ -11,24 +11,23 @@ interface Values {
     status: string,
     profilePic: string
 }
-type newProfileProps = {
-    appState: { appState: { authenticated: boolean, token: string|null } }
+type updateProfileProps = {
+    appState: {appState: { appState: { authenticated: boolean, token: string|null } }}
 }
 
-class NewProfile extends Component<newProfileProps> {
-    constructor(props: newProfileProps){
+class UpdateProfile extends Component<updateProfileProps> {
+    constructor(props: updateProfileProps){
         super(props)
         console.log(props);
-        
     }
-    token:string|null = this.props.appState.appState.token
+    
+    token:string|null = this.props.appState.appState.appState.token
     requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.token};
 
-    newProfileSubmit = (values: Values) => {
+    updateProfileSubmit = (values: Values) => {
         console.log(values);
-        let id: number = 1
-        fetch(`${APIURL}/profile/register/${id}`, {
-            method: 'POST',
+        fetch(`${APIURL}/profile/`, {
+            method: 'PUT',
             headers: this.requestHeaders,
             body: JSON.stringify({
                 aboutMe: values.aboutMe,
@@ -47,7 +46,7 @@ class NewProfile extends Component<newProfileProps> {
     render() {
         return (
             <div>
-                <h1>Create your Profile</h1>
+                <h1>Update your Profile</h1>
                 <Formik
                     initialValues={{
                         playaname: '',
@@ -58,7 +57,7 @@ class NewProfile extends Component<newProfileProps> {
                         profilePic: ''
                     }}
                     onSubmit={values => {
-                        this.newProfileSubmit(values)
+                        this.updateProfileSubmit(values)
                     }}
                     >
                     {({ values, handleChange, handleBlur }) => (
@@ -127,7 +126,7 @@ class NewProfile extends Component<newProfileProps> {
                                 />
                             </div>
 
-                            <Button type='submit'>Create Profile</Button>
+                            <Button type='submit'>Update Profile</Button>
                         </Form>
                     )}
                 </Formik>
@@ -135,4 +134,4 @@ class NewProfile extends Component<newProfileProps> {
         )
     }
 }
-export default NewProfile
+export default UpdateProfile

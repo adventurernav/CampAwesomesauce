@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import APIURL from '../../helpers/environment'
 import {ProfileResults} from './ProfileInterfaces'
+import UpdateProfile from "./UpdateProfile";
 
 type getProfileProps = {
-    appState: { appState: { authenticated: boolean, token: string } }
+    appState: { appState: { authenticated: boolean, token: string|null } }
 }
 class GetProfile extends Component<getProfileProps, ProfileResults> {
     constructor(props: getProfileProps) {
@@ -19,19 +20,17 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
             }
         }
     }
+    token:string|null = this.props.appState.appState.token
+    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.token};
+
     componentDidMount(){
         this.profileFetch()
     }
     profileFetch = (): any => {
         let id:number = 1; //this should be the user's ID
-        let token:string = this.props.appState.appState.token
         fetch(`${APIURL}/profile/${id}`, {
             method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': token
-                // 'Authorization': window.localStorage.getItem('token')
-            })
+            headers: this.requestHeaders
         })
             .then(res => res.json())
             .then((data: ProfileResults) => {
@@ -56,11 +55,12 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
         return (
             <div>
                 <p>{`Playaname: ${this.state.users.playaname}`}</p>
-                <img src={this.state.users.profilePic} alt="Profile Picture"/>
+                <img src={this.state.users.profilePic} alt="Profile Picture" style={{height: '50px'}}/>
                 <p>{`Status: ${this.state.users.status}`}</p>
                 <p>{`Burns Attended: ${this.state.users.burnsAttended}`}</p>
                 <p>{`Favorite Principle: ${this.state.users.favPrinciple}`}</p>
                 <p>{`About Me: ${this.state.users.aboutMe}`}</p>
+                <UpdateProfile appState={this.props} />
             </div>
         )
     }

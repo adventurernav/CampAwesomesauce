@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import GetPacklist from './GetPacklist'
 
 class Packlist extends Component {
 
@@ -6,7 +7,7 @@ class Packlist extends Component {
         return (
             <div>
                 <h1>Packlist</h1>
-
+                <GetPacklist /> 
             </div>
         )
     }

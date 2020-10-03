@@ -10,7 +10,7 @@ type controllerState = {
 }
 type ControllerProps = {
     updateToken: (token: string, authenticated: boolean) => void
-    appState: { authenticated: boolean, token: string }
+    appState: { authenticated: boolean, token: string|null }
 }
 
 class SwitchController extends Component<ControllerProps, controllerState> {
