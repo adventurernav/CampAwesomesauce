@@ -4,8 +4,7 @@
     --pink: #f45286;
     --purple: #a14176;
     --black: #0d0908;
-
-    --caps: font-family: 'Amatic SC', cursive;
-    --head: font-family: 'Abel', sans-serif;
-    --text: font-family: 'Open Sans', sans-serif;
+    --caps: 'Amatic SC', cursive;
+    --head: 'Abel', sans-serif;
+    --text: 'Open Sans', sans-serif;
 }
