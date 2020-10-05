@@ -29,6 +29,7 @@ this.setState({token: newToken, authenticated: authenticated})
           <Router>
             <header className="App-header">
               <Header />
+              
             </header>
             <SwitchController updateToken={this.updateToken} appState={this.state} />
             <footer className="App-footer">

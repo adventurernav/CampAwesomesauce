@@ -6,9 +6,7 @@ type delProfileProps = {
     appState: { appState: { authenticated: boolean, token: string|null } }
 }
 class DeleteProfile extends Component<delProfileProps> {
-    constructor(props: delProfileProps) {
-        super(props)
-    }
+
     token:string|null = this.props.appState.appState.token
     requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.token};
 
@@ -26,7 +24,7 @@ class DeleteProfile extends Component<delProfileProps> {
     render() {
         return (
             <div>
-                <h1>HELLO WORLD</h1>
+                <br />
                 <Button color="secondary" onClick={this.delProfileFetch}>Delete My Profile</Button>
             </div>
         )

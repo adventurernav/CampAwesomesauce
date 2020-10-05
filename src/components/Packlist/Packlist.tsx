@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import GetPacklist from './GetPacklist'
-import NewPacklist from "./NewPacklist";
-import VerticalTabs from "./Tabs";
-import UpdatePacklist from "./UpdatePacklist";
+
 
 type PacklistProps = {
     appState: {authenticated: boolean, token: string|null}

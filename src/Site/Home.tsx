@@ -1,11 +1,16 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+import Banner from '../assets/pinkbanner.png'
+import Balls from '../assets/awesomeballs.jpg'
+import Group from '../assets/group2019.jpg'
 
 class Home extends Component {
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <h1>Home</h1>
+                <img src={Banner} alt="Banner"/>
+                <img src={Balls} alt="Banner"/>
+                <img src={Group} alt="Group"/>
             </div>
         )
     }

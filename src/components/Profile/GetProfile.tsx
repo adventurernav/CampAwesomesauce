@@ -55,7 +55,7 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
         return (
             <div>
                 <p>{`Playaname: ${this.state.users.playaname}`}</p>
-                <img src={this.state.users.profilePic} alt="Profile Picture" style={{height: '50px'}}/>
+                <img src={this.state.users.profilePic} alt="Avatar" style={{height: '50px'}}/>
                 <p>{`Status: ${this.state.users.status}`}</p>
                 <p>{`Burns Attended: ${this.state.users.burnsAttended}`}</p>
                 <p>{`Favorite Principle: ${this.state.users.favPrinciple}`}</p>

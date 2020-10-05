@@ -38,7 +38,7 @@ function a11yProps(index: any) {
   };
 }
 
-const styles = (theme:any) => ({
+const styles = (theme: any) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
@@ -50,15 +50,26 @@ const styles = (theme:any) => ({
   },
 });
 type tabProps = {
-  appState: {appState: { appState: { authenticated: boolean, token: string | null } }},
-  classes: any
+  appState: { appState: { appState: { authenticated: boolean, token: string | null } } },
+  classes: any,
+  PacklistState: PacklistState
 }
 type tabState = {
   value: number,
   classes: any
 }
 
- class VerticalTabs extends Component<tabProps, tabState> {
+export interface PacklistState {
+  data: packlistObject[]
+}
+type packlistKeys = {
+  id: number,
+  title: string
+}
+type packlistObject = {
+  [title:string]: packlistKeys
+}
+class VerticalTabs extends Component<tabProps, tabState> {
   constructor(props: tabProps) {
     super(props)
     this.state = {
@@ -66,7 +77,11 @@ type tabState = {
       classes: styles
     }
     console.log(props);
-    
+
+  }
+  componentDidUpdate() {
+    console.log(this.props);
+
   }
 
   handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -82,26 +97,23 @@ type tabState = {
           variant="scrollable"
           value={this.state.value}
           onChange={this.handleChange}
-          aria-label="Vertical tabs example"
+          aria-label="My Packlists"
           className={classes.tabs}
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-          
+          {this.props.PacklistState.data.map((packlist, i) => {
+            console.log(packlist);
+            return <Tab label={packlist?packlist.title:''} {...a11yProps(i)} />
+
+          })}
+
         </Tabs>
         <TabPanel value={this.state.value} index={0}>
-          Item One
+          Packlist Items for the first packlist
       </TabPanel>
-        <TabPanel value={this.state.value} index={1}>
-          Item Two
-      </TabPanel>
-        <TabPanel value={this.state.value} index={2}>
-          Item Three
-      </TabPanel>
+
 
       </div>
     );
   }
 }
-export default withStyles(styles,{withTheme: true})(VerticalTabs)
+export default withStyles(styles, { withTheme: true })(VerticalTabs)

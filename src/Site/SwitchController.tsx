@@ -15,9 +15,7 @@ type ControllerProps = {
 
 class SwitchController extends Component<ControllerProps, controllerState> {
 
-    constructor(props: ControllerProps) {
-        super(props)
-    }
+  
 
     render() {
         return (

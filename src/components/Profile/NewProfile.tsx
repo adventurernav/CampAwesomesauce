@@ -120,7 +120,7 @@ class NewProfile extends Component<newProfileProps> {
                             <div>
                                 <TextField
                                     name="profilePic"
-                                    label="Choose an avatar"
+                                    label="Choose an avatar(TEMP: enter a url)"
                                     value={values.profilePic}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
