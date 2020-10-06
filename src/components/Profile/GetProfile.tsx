@@ -4,7 +4,7 @@ import {ProfileResults} from './ProfileInterfaces'
 import UpdateProfile from "./UpdateProfile";
 
 type getProfileProps = {
-    appState: { appState: { authenticated: boolean, token: string|null } }
+     appState: { authenticated: boolean, token: string|null } 
 }
 class GetProfile extends Component<getProfileProps, ProfileResults> {
     constructor(props: getProfileProps) {
@@ -20,15 +20,14 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
             }
         }
     }
-    token:string|null = this.props.appState.appState.token
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.token};
+    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
 
     componentDidMount(){
         this.profileFetch()
     }
     profileFetch = (): any => {
-        let id:number = 1; //this should be the user's ID
-        fetch(`${APIURL}/profile/${id}`, {
+    
+        fetch(`${APIURL}/profile/`, {
             method: 'GET',
             headers: this.requestHeaders
         })
@@ -46,7 +45,6 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
                 })
                 return data
             })
-            .then(()=>console.log(this.state))
             .catch(err => console.log(err))
     }
 
@@ -60,7 +58,7 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
                 <p>{`Burns Attended: ${this.state.users.burnsAttended}`}</p>
                 <p>{`Favorite Principle: ${this.state.users.favPrinciple}`}</p>
                 <p>{`About Me: ${this.state.users.aboutMe}`}</p>
-                <UpdateProfile appState={this.props} />
+                <UpdateProfile appState={this.props.appState} />
             </div>
         )
     }

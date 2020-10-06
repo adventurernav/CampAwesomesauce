@@ -22,7 +22,6 @@ const LoginSubmit = (values: Values, updateToken: UpdateToken) => {
     })
         .then(res => res.json())
         .then((data) => {
-            console.log('DATA----->', data);
             window.localStorage.setItem('token', data.sessionToken)
             updateToken.updateToken(data.sessionToken, true)
         })

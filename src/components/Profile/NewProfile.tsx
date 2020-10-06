@@ -12,20 +12,14 @@ interface Values {
     profilePic: string
 }
 type newProfileProps = {
-    appState: { appState: { authenticated: boolean, token: string|null } }
+     appState: { authenticated: boolean, token: string|null } 
 }
 
 class NewProfile extends Component<newProfileProps> {
-    constructor(props: newProfileProps){
-        super(props)
-        console.log(props);
-        
-    }
-    token:string|null = this.props.appState.appState.token
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.token};
+    
+    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
 
     newProfileSubmit = (values: Values) => {
-        console.log(values);
         let id: number = 1
         fetch(`${APIURL}/profile/register/${id}`, {
             method: 'POST',
@@ -40,9 +34,7 @@ class NewProfile extends Component<newProfileProps> {
             })
         })
             .then(res => res.json())
-            .then((data) => {
-                console.log('DATA----->', data)
-            })
+            .catch(err => console.log(err))
     }
     render() {
         return (

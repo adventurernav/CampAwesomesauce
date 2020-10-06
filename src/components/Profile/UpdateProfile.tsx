@@ -12,20 +12,14 @@ interface Values {
     profilePic: string
 }
 type updateProfileProps = {
-    appState: {appState: { appState: { authenticated: boolean, token: string|null } }}
+    appState: { authenticated: boolean, token: string|null } 
 }
 
 class UpdateProfile extends Component<updateProfileProps> {
-    constructor(props: updateProfileProps){
-        super(props)
-        console.log(props);
-    }
-    
-    token:string|null = this.props.appState.appState.appState.token
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.token};
+
+    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
 
     updateProfileSubmit = (values: Values) => {
-        console.log(values);
         fetch(`${APIURL}/profile/`, {
             method: 'PUT',
             headers: this.requestHeaders,
@@ -39,9 +33,7 @@ class UpdateProfile extends Component<updateProfileProps> {
             })
         })
             .then(res => res.json())
-            .then((data) => {
-                console.log('DATA----->', data)
-            })
+            .catch(err => console.log(err))
     }
     render() {
         return (

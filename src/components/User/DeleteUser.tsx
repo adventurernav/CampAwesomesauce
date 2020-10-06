@@ -2,17 +2,16 @@ import { Button } from "@material-ui/core";
 import React, { Component } from "react";
 import APIURL from '../../helpers/environment'
 
-type delProfileProps = {
+type delUserProps = {
     appState: { authenticated: boolean, token: string|null } 
 }
-class DeleteProfile extends Component<delProfileProps> {
+class DeleteUser extends Component<delUserProps> {
 
     requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
 
     
-    delProfileFetch = (): any => {
-        let id:number = 1; //this should be the user's ID
-        fetch(`${APIURL}/profile/${id}`, {
+    delUser = (): any => {
+        fetch(`${APIURL}/user/`, {
             method: 'DELETE',
             headers: this.requestHeaders
         })
@@ -23,9 +22,9 @@ class DeleteProfile extends Component<delProfileProps> {
         return (
             <div>
                 <br />
-                <Button color="secondary" onClick={this.delProfileFetch}>Delete My Profile</Button>
+                <Button color="secondary" onClick={this.delUser}>Delete My Account</Button>
             </div>
         )
     }
 }
-export default DeleteProfile;
+export default DeleteUser;

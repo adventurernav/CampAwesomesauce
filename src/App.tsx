@@ -23,6 +23,11 @@ class App extends Component<{}, AppState> {
 updateToken (newToken:string, authenticated:boolean):void {
 this.setState({token: newToken, authenticated: authenticated})
 }
+componentWillUnmount():void{
+  console.log('Need to clean up token');
+  this.updateToken('',false);
+  window.localStorage.removeItem('token')
+}
   render() {
     return (
       <div className="App">

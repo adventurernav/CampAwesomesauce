@@ -12,7 +12,6 @@ type UpdateToken = {
 }
 
 const RegisterSubmit = (values: Values, updateToken: UpdateToken ) => {
-    console.log(values);
     fetch(`${APIURL}/user/register`, {
         method: 'POST',
         headers: {
@@ -28,7 +27,6 @@ const RegisterSubmit = (values: Values, updateToken: UpdateToken ) => {
     })
         .then(res => res.json())
         .then((data) => {
-            console.log('DATA----->', data);
             window.localStorage.setItem('token', data.sessionToken)
             updateToken.updateToken(data.sessionToken, true)
         })

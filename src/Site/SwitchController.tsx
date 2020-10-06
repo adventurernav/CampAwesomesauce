@@ -4,6 +4,7 @@ import Home from './Home'
 import Auth from '../Auth/Auth'
 import Packlist from '../components/Packlist/Packlist'
 import Profile from '../components/Profile/Profile'
+import User from '../components/User/User'
 
 type controllerState = {
 
@@ -26,6 +27,7 @@ class SwitchController extends Component<ControllerProps, controllerState> {
                     <Route exact path="/auth"><Auth updateToken={this.props.updateToken} /></Route>
                     <Route exact path="/packlist"><Packlist appState={this.props.appState} /></Route>
                     <Route exact path="/profile"><Profile appState={this.props.appState} /></Route>
+                    <Route exact path="/account"><User appState={this.props.appState} /></Route>
 
                 </Switch>
             </div>

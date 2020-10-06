@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
-import { AppBar, IconButton, Toolbar, List, ListItem, Drawer, CssBaseline, Typography, Divider } from "@material-ui/core";
+import { AppBar, IconButton, Toolbar, List, ListItem, Drawer, CssBaseline, Divider } from "@material-ui/core";
 import { Menu, ChevronLeft } from '@material-ui/icons'
 import { Theme } from '@material-ui/core/styles'
 import uniIcon from '../assets/whiteuni.png'
+import clsx from 'clsx';
+
+
 const drawerWidth = 240;
 
 const styles = (theme: Theme) =>
@@ -91,6 +94,9 @@ class Header extends Component<{}, headerState> {
                 <CssBaseline />
                 <AppBar
                     position="static"
+                    className={clsx(classes.appBar, {
+                        [classes.appBarShift]: this.state.open,
+                      })}
 
                 >
                     <Toolbar>
@@ -99,6 +105,7 @@ class Header extends Component<{}, headerState> {
                             aria-label="open drawer"
                             onClick={this.handleDrawerOpen}
                             edge="start"
+                            className={clsx(classes.menuButton, this.state.open && classes.hide)}
                         >
                             <Menu />
                         </IconButton>
@@ -116,6 +123,7 @@ class Header extends Component<{}, headerState> {
                 >
                     <div className={classes.drawerHeader}>
                         <IconButton onClick={this.handleDrawerClose}>
+                            {/* {theme.direction === 'ltr'? <ChevronLeft />:null} */}
                             <ChevronLeft />
                         </IconButton>
                     </div>
@@ -125,13 +133,16 @@ class Header extends Component<{}, headerState> {
                             <Link to="/" >Home</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link to="/auth">Auth</Link>
+                            <Link to="/auth">Sign up or Sign in</Link>
                         </ListItem>
                         <ListItem button>
                             <Link to="/packlist">Packlist</Link>
                         </ListItem>
                         <ListItem button>
                             <Link to="/profile">Profile</Link>
+                        </ListItem>
+                        <ListItem button>
+                            <Link to="/account">Account</Link>
                         </ListItem>
                     </List>
                 </Drawer>
@@ -141,5 +152,3 @@ class Header extends Component<{}, headerState> {
     }
 }
 export default Header;
-
-{/*  */ }

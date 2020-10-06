@@ -9,11 +9,7 @@ type ProfileProps = {
 }
 
 class Profile extends Component<ProfileProps> {
-    constructor(props: ProfileProps) {
-        super(props)
-        console.log(props);
-
-    }
+    
 
     render() {
         return (
@@ -21,14 +17,14 @@ class Profile extends Component<ProfileProps> {
                 <h1>My Profile</h1>
                 <Grid container direction="row" justify="space-around" alignItems="center" spacing={2}>
                     <Grid item>
-                        <GetProfile appState={this.props} />
+                        <GetProfile appState={this.props.appState} />
                     </Grid>
                     <Grid container direction="row" justify="space-around" alignItems="center" spacing={2}>
                         <Grid item>
-                            <NewProfile appState={this.props} />
+                            <NewProfile appState={this.props.appState} />
                         </Grid>
                         <Grid item>
-                            <DeleteProfile appState={this.props} />
+                            <DeleteProfile appState={this.props.appState} />
                         </Grid>
                     </Grid>
                 </Grid>

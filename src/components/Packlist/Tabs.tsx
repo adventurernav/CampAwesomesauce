@@ -4,6 +4,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import NewPacklist from './NewPacklist';
+import { Button } from '@material-ui/core';
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -50,7 +53,7 @@ const styles = (theme: any) => ({
   },
 });
 type tabProps = {
-  appState: { appState: { appState: { authenticated: boolean, token: string | null } } },
+  appState: {authenticated: boolean, token: string | null}
   classes: any,
   PacklistState: PacklistState
 }
@@ -67,7 +70,7 @@ type packlistKeys = {
   title: string
 }
 type packlistObject = {
-  [title:string]: packlistKeys
+  [title: string]: packlistKeys
 }
 class VerticalTabs extends Component<tabProps, tabState> {
   constructor(props: tabProps) {
@@ -77,16 +80,19 @@ class VerticalTabs extends Component<tabProps, tabState> {
       classes: styles
     }
     console.log(props);
-
   }
   componentDidUpdate() {
     console.log(this.props);
-
   }
 
   handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     this.setState({ value: newValue });
   };
+
+  deletePacklist= () => {
+    console.log('del pl');
+    
+  }
 
   render() {
     const { classes } = this.props
@@ -102,14 +108,22 @@ class VerticalTabs extends Component<tabProps, tabState> {
         >
           {this.props.PacklistState.data.map((packlist, i) => {
             console.log(packlist);
-            return <Tab label={packlist?packlist.title:''} {...a11yProps(i)} />
+            return <Tab key={i} label={packlist ? packlist.title : ''} {...a11yProps(i)} />
 
           })}
-
+          <Tab label="+ New" {...a11yProps(this.props.PacklistState.data.length)} />
         </Tabs>
+
+
         <TabPanel value={this.state.value} index={0}>
-          Packlist Items for the first packlist
+          <Button color="secondary">Update Packlist Title</Button>
+          <Button color="secondary" onClick={this.deletePacklist}>Delete this Packlist</Button>
+          <hr />
       </TabPanel>
+
+        <TabPanel value={this.state.value} index={this.props.PacklistState.data.length}>
+          <NewPacklist appState={this.props.appState}/>
+        </TabPanel>
 
 
       </div>
