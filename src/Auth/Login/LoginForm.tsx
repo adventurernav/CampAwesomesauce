@@ -1,7 +1,9 @@
 import { Button, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import React, { Component } from "react";
-import LoginSubmit from "./LoginSubmit";
+import APIURL from "../../helpers/environment";
+import { Redirect } from "react-router-dom";
+
 
 interface Values {
     email: string, 
@@ -10,15 +12,42 @@ interface Values {
 type LoginFormProps = {
     updateToken: (token:string, authenticated:boolean)=>void
 }
+type stateValues={
+    submitted: boolean
+}
+export class LoginForm extends Component <LoginFormProps,stateValues> {
+    state={
+        submitted: false
+    }
+    LoginSubmit(values:Values, loginProps: LoginFormProps){
+        fetch(`${APIURL}/user/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: values.email,
+                password: values.password
+            })
+        })
+            .then(res => res.json())
+            .then((data) => {
+                window.localStorage.setItem('token', data.sessionToken)
+                loginProps.updateToken(data.sessionToken, true)
+                this.setState({ submitted: true })
 
-export class LoginForm extends Component <LoginFormProps> {
-    render(){return(
+            })
+            .catch(err => console.log(err))
+    }
+    render(){
+        return(
         <div>
+            {(this.state.submitted === true) ? <Redirect to='/profile' /> : null}
             <h1>Login</h1>
             <Formik 
             initialValues={{email: '', password: ''}} 
             onSubmit={values=> {
-                LoginSubmit(values, this.props);
+                this.LoginSubmit(values, this.props);
             }}
             >
                 {({values, handleChange, handleBlur}) => (

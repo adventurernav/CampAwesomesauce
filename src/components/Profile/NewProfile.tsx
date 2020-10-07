@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, TextField } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import APIURL from "../../helpers/environment";
+import { Redirect } from "react-router-dom";
 
 interface Values {
     playaname: string,
@@ -14,9 +15,13 @@ interface Values {
 type newProfileProps = {
      appState: { authenticated: boolean, token: string|null } 
 }
-
-class NewProfile extends Component<newProfileProps> {
-    
+type stateValues={
+    submitted: boolean
+}
+class NewProfile extends Component<newProfileProps,stateValues> {
+    state={
+        submitted: false
+    }
     requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
 
     newProfileSubmit = (values: Values) => {
@@ -34,11 +39,14 @@ class NewProfile extends Component<newProfileProps> {
             })
         })
             .then(res => res.json())
+            .then(()=>this.setState({ submitted: true}))
             .catch(err => console.log(err))
     }
     render() {
         return (
             <div>
+                            {(this.state.submitted === true) ? <Redirect to='/profile' /> : null}
+
                 <h1>Create your Profile</h1>
                 <Formik
                     initialValues={{

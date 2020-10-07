@@ -9,23 +9,18 @@ type ProfileProps = {
 }
 
 class Profile extends Component<ProfileProps> {
-    
+
 
     render() {
         return (
             <div>
                 <h1>My Profile</h1>
-                <Grid container direction="row" justify="space-around" alignItems="center" spacing={2}>
+                <Grid container direction="column" justify="center" alignContent="center">
                     <Grid item>
                         <GetProfile appState={this.props.appState} />
                     </Grid>
-                    <Grid container direction="row" justify="space-around" alignItems="center" spacing={2}>
-                        <Grid item>
-                            <NewProfile appState={this.props.appState} />
-                        </Grid>
-                        <Grid item>
-                            <DeleteProfile appState={this.props.appState} />
-                        </Grid>
+                    <Grid item>
+                        <DeleteProfile appState={this.props.appState} />
                     </Grid>
                 </Grid>
             </div>

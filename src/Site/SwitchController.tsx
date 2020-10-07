@@ -6,6 +6,7 @@ import Packlist from '../components/Packlist/Packlist'
 import Profile from '../components/Profile/Profile'
 import User from '../components/User/User'
 import Logout from "../Auth/Logout";
+import NewProfile from "../components/Profile/NewProfile";
 
 type controllerState = {
 
@@ -30,6 +31,7 @@ class SwitchController extends Component<ControllerProps, controllerState> {
                     <Route exact path="/packlist"><Packlist appState={this.props.appState} /></Route>
                     <Route exact path="/profile"><Profile appState={this.props.appState} /></Route>
                     <Route exact path="/account"><User appState={this.props.appState} /></Route>
+                    <Route exact path="/profile/new"><NewProfile appState={this.props.appState} /></Route>
 
 
                 </Switch>

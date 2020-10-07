@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, InputLabel } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import APIURL from "../../helpers/environment";
+import {ProfileResults} from './ProfileInterfaces'
 
 interface Values {
     playaname: string,
@@ -12,7 +13,8 @@ interface Values {
     profilePic: string
 }
 type updateProfileProps = {
-    appState: { authenticated: boolean, token: string|null } 
+    appState: { authenticated: boolean, token: string|null },
+    fetchResults: ProfileResults 
 }
 
 class UpdateProfile extends Component<updateProfileProps> {
@@ -41,12 +43,12 @@ class UpdateProfile extends Component<updateProfileProps> {
                 <h1>Update your Profile</h1>
                 <Formik
                     initialValues={{
-                        playaname: '',
-                        burnsAttended: 0,
-                        favPrinciple: '',
-                        aboutMe: '',
-                        status: '',
-                        profilePic: ''
+                        playaname: this.props.fetchResults.users.playaname,
+                        burnsAttended: this.props.fetchResults.users.burnsAttended,
+                        favPrinciple: this.props.fetchResults.users.favPrinciple,
+                        aboutMe: this.props.fetchResults.users.aboutMe,
+                        status: this.props.fetchResults.users.status,
+                        profilePic: this.props.fetchResults.users.profilePic
                     }}
                     onSubmit={values => {
                         this.updateProfileSubmit(values)

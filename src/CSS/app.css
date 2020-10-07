@@ -6,3 +6,6 @@ body{
 h1{
     font-family: var(--head);
 }
+.getprofileP{
+padding: .5rem;
+}
