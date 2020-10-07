@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import NewPacklist from './NewPacklist';
 import { Button } from '@material-ui/core';
+import DeletePacklist from './DeletePacklist';
 
 
 interface TabPanelProps {
@@ -55,7 +56,8 @@ const styles = (theme: any) => ({
 type tabProps = {
   appState: {authenticated: boolean, token: string | null}
   classes: any,
-  PacklistState: PacklistState
+  PacklistState: PacklistState,
+  refresh: boolean
 }
 type tabState = {
   value: number,
@@ -65,18 +67,14 @@ type tabState = {
 export interface PacklistState {
   data: packlistObject[]
 }
+type packlistObject = {
+  id: number,
+  title: string
+  // [title: string]: packlistKeys
+}
 type packlistKeys = {
   id: number,
   title: string
-}
-type plIDkey={
-  id: number
-}
-type titleKey = {
-  title:string
-}
-type packlistObject = {
-  [title: string]: packlistKeys
 }
 class VerticalTabs extends Component<tabProps, tabState> {
   constructor(props: tabProps) {
@@ -85,22 +83,14 @@ class VerticalTabs extends Component<tabProps, tabState> {
       value: 0,
       classes: styles
     }
-    console.log(props);
-    this.deletePacklist = this.deletePacklist.bind(this)
   }
-  componentDidUpdate() {
-    console.log(this.props);
-  }
-
+  componentDidUpdate(){
+    console.log('Component Did Update')
+}
   handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     this.setState({ value: newValue });
   };
-
-  deletePacklist= (i:number) => {
-    console.log('del pl', i);
-    
-  }
-
+ 
   render() {
     const { classes } = this.props
     return (
@@ -123,12 +113,11 @@ class VerticalTabs extends Component<tabProps, tabState> {
 
 
         {this.props.PacklistState.data.map((packlist, i)=>{
-          console.log('packlist id:',packlist.id)
-          let plID = packlist.id
+          console.log('packlist id :',packlist.id)
+          console.log('i for data.map:', i)
           return (<TabPanel key={i}value={this.state.value} index={i}>
             <Button color="secondary">Update Packlist Title</Button>
-            <Button color="secondary" onClick={()=>{this.deletePacklist(i)}}>Delete this Packlist</Button>
-            <hr />
+            <DeletePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh}/>
         </TabPanel>)
         })}
 

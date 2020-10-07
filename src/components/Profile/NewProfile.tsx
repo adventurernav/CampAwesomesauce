@@ -13,16 +13,16 @@ interface Values {
     profilePic: string
 }
 type newProfileProps = {
-     appState: { authenticated: boolean, token: string|null } 
+    appState: { authenticated: boolean, token: string | null }
 }
-type stateValues={
+type stateValues = {
     submitted: boolean
 }
-class NewProfile extends Component<newProfileProps,stateValues> {
-    state={
+class NewProfile extends Component<newProfileProps, stateValues> {
+    state = {
         submitted: false
     }
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
+    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
     newProfileSubmit = (values: Values) => {
         let id: number = 1
@@ -39,9 +39,9 @@ class NewProfile extends Component<newProfileProps,stateValues> {
             })
         })
             .then(res => res.json())
-            .then((data)=>{
-                if (!data.error){
-                    this.setState({ submitted: true})
+            .then((data) => {
+                if (!data.error) {
+                    this.setState({ submitted: true })
                 } else {
                     alert(`${data.error.errors[0].message}`)
                 }
@@ -51,7 +51,7 @@ class NewProfile extends Component<newProfileProps,stateValues> {
     render() {
         return (
             <div>
-                            {(this.state.submitted === true) ? <Redirect to='/profile' /> : null}
+                {(this.state.submitted === true) ? <Redirect to='/profile' /> : null}
 
                 <h1>Create your Profile</h1>
                 <Formik
@@ -66,7 +66,7 @@ class NewProfile extends Component<newProfileProps,stateValues> {
                     onSubmit={values => {
                         this.newProfileSubmit(values)
                     }}
-                    >
+                >
                     {({ values, handleChange, handleBlur }) => (
                         <Form>
 
@@ -89,9 +89,9 @@ class NewProfile extends Component<newProfileProps,stateValues> {
                                 />
                             </div>
                             <div>
-                                
+
                                 <Field name='favPrinciple' as="select" label="Your Favorite Principle">
-                                <option value="" disabled>--Your Favorite Principle--</option>
+                                    <option value="" disabled>--Your Favorite Principle--</option>
                                     <option value="Radical Inclusion">Radical Inclusion</option>
                                     <option value="Gifting">Gifting</option>
                                     <option value="Decommodification">Decommodification</option>
@@ -102,7 +102,7 @@ class NewProfile extends Component<newProfileProps,stateValues> {
                                     <option value="Leave No Trace">Leave No Trace</option>
                                     <option value="Participation">Participation</option>
                                     <option value="Immediacy">Immediacy</option>
-                                    
+
                                 </Field>
                             </div>
                             <div>

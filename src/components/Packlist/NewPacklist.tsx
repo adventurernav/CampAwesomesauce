@@ -12,11 +12,20 @@ type newPacklistProps = {
     appState: { authenticated: boolean, token: string | null }
 
 }
+type newPacklistState = {
+    submitted: boolean
+}
 
 class NewPacklist extends Component<newPacklistProps> {
     constructor(props: newPacklistProps) {
         super(props)
+        this.state={
+            submitted: false
+        }
         console.log(props);
+    }
+    componentDidUpdate(){
+        console.log('Component Did Update')
     }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
@@ -30,6 +39,11 @@ class NewPacklist extends Component<newPacklistProps> {
             })
         })
             .then(res => res.json())
+            .then(response => {
+                this.setState({submitted: true})
+                window.location.reload()
+
+            })
             .catch(err => console.log(err))
     }
 

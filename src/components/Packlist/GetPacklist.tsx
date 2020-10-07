@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import APIURL from '../../helpers/environment'
 import VerticalTabs from './Tabs'
 type getPacklistProps = {
-    appState:{ authenticated: boolean, token: string | null }
+    appState:{ authenticated: boolean, token: string | null },
+    refresh: boolean
 }
 export interface PacklistState {
     data: packlistObject[]
 }
-type packlistKeys = {
+
+type packlistObject = {
     id: number,
     title: string
-}
-type packlistObject = {
-    [index: number]: packlistKeys
+    // [index: number]: packlistKeys
 }
 
 class GetPacklist extends Component<getPacklistProps, PacklistState> {
@@ -24,7 +24,8 @@ class GetPacklist extends Component<getPacklistProps, PacklistState> {
     componentDidMount() {
         this.packlistFetch()
     }
-    componentDidUpdate() {
+    componentDidUpdate(){
+        console.log('Component Did Update')
     }
     packlistFetch = (): void => {
         fetch(`${APIURL}/packlist/`, {
@@ -36,6 +37,7 @@ class GetPacklist extends Component<getPacklistProps, PacklistState> {
                 this.setState({
                     data: results
                 })
+
             })
             .catch(err => console.log(err))
     }
@@ -43,7 +45,7 @@ class GetPacklist extends Component<getPacklistProps, PacklistState> {
 
         return (
             <div>
-                <VerticalTabs appState={this.props.appState} PacklistState={this.state} />
+                <VerticalTabs appState={this.props.appState} PacklistState={this.state} refresh={this.props.refresh} />
             </div>
         )
     }
