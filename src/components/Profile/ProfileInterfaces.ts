@@ -1,6 +1,7 @@
 export interface ProfileResults {
     users: Users
     newUser: boolean
+    upSubmitted: boolean
 }
 export interface Users {
         aboutMe: string,

@@ -2,7 +2,6 @@ import { Grid } from '@material-ui/core'
 import React, { Component } from 'react'
 import DeleteProfile from './DeleteProfile'
 import GetProfile from './GetProfile'
-import NewProfile from './NewProfile'
 
 type ProfileProps = {
     appState: { authenticated: boolean, token: string | null }

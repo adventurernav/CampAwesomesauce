@@ -25,7 +25,6 @@ class GetPacklist extends Component<getPacklistProps, PacklistState> {
         this.packlistFetch()
     }
     componentDidUpdate() {
-        console.log(this.state);
     }
     packlistFetch = (): void => {
         fetch(`${APIURL}/packlist/`, {
@@ -36,7 +35,7 @@ class GetPacklist extends Component<getPacklistProps, PacklistState> {
             .then((results) => {
                 this.setState({
                     data: results
-                }, () => console.log(`THIS.STATE in the callback function`, this.state))
+                })
             })
             .catch(err => console.log(err))
     }

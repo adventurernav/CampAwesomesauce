@@ -1,7 +1,7 @@
 import { Button, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import React, { Component } from "react";
-import APIURL from "../../helpers/environment";
+import APIURL from "../helpers/environment";
 import { Redirect } from "react-router-dom";
 
 
@@ -32,10 +32,15 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
         })
             .then(res => res.json())
             .then((data) => {
-                window.localStorage.setItem('token', data.sessionToken)
-                loginProps.updateToken(data.sessionToken, true)
-                this.setState({ submitted: true })
-
+                console.log(data)
+                if (!data.error){
+                    window.localStorage.setItem('token', data.sessionToken)
+                    loginProps.updateToken(data.sessionToken, true)
+                    this.setState({ submitted: true })
+                } else {
+                    alert(`${data.error}`)
+                }
+                    
             })
             .catch(err => console.log(err))
     }

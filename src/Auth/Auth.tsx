@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { LoginForm } from './Login/LoginForm'
-import  RegisterForm  from "./Register/RegisterForm";
+import { LoginForm } from './LoginForm'
+import  RegisterForm  from "./RegisterForm";
 import { Grid } from "@material-ui/core";
 
 type AuthProps = {

@@ -7,7 +7,11 @@ import Profile from '../components/Profile/Profile'
 import User from '../components/User/User'
 import Logout from "../Auth/Logout";
 import NewProfile from "../components/Profile/NewProfile";
-
+import Dashboard from './Dashboard'
+import Contact from "./Contact";
+import About from "./About";
+import Donate from "./Donate";
+import Resources from "./Resources";
 type controllerState = {
 
 }
@@ -26,6 +30,11 @@ class SwitchController extends Component<ControllerProps, controllerState> {
             <div>
                 <Switch>
                     <Route exact path="/"><Home /></Route>
+                    <Route exact path="/dashboard"><Dashboard /></Route>
+                    <Route exact path="/resources"><Resources /></Route>
+                    <Route exact path="/contact"><Contact /></Route>
+                    <Route exact path="/about"><About /></Route>
+                    <Route exact path="/donate"><Donate /></Route>
                     <Route exact path="/auth"><Auth updateToken={this.props.updateToken} appState={this.props.appState} /></Route>
                     <Route exact path="/logout"><Logout updateToken={this.props.updateToken} /></Route>
                     <Route exact path="/packlist"><Packlist appState={this.props.appState} /></Route>

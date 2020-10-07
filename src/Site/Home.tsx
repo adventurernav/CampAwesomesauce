@@ -10,7 +10,7 @@ class Home extends Component {
             <div>
                 <img src={Banner} alt="Banner"/>
                 <img src={Balls} alt="Banner"/>
-                <img src={Group} alt="Group"/>
+                <img style={{width: '80vw'}}src={Group} alt="Group"/>
             </div>
         )
     }

@@ -39,7 +39,13 @@ class NewProfile extends Component<newProfileProps,stateValues> {
             })
         })
             .then(res => res.json())
-            .then(()=>this.setState({ submitted: true}))
+            .then((data)=>{
+                if (!data.error){
+                    this.setState({ submitted: true})
+                } else {
+                    alert(`${data.error.errors[0].message}`)
+                }
+            })
             .catch(err => console.log(err))
     }
     render() {

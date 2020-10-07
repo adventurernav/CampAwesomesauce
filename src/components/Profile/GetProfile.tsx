@@ -8,6 +8,7 @@ import UpdateProfile from "./UpdateProfile";
 type getProfileProps = {
     appState: { authenticated: boolean, token: string | null }
 }
+
 class GetProfile extends Component<getProfileProps, ProfileResults> {
     constructor(props: getProfileProps) {
         super(props)
@@ -20,7 +21,8 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
                 profilePic: '',
                 status: ''
             },
-            newUser: false
+            newUser: false,
+            upSubmitted: false
         }
     }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };

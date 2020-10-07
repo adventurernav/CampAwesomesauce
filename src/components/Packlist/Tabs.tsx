@@ -69,6 +69,12 @@ type packlistKeys = {
   id: number,
   title: string
 }
+type plIDkey={
+  id: number
+}
+type titleKey = {
+  title:string
+}
 type packlistObject = {
   [title: string]: packlistKeys
 }
@@ -109,7 +115,7 @@ class VerticalTabs extends Component<tabProps, tabState> {
         >
           {this.props.PacklistState.data.map((packlist, i) => {
             console.log(packlist);
-            return <Tab key={i} label={packlist ? packlist.title : ''} {...a11yProps(i)} />
+            return <Tab key={i} label={packlist ? packlist.title : 'Nothing Found'} {...a11yProps(i)} />
 
           })}
           <Tab label="+ New" {...a11yProps(this.props.PacklistState.data.length)} />
@@ -117,7 +123,9 @@ class VerticalTabs extends Component<tabProps, tabState> {
 
 
         {this.props.PacklistState.data.map((packlist, i)=>{
-          return (<TabPanel key={i}value={this.state.value} index={0}>
+          console.log('packlist id:',packlist.id)
+          let plID = packlist.id
+          return (<TabPanel key={i}value={this.state.value} index={i}>
             <Button color="secondary">Update Packlist Title</Button>
             <Button color="secondary" onClick={()=>{this.deletePacklist(i)}}>Delete this Packlist</Button>
             <hr />

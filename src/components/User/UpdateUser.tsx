@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import APIURL from "../../helpers/environment";
+import { Redirect } from 'react-router-dom';
 
 interface Values {
     firstName: string,
@@ -13,12 +14,19 @@ interface Values {
 type UpdateUserProps = {
     appState: { authenticated: boolean, token: string | null }
 }
+type UpdateUserState= {
+submitted: boolean
+}
 
-class UpdateUser extends Component<UpdateUserProps>{
+class UpdateUser extends Component<UpdateUserProps, UpdateUserState>{
+    state={
+        submitted: false
+    }
     requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
     render(){
         return(
             <div>
+                {this.state.submitted===true? <Redirect to='/account'/>: null}
                 <h1>Update User</h1>
             <Formik
                 initialValues={{ 
@@ -40,7 +48,11 @@ class UpdateUser extends Component<UpdateUserProps>{
                         })
                             .then(res => res.json())
                             .then((data) => {
-                                console.log(data);
+                                if (!data.error){
+                                    this.setState({submitted:true})
+                                } else{
+                                    alert(`${data.error.errors[0].message}`)
+                                }
                                 
                             })
                             .catch(err=>console.log(err))

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Button, TextField, InputLabel } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import APIURL from "../../helpers/environment";
 import {ProfileResults} from './ProfileInterfaces'
+import { Redirect } from "react-router-dom";
 
 interface Values {
     playaname: string,
@@ -16,11 +17,17 @@ type updateProfileProps = {
     appState: { authenticated: boolean, token: string|null },
     fetchResults: ProfileResults 
 }
-
-class UpdateProfile extends Component<updateProfileProps> {
-
+type UpdateState = {
+submitted: boolean
+}
+class UpdateProfile extends Component<updateProfileProps, UpdateState> {
+state={
+    submitted: false
+}
     requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
-
+componentDidUpdate(){
+    
+}
     updateProfileSubmit = (values: Values) => {
         fetch(`${APIURL}/profile/`, {
             method: 'PUT',
@@ -35,11 +42,22 @@ class UpdateProfile extends Component<updateProfileProps> {
             })
         })
             .then(res => res.json())
+            .then(data=>{
+                if (data.message === "Update Failed"){
+                    alert(data.error.original.detail)
+                }else {
+                    console.log(data)
+                    this.setState({submitted: true})
+                    
+                }
+                return console.log(data)
+            })
             .catch(err => console.log(err))
     }
     render() {
         return (
             <div>
+                {(this.state.submitted === true) ? <Redirect to="/profile" /> : null}
                 <h1>Update your Profile</h1>
                 <Formik
                     initialValues={{
@@ -60,8 +78,9 @@ class UpdateProfile extends Component<updateProfileProps> {
                             <div>
                                 <TextField
                                     name="playaname"
-                                    label="Playa Name"
+                                    helperText="Playa Name"
                                     value={values.playaname}
+                                    defaultValue={this.props.fetchResults.users.playaname}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
@@ -69,15 +88,43 @@ class UpdateProfile extends Component<updateProfileProps> {
                             <div>
                                 <TextField
                                     name="burnsAttended"
-                                    label="Number of Burns Attended"
+                                    helperText="Number of Burns Attended"
                                     value={values.burnsAttended}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
                             </div>
                             <div>
+                                <TextField
+                                    name="aboutMe"
+                                    helperText="About Me"
+                                    value={values.aboutMe}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+                            <div>
+                                <TextField
+                                    name="status"
+                                    helperText="Status"
+                                    value={values.status}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+                            <div>
+                                <TextField
+                                    name="profilePic"
+                                    helperText="Choose an avatar(TEMP: paste URL)"
+                                    value={values.profilePic}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+
+                            <div>
                                 
-                                <Field name='favPrinciple' as="select" label="Your Favorite Principle">
+                                <Field name='favPrinciple' as="select" helperText="Your Favorite Principle">
                                 <option value="" disabled>--Your Favorite Principle--</option>
                                     <option value="Radical Inclusion">Radical Inclusion</option>
                                     <option value="Gifting">Gifting</option>
@@ -92,34 +139,6 @@ class UpdateProfile extends Component<updateProfileProps> {
                                     
                                 </Field>
                             </div>
-                            <div>
-                                <TextField
-                                    name="aboutMe"
-                                    label="About Me"
-                                    value={values.aboutMe}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                            <div>
-                                <TextField
-                                    name="status"
-                                    label="Status"
-                                    value={values.status}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                            <div>
-                                <TextField
-                                    name="profilePic"
-                                    label="Choose an avatar"
-                                    value={values.profilePic}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-
                             <Button type='submit'>Update Profile</Button>
                         </Form>
                     )}

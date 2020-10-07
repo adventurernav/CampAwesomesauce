@@ -1,7 +1,7 @@
 import { Button, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import React, { Component } from "react";
-import APIURL from "../../helpers/environment";
+import APIURL from "../helpers/environment";
 import { Redirect } from "react-router-dom";
 
 type RegisterFormProps = {
@@ -45,9 +45,13 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
             .then(res => res.json())
             .then((data) => {
                 console.log(data);
+                if (!data.error){
                 window.localStorage.setItem('token', data.sessionToken)
                 submitProps.updateToken(data.sessionToken, true)
                 this.setState({ submitted: true })
+                } else {
+                    alert(`${data.error.errors[0].message}`)
+                }
             })
             .catch(err => console.log(err))
     }

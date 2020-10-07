@@ -134,8 +134,9 @@ class Header extends Component<{}, headerState> {
                     </div>
                     <Divider />
                     <List>
+                        
                         <ListItem button>
-                            <Link className={classes.link} to="/" >Home</Link>
+                            <Link className={classes.link} to="/dashboard" >Dashboard</Link>
                         </ListItem>
                         <ListItem button>
                             <Link to="/auth">Sign up or Sign in</Link>
@@ -151,6 +152,22 @@ class Header extends Component<{}, headerState> {
                         </ListItem>
                         <ListItem button>
                             <Link to="/logout">Logout</Link>
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <Link className={classes.link} to="/" >Home</Link>
+                        </ListItem>
+                        <ListItem button>
+                            <Link className={classes.link} to="/resources" >Resources</Link>
+                        </ListItem>
+                        <ListItem button>
+                            <Link className={classes.link} to="/about" >About</Link>
+                        </ListItem>
+                        <ListItem button>
+                            <Link className={classes.link} to="/donate" >Donate</Link>
+                        </ListItem>
+                        <ListItem button>
+                            <Link className={classes.link} to="/contact" >Contact</Link>
                         </ListItem>
                     </List>
                 </Drawer>
