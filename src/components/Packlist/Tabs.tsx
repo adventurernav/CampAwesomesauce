@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box';
 import NewPacklist from './NewPacklist';
 import { Button } from '@material-ui/core';
 import DeletePacklist from './DeletePacklist';
+import UpdatePacklist from './UpdatePacklist';
 
 
 interface TabPanelProps {
@@ -57,7 +58,8 @@ type tabProps = {
   appState: {authenticated: boolean, token: string | null}
   classes: any,
   PacklistState: PacklistState,
-  refresh: boolean
+  refresh: (newState:boolean) => void,
+  refreshState: boolean
 }
 type tabState = {
   value: number,
@@ -70,12 +72,8 @@ export interface PacklistState {
 type packlistObject = {
   id: number,
   title: string
-  // [title: string]: packlistKeys
 }
-type packlistKeys = {
-  id: number,
-  title: string
-}
+
 class VerticalTabs extends Component<tabProps, tabState> {
   constructor(props: tabProps) {
     super(props)
@@ -116,8 +114,8 @@ class VerticalTabs extends Component<tabProps, tabState> {
           console.log('packlist id :',packlist.id)
           console.log('i for data.map:', i)
           return (<TabPanel key={i}value={this.state.value} index={i}>
-            <Button color="secondary">Update Packlist Title</Button>
-            <DeletePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh}/>
+            <UpdatePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
+            <DeletePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
         </TabPanel>)
         })}
 

@@ -3,7 +3,8 @@ import APIURL from '../../helpers/environment'
 import VerticalTabs from './Tabs'
 type getPacklistProps = {
     appState:{ authenticated: boolean, token: string | null },
-    refresh: boolean
+    refresh: (newState:boolean) => void,
+    refreshState: boolean
 }
 export interface PacklistState {
     data: packlistObject[]
@@ -45,7 +46,7 @@ class GetPacklist extends Component<getPacklistProps, PacklistState> {
 
         return (
             <div>
-                <VerticalTabs appState={this.props.appState} PacklistState={this.state} refresh={this.props.refresh} />
+                <VerticalTabs appState={this.props.appState} PacklistState={this.state} refresh={this.props.refresh} refreshState={this.props.refreshState} />
             </div>
         )
     }
