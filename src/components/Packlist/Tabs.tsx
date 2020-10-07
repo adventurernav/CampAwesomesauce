@@ -80,6 +80,7 @@ class VerticalTabs extends Component<tabProps, tabState> {
       classes: styles
     }
     console.log(props);
+    this.deletePacklist = this.deletePacklist.bind(this)
   }
   componentDidUpdate() {
     console.log(this.props);
@@ -89,8 +90,8 @@ class VerticalTabs extends Component<tabProps, tabState> {
     this.setState({ value: newValue });
   };
 
-  deletePacklist= () => {
-    console.log('del pl');
+  deletePacklist= (i:number) => {
+    console.log('del pl', i);
     
   }
 
@@ -115,11 +116,13 @@ class VerticalTabs extends Component<tabProps, tabState> {
         </Tabs>
 
 
-        <TabPanel value={this.state.value} index={0}>
-          <Button color="secondary">Update Packlist Title</Button>
-          <Button color="secondary" onClick={this.deletePacklist}>Delete this Packlist</Button>
-          <hr />
-      </TabPanel>
+        {this.props.PacklistState.data.map((packlist, i)=>{
+          return (<TabPanel key={i}value={this.state.value} index={0}>
+            <Button color="secondary">Update Packlist Title</Button>
+            <Button color="secondary" onClick={()=>{this.deletePacklist(i)}}>Delete this Packlist</Button>
+            <hr />
+        </TabPanel>)
+        })}
 
         <TabPanel value={this.state.value} index={this.props.PacklistState.data.length}>
           <NewPacklist appState={this.props.appState}/>

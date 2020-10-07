@@ -6,11 +6,11 @@ import Footer from './Site/Footer'
 import SwitchController from './Site/SwitchController'
 
 type AppState = {
-  token: string|null,
+  token: string | null,
   authenticated: boolean
 }
 let currentToken = window.localStorage.getItem('token')
-let authCheck = currentToken? true:false
+let authCheck = currentToken ? true : false
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props)
@@ -20,27 +20,26 @@ class App extends Component<{}, AppState> {
     }
     this.updateToken = this.updateToken.bind(this)
   }
-updateToken (newToken:string, authenticated:boolean):void {
-this.setState({token: newToken, authenticated: authenticated})
-}
-componentWillUnmount():void{
-  console.log('Need to clean up token');
-  this.updateToken('',false);
-  window.localStorage.removeItem('token')
-}
+  updateToken(newToken: string, authenticated: boolean): void {
+    this.setState({ token: newToken, authenticated: authenticated })
+  }
+  componentWillUnmount(): void {
+    console.log('Need to clean up token');
+    this.updateToken('', false);
+    window.localStorage.removeItem('token')
+  }
   render() {
     return (
       <div className="App">
-          <Router>
-            <header className="App-header">
-              <Header />
-              
-            </header>
-            <SwitchController updateToken={this.updateToken} appState={this.state} />
-            <footer className="App-footer">
-              <Footer />
-            </footer>
-          </Router>
+        <Router>
+          <header className="App-header">
+            <Header />
+          </header>
+          <SwitchController updateToken={this.updateToken} appState={this.state} />
+          <footer className="App-footer">
+            <Footer />
+          </footer>
+        </Router>
       </div>
     );
   }

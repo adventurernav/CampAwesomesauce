@@ -5,12 +5,13 @@ import Auth from '../Auth/Auth'
 import Packlist from '../components/Packlist/Packlist'
 import Profile from '../components/Profile/Profile'
 import User from '../components/User/User'
+import Logout from "../Auth/Logout";
 
 type controllerState = {
 
 }
 type ControllerProps = {
-    updateToken: (token: string, authenticated: boolean) => void
+    updateToken: (token: string, authenticated: boolean) => void,
     appState: { authenticated: boolean, token: string | null }
 }
 
@@ -24,10 +25,12 @@ class SwitchController extends Component<ControllerProps, controllerState> {
             <div>
                 <Switch>
                     <Route exact path="/"><Home /></Route>
-                    <Route exact path="/auth"><Auth updateToken={this.props.updateToken} /></Route>
+                    <Route exact path="/auth"><Auth updateToken={this.props.updateToken} appState={this.props.appState} /></Route>
+                    <Route exact path="/logout"><Logout updateToken={this.props.updateToken} /></Route>
                     <Route exact path="/packlist"><Packlist appState={this.props.appState} /></Route>
                     <Route exact path="/profile"><Profile appState={this.props.appState} /></Route>
                     <Route exact path="/account"><User appState={this.props.appState} /></Route>
+
 
                 </Switch>
             </div>

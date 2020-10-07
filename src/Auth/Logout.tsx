@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import { Button } from "@material-ui/core";
 
 type LogoutProps = {
-    updateToken: (token:string, authenticated:boolean)=>void
+    updateToken: (token:string, authenticated:boolean)=>void,
 }
+
 class Logout extends Component <LogoutProps> {
 
     removeToken = ():void => {
@@ -11,10 +12,15 @@ class Logout extends Component <LogoutProps> {
         this.props.updateToken('', false)
     }
 
+    componentDidMount(){
+        this.removeToken();
+    }
+
     render(){
         return(
             <div>
-                <Button onClick={this.removeToken}>Logout</Button>
+                <h3>You have been logged out. </h3>
+                <Button href="/auth">Login again</Button>
             </div>
         )
     }

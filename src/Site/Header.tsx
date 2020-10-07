@@ -13,6 +13,11 @@ const styles = (theme: Theme) =>
     ({
         root: {
             display: 'flex',
+            
+        },
+        link: {
+            underline: 'none',
+            color: 'secondary'
         },
         appBar: {
             transition: theme.transitions.create(['margin', 'width'], {
@@ -109,7 +114,7 @@ class Header extends Component<{}, headerState> {
                         >
                             <Menu />
                         </IconButton>
-                        <img style={{height: '10vh'}}src={uniIcon} alt="Why isnt this img working?!?" />
+                        <img style={{height: '10vh'}}src={uniIcon} alt="Camp Awesomesauce" />
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -130,7 +135,7 @@ class Header extends Component<{}, headerState> {
                     <Divider />
                     <List>
                         <ListItem button>
-                            <Link to="/" >Home</Link>
+                            <Link className={classes.link} to="/" >Home</Link>
                         </ListItem>
                         <ListItem button>
                             <Link to="/auth">Sign up or Sign in</Link>
@@ -143,6 +148,9 @@ class Header extends Component<{}, headerState> {
                         </ListItem>
                         <ListItem button>
                             <Link to="/account">Account</Link>
+                        </ListItem>
+                        <ListItem button>
+                            <Link to="/logout">Logout</Link>
                         </ListItem>
                     </List>
                 </Drawer>
