@@ -15,6 +15,9 @@ class DeletePacklist extends Component<DelProps> {
     componentDidUpdate() {
         console.log('Component Did Update')
     }
+    submitClick = () => {
+        this.delPacklistFetch();
+    }
     delPacklistFetch = (): any => {
         fetch(`${APIURL}/packlist/${this.props.plID}`, {
             method: 'DELETE',
@@ -23,9 +26,8 @@ class DeletePacklist extends Component<DelProps> {
             .then(res => res.json())
             .then(response => {
                 if (!response.error) {
-                    console.log('Success, need to refresh to show changes')
-                    // window.location.reload()
-                    this.props.refresh(!this.props.refreshState)
+                    window.location.reload()
+                    // this.props.refresh(!this.props.refreshState)
                 } else {
                     alert(`${response.error.errors[0].message}`)
                 }
@@ -35,7 +37,7 @@ class DeletePacklist extends Component<DelProps> {
     render() {
         return (
             <div>
-                <Button color="secondary" onClick={this.delPacklistFetch}>Delete this Packlist</Button>
+                <Button color="secondary" onClick={this.submitClick}>Delete this Packlist</Button>
                 <hr />
             </div>
         )

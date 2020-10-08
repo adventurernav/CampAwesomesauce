@@ -136,38 +136,38 @@ class Header extends Component<{}, headerState> {
                     <List>
                         
                         <ListItem button>
-                            <Link className={classes.link} to="/dashboard" >Dashboard</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/dashboard" >Dashboard</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link to="/auth">Sign up or Sign in</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/auth">Sign up or Sign in</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link to="/packlist">Packlist</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/packlist">Packlist</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link to="/profile">Profile</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/profile">Profile</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link to="/account">Account</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/account">Account</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link to="/logout">Logout</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/logout">Logout</Link>
                         </ListItem>
                         <Divider />
                         <ListItem button>
-                            <Link className={classes.link} to="/" >Home</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/" >Home</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link className={classes.link} to="/resources" >Resources</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/resources" >Resources</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link className={classes.link} to="/about" >About</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/about" >About</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link className={classes.link} to="/donate" >Donate</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/donate" >Donate</Link>
                         </ListItem>
                         <ListItem button>
-                            <Link className={classes.link} to="/contact" >Contact</Link>
+                            <Link className={classes.link} onClick={this.handleDrawerClose} to="/contact" >Contact</Link>
                         </ListItem>
                     </List>
                 </Drawer>

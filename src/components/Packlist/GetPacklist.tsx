@@ -26,7 +26,6 @@ class GetPacklist extends Component<getPacklistProps, PacklistState> {
         this.packlistFetch()
     }
     componentDidUpdate(){
-        console.log('Component Did Update')
     }
     packlistFetch = (): void => {
         fetch(`${APIURL}/packlist/`, {

@@ -5,7 +5,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import NewPacklist from './NewPacklist';
-import { Button } from '@material-ui/core';
 import DeletePacklist from './DeletePacklist';
 import UpdatePacklist from './UpdatePacklist';
 
@@ -83,7 +82,6 @@ class VerticalTabs extends Component<tabProps, tabState> {
     }
   }
   componentDidUpdate(){
-    console.log('Component Did Update')
 }
   handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     this.setState({ value: newValue });
@@ -101,8 +99,7 @@ class VerticalTabs extends Component<tabProps, tabState> {
           aria-label="My Packlists"
           className={classes.tabs}
         >
-          {this.props.PacklistState.data.map((packlist, i) => {
-            console.log(packlist);
+          {this.props.PacklistState.data.reverse().map((packlist, i) => {
             return <Tab key={i} label={packlist ? packlist.title : 'Nothing Found'} {...a11yProps(i)} />
 
           })}
@@ -110,9 +107,8 @@ class VerticalTabs extends Component<tabProps, tabState> {
         </Tabs>
 
 
-        {this.props.PacklistState.data.map((packlist, i)=>{
-          console.log('packlist id :',packlist.id)
-          console.log('i for data.map:', i)
+        {this.props.PacklistState.data.reverse().map((packlist, i)=>{
+          
           return (<TabPanel key={i}value={this.state.value} index={i}>
             <UpdatePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
             <DeletePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>

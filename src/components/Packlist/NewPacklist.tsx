@@ -30,7 +30,6 @@ class NewPacklist extends Component<newPacklistProps> {
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
     newPacklistSubmit(values: Values) {
-        console.log(values);
         fetch(`${APIURL}/packlist/`, {
             method: 'POST',
             headers: this.requestHeaders,

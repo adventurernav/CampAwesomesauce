@@ -6,26 +6,54 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import APIURL from "../../helpers/environment";
+import { DesktopWindowsOutlined } from '@material-ui/icons';
+
 
 
 type UpProps = {
     plID: number,
     appState: { authenticated: boolean, token: string | null },
-    refresh: (newState:boolean) => void,
+    refresh: (newState: boolean) => void,
     refreshState: boolean
 }
 type UpState = {
     open: boolean,
-    textFieldValue: string
+    newTitle: string,
+    refreshState: boolean
 }
 class UpdatePacklist extends Component<UpProps, UpState> {
     state = {
         open: false,
-        textFieldValue: ''
+        newTitle: '',
+        refreshState: this.props.refreshState
+    }
+    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
+    submitClick = () => {
+        this.handleClose();
+        this.handleUpdateFetch();
     }
     handleUpdateFetch = () => {
-        this.handleClose();
+        fetch(`${APIURL}/packlist/${this.props.plID}`, {
+            method: 'PUT',
+            headers: this.requestHeaders,
+            body: JSON.stringify({
+                title: this.state.newTitle
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.message === "Update Failed") {
+                    alert(data.error.original.detail)
+                } else {
+                    console.log(data)
+                    // this.props.refresh(!this.state.refreshState)
+                    window.location.reload()
+                }
 
+            })
+            .catch(err => console.log(err))
     }
     handleClickOpen = () => {
         this.setState({ open: true });
@@ -36,7 +64,7 @@ class UpdatePacklist extends Component<UpProps, UpState> {
     };
     handleChange = (e: any) => {
         this.setState({
-            textFieldValue: e.target.value
+            newTitle: e.target.value
         });
     }
     render() {
@@ -58,7 +86,7 @@ class UpdatePacklist extends Component<UpProps, UpState> {
                             label="Title"
                             type="text"
                             fullWidth
-                            value={this.state.textFieldValue}
+                            value={this.state.newTitle}
                             onChange={this.handleChange}
                         />
                     </DialogContent>
@@ -66,7 +94,7 @@ class UpdatePacklist extends Component<UpProps, UpState> {
                         <Button onClick={this.handleClose} color="secondary">
                             Cancel
             </Button>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.submitClick} color="primary">
                             Submit Changes
             </Button>
                     </DialogActions>
