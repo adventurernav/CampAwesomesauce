@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box';
 import NewPacklist from './NewPacklist';
 import DeletePacklist from './DeletePacklist';
 import UpdatePacklist from './UpdatePacklist';
+import PLitem from './PacklistItem/PLitem'
 
 
 interface TabPanelProps {
@@ -112,6 +113,7 @@ class VerticalTabs extends Component<tabProps, tabState> {
           return (<TabPanel key={i}value={this.state.value} index={i}>
             <UpdatePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
             <DeletePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
+            <PLitem appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
         </TabPanel>)
         })}
 
