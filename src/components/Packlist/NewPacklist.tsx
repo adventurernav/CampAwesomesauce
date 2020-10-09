@@ -70,7 +70,7 @@ class NewPacklist extends Component<newPacklistProps> {
                                 />
                             </div>
 
-                            <Button type='submit'>Create Packlist</Button>
+                            <Button type='submit' variant="outlined" color="primary">Create Packlist</Button>
                         </Form>
                     )}
                 </Formik>

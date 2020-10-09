@@ -13,19 +13,16 @@ import APIURL from "../../helpers/environment";
 type UpProps = {
     plID: number,
     appState: { authenticated: boolean, token: string | null },
-    refresh: (newState: boolean) => void,
-    refreshState: boolean
+    
 }
 type UpState = {
     open: boolean,
     newTitle: string,
-    refreshState: boolean
 }
 class UpdatePacklist extends Component<UpProps, UpState> {
     state = {
         open: false,
         newTitle: '',
-        refreshState: this.props.refreshState
     }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     submitClick = () => {
@@ -45,7 +42,6 @@ class UpdatePacklist extends Component<UpProps, UpState> {
                 if (data.message === "Update Failed") {
                     alert(data.error.original.detail)
                 } else {
-                    // this.props.refresh(!this.state.refreshState)
                     window.location.reload()
                 }
 

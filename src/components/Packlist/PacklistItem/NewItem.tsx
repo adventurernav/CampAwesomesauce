@@ -5,16 +5,15 @@ import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, D
 type NewItemProps = {
     plID: number,
     appState: { authenticated: boolean, token: string | null },
-    refresh: (newState: boolean) => void,
-    refreshState: boolean
+    
 }
 type NewItemState = {
-    itemsData: {
-        itemName: string,
-        qty: number,
-        isOwned: boolean,
-        isPacked: boolean,
-    },
+
+    itemName: string,
+    qty: number,
+    isOwned: boolean,
+    isPacked: boolean,
+
     open: boolean,
 }
 
@@ -22,12 +21,12 @@ class NewItem extends Component<NewItemProps, NewItemState> {
     constructor(props: NewItemProps) {
         super(props)
         this.state = {
-            itemsData: {
-                itemName: '',
-                qty: 0,
-                isOwned: false,
-                isPacked: false,
-            },
+
+            itemName: '',
+            qty: 0,
+            isOwned: false,
+            isPacked: false,
+
             open: false,
         }
         console.log(props.plID);
@@ -42,17 +41,16 @@ class NewItem extends Component<NewItemProps, NewItemState> {
             method: 'POST',
             headers: this.requestHeaders,
             body: JSON.stringify({
-                itemName: this.state.itemsData.itemName,
-                isOwned: this.state.itemsData.isOwned,
-                isPacked: this.state.itemsData.isPacked,
-                qty: this.state.itemsData.qty,
+                itemName: this.state.itemName,
+                isOwned: this.state.isOwned,
+                isPacked: this.state.isPacked,
+                qty: this.state.qty,
             })
         })
             .then(res => res.json())
             .then(response => {
                 console.log(response)
-                // window.location.reload()
-
+                window.location.reload()
             })
             .catch(err => console.log(err))
     }
@@ -66,17 +64,26 @@ class NewItem extends Component<NewItemProps, NewItemState> {
     handleClose = () => {
         this.setState({ open: false });
     };
-    handleChange = (e: any) => {
+    handleChangeDesc = (e: any) => {
         this.setState({
-            itemsData: {
-                itemName: e.target.value,
-                qty: e.target.value,
-                isOwned: e.target.checked,
-                isPacked: e.target.checked
-            }
+            itemName: e.target.value
         })
     }
-
+    handleChangeQty =(e:any) => {
+        this.setState({
+            qty: e.target.value
+        })
+    }
+    handleChangePack =(e:any) => {
+        this.setState({
+            isPacked: e.target.checked
+        })
+    }
+    handleChangeOwn =(e:any) => {
+        this.setState({
+            isOwned: e.target.checked
+        })
+    }
     render() {
         return (
             <div>
@@ -96,7 +103,7 @@ class NewItem extends Component<NewItemProps, NewItemState> {
                                 id="itemName"
                                 label="Item Description"
                                 fullWidth
-                                onChange={this.handleChange}
+                                onChange={this.handleChangeDesc}
 
                             />
                             <TextField
@@ -105,16 +112,18 @@ class NewItem extends Component<NewItemProps, NewItemState> {
                                 label="Quantity"
                                 type="number"
                                 fullWidth
-                                onChange={this.handleChange}
+                                onChange={this.handleChangeQty}
+
 
                             />
                             <FormControlLabel
                                 control={
                                     <Switch
-                                        checked={this.state.itemsData.isPacked}
-                                        onChange={this.handleChange}
+                                        checked={this.state.isPacked}
                                         name="isPacked"
                                         inputProps={{ 'aria-label': 'isPacked' }}
+                                        onChange={this.handleChangePack}
+
                                     />
                                 }
                                 label="Item is packed?"
@@ -122,10 +131,11 @@ class NewItem extends Component<NewItemProps, NewItemState> {
                             <FormControlLabel
                                 control={
                                     <Switch
-                                        checked={this.state.itemsData.isOwned}
-                                        onChange={this.handleChange}
+                                        checked={this.state.isOwned}
                                         name="isOwned"
                                         inputProps={{ 'aria-label': 'isOwned' }}
+                                        onChange={this.handleChangeOwn}
+
                                     />
                                 }
                                 label="Already Owned?"

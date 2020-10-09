@@ -46,7 +46,7 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
     render(){
         return(
         <div>
-            {(this.state.submitted === true) ? <Redirect to='/profile' /> : null}
+            {(this.state.submitted === true) ? <Redirect to='/dashboard' /> : null}
             <h1>Login</h1>
             <Formik 
             initialValues={{email: '', password: ''}} 

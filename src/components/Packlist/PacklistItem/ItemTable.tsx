@@ -1,12 +1,12 @@
-import { TableContainer, TableRow, Table, TableHead, TableCell, TableBody, Button } from "@material-ui/core";
+import { TableContainer, TableRow, Table, TableHead, TableCell, TableBody, Button, Switch } from "@material-ui/core";
 import React, { Component } from "react";
 import DeleteItem from "./DeleteItem";
+import UpdateItem from "./UpdateItem";
+import Slider from './Slider'
 
 type PLitemProps = {
     plID: number,
     appState: { authenticated: boolean, token: string | null },
-    refresh: (newState: boolean) => void,
-    refreshState: boolean,
     items: itemObject[]
 }
 type itemObject = {
@@ -25,44 +25,42 @@ class ItemTable extends Component<PLitemProps> {
     }
     componentDidUpdate() {
     }
+    updateItemDetail() {
 
+    }
     render() {
 
         return (
             <div>
+
                 <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>
-                                    Item
-                                </TableCell>
-                                <TableCell>
-                                    Quantity
-                                </TableCell>
-                                <TableCell>
-                                    Owned?
-                                </TableCell>
-                                <TableCell>
-                                    Packed?
-                                </TableCell>
-                                <TableCell>
-                                    Edit
-                                </TableCell>
-                                <TableCell>
-                                    Delete
-                                </TableCell>
+                                <TableCell></TableCell>
+                                <TableCell>Item</TableCell>
+                                <TableCell>Quantity</TableCell>
+                                <TableCell>Owned?</TableCell>
+                                <TableCell> Packed?</TableCell>
+                                <TableCell>Delete</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.props.items.map((thisItem, i) => (
-                                <TableRow>
+                                <TableRow key={thisItem.id}>
+                                    <TableCell><UpdateItem itemID={thisItem.id} appState={this.props.appState} /></TableCell>
+
                                     <TableCell>{thisItem.itemName}</TableCell>
+
                                     <TableCell>{thisItem.qty}</TableCell>
-                                    <TableCell>{thisItem.isOwned}</TableCell>
-                                    <TableCell>{thisItem.isPacked}</TableCell>
-                                    <TableCell><Button>Edit</Button></TableCell>
-                                    <TableCell><DeleteItem itemID={thisItem.id} appState={this.props.appState} refresh={this.props.refresh} refreshState={this.props.refreshState}/></TableCell>
+
+                                    <TableCell>
+                                        <Slider itemID={thisItem.id} checked={thisItem.isOwned} sliderKey={'isOwned'} appState={this.props.appState}/>
+                                    </TableCell>
+                                    <TableCell>
+                                    <Slider itemID={thisItem.id} checked={thisItem.isOwned} sliderKey={'isPacked'} appState={this.props.appState}/>
+                                    </TableCell>
+                                    <TableCell><DeleteItem itemID={thisItem.id} appState={this.props.appState} /></TableCell>
                                 </TableRow>
 
                             ))}

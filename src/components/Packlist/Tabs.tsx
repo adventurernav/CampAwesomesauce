@@ -48,7 +48,8 @@ const styles = (theme: any) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
-    height: '100vh',
+    height: 'fit-content',
+    width: 'max-width'
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
@@ -58,8 +59,7 @@ type tabProps = {
   appState: {authenticated: boolean, token: string | null}
   classes: any,
   PacklistState: PacklistState,
-  refresh: (newState:boolean) => void,
-  refreshState: boolean
+  
 }
 type tabState = {
   value: number,
@@ -111,9 +111,9 @@ class VerticalTabs extends Component<tabProps, tabState> {
         {this.props.PacklistState.data.map((packlist, i)=>{
           
           return (<TabPanel key={i}value={this.state.value} index={i} >
-            <UpdatePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
-            <DeletePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
-            <PLitem appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
+            <UpdatePacklist appState={this.props.appState} plID={packlist.id} />
+            <DeletePacklist appState={this.props.appState} plID={packlist.id} />
+            <PLitem appState={this.props.appState} plID={packlist.id} />
         </TabPanel>)
         })}
 

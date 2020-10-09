@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Button } from '@material-ui/core'
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+
 import APIURL from "../../../helpers/environment";
 
 type DelProps = {
     itemID: number,
     appState: { authenticated: boolean, token: string | null },
-    refresh: (newState:boolean) => void,
-    refreshState: boolean
+    
 }
 class DeleteItem extends Component<DelProps> {
    
@@ -25,7 +26,6 @@ class DeleteItem extends Component<DelProps> {
             .then(response => {
                 if (!response.error) {
                     window.location.reload()
-                    // this.props.refresh(!this.props.refreshState)
                 } else {
                     alert(`${response.error.errors[0].message}`)
                 }
@@ -35,8 +35,7 @@ class DeleteItem extends Component<DelProps> {
     render() {
         return (
             <div>
-                <Button color="secondary" onClick={this.submitClick}>Delete this Item</Button>
-                <hr />
+                <Button color="secondary" onClick={this.submitClick}><DeleteOutlinedIcon/></Button>
             </div>
         )
     }

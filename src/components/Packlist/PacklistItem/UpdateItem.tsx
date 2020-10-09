@@ -7,25 +7,23 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import APIURL from "../../../helpers/environment";
+import { EditOutlined } from "@material-ui/icons";
 
 
 
 type UpProps = {
     itemID: number,
     appState: { authenticated: boolean, token: string | null },
-    refresh: (newState: boolean) => void,
-    refreshState: boolean
+    
 }
 type UpState = {
     open: boolean,
-    newTitle: string,
-    refreshState: boolean
+    newTitle: string
 }
 class UpdateItem extends Component<UpProps, UpState> {
     state = {
         open: false,
-        newTitle: '',
-        refreshState: this.props.refreshState
+        newTitle: ''
     }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     submitClick = () => {
@@ -45,7 +43,6 @@ class UpdateItem extends Component<UpProps, UpState> {
                 if (data.message === "Update Failed") {
                     alert(data.error.original.detail)
                 } else {
-                    // this.props.refresh(!this.state.refreshState)
                     window.location.reload()
                 }
 
@@ -67,9 +64,7 @@ class UpdateItem extends Component<UpProps, UpState> {
     render() {
         return (
             <div>
-                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                    Edit
-        </Button>
+                <Button color='secondary'><EditOutlined /></Button>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Update Item Details</DialogTitle>
                     <DialogContent>

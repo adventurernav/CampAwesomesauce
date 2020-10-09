@@ -1,4 +1,5 @@
 
+import { Button } from "@material-ui/core";
 import React, { Component } from "react";
 import APIURL from '../../../helpers/environment'
 import ItemTable from "./ItemTable";
@@ -7,8 +8,6 @@ import NewItem from "./NewItem";
 type PLitemProps = {
     plID: number,
     appState: { authenticated: boolean, token: string | null },
-    refresh: (newState: boolean) => void,
-    refreshState: boolean
 }
 
 type itemObject = {
@@ -50,8 +49,8 @@ class GetPacklist extends Component<PLitemProps, PLitemState> {
 
         return (
             <div>
-                <NewItem appState={this.props.appState} plID={this.props.plID} refresh={this.props.refresh} refreshState={this.props.refreshState} />
-                <ItemTable items={this.state.data} appState={this.props.appState} plID={this.props.plID} refresh={this.props.refresh} refreshState={this.props.refreshState} />
+                <NewItem appState={this.props.appState} plID={this.props.plID}  />
+                <ItemTable items={this.state.data} appState={this.props.appState} plID={this.props.plID}  />
             </div>
         )
     }

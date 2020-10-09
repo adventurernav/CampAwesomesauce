@@ -5,8 +5,7 @@ import APIURL from "../../helpers/environment";
 type DelProps = {
     plID: number,
     appState: { authenticated: boolean, token: string | null },
-    refresh: (newState:boolean) => void,
-    refreshState: boolean
+    
 }
 class DeletePacklist extends Component<DelProps> {
    
@@ -25,7 +24,6 @@ class DeletePacklist extends Component<DelProps> {
             .then(response => {
                 if (!response.error) {
                     window.location.reload()
-                    // this.props.refresh(!this.props.refreshState)
                 } else {
                     alert(`${response.error.errors[0].message}`)
                 }
