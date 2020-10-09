@@ -46,11 +46,9 @@ componentDidUpdate(){
                 if (data.message === "Update Failed"){
                     alert(data.error.original.detail)
                 }else {
-                    console.log(data)
                     this.setState({submitted: true})
                     
                 }
-                return console.log(data)
             })
             .catch(err => console.log(err))
     }

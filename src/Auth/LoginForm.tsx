@@ -32,7 +32,6 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
         })
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
                 if (!data.error){
                     window.localStorage.setItem('token', data.sessionToken)
                     loginProps.updateToken(data.sessionToken, true)

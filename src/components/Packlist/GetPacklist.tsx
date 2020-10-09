@@ -13,7 +13,6 @@ export interface PacklistState {
 type packlistObject = {
     id: number,
     title: string
-    // [index: number]: packlistKeys
 }
 
 class GetPacklist extends Component<getPacklistProps, PacklistState> {

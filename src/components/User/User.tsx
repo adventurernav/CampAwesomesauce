@@ -41,7 +41,6 @@ class User extends Component<UserProps, UserState>{
     }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     componentDidMount() {
-        console.log('component did mount');
         this.getUser()
     }
     getUser() {
@@ -51,7 +50,6 @@ class User extends Component<UserProps, UserState>{
         })
             .then(res => res.json())
             .then((data: UserResults) => {
-                console.log(data);
                 this.setState({
                     user: {
                         firstName: data.firstName,

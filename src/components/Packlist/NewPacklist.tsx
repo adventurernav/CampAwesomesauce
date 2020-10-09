@@ -22,7 +22,6 @@ class NewPacklist extends Component<newPacklistProps> {
         this.state={
             submitted: false
         }
-        console.log(props);
     }
     componentDidUpdate(){
         console.log('Component Did Update')

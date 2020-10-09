@@ -12,9 +12,7 @@ class Packlist extends Component<PacklistProps,PacklistState> {
 state={
     refresh: false
 }
-componentDidUpdate(){
-    console.log('Component Did Update')
-}
+
 refrFunc(newState: boolean): void {
     this.setState({ refresh: newState })
   }

@@ -48,7 +48,7 @@ const styles = (theme: any) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
-    height: 224,
+    height: '100vh',
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
@@ -100,7 +100,7 @@ class VerticalTabs extends Component<tabProps, tabState> {
           aria-label="My Packlists"
           className={classes.tabs}
         >
-          {this.props.PacklistState.data.reverse().map((packlist, i) => {
+          {this.props.PacklistState.data.map((packlist, i) => {
             return <Tab key={i} label={packlist ? packlist.title : 'Nothing Found'} {...a11yProps(i)} />
 
           })}
@@ -108,9 +108,9 @@ class VerticalTabs extends Component<tabProps, tabState> {
         </Tabs>
 
 
-        {this.props.PacklistState.data.reverse().map((packlist, i)=>{
+        {this.props.PacklistState.data.map((packlist, i)=>{
           
-          return (<TabPanel key={i}value={this.state.value} index={i}>
+          return (<TabPanel key={i}value={this.state.value} index={i} >
             <UpdatePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
             <DeletePacklist appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>
             <PLitem appState={this.props.appState} plID={packlist.id} refresh={this.props.refresh} refreshState={this.props.refreshState}/>

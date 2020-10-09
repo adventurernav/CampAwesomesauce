@@ -9,10 +9,7 @@ type AuthProps = {
 
 }
 class Auth extends Component<AuthProps> {
-componentDidMount(){
-    console.log(this.props)
 
-}
     render() {
         return (
             <div>

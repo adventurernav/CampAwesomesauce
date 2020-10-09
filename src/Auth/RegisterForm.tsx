@@ -44,7 +44,6 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
         })
             .then(res => res.json())
             .then((data) => {
-                console.log(data);
                 if (!data.error){
                 window.localStorage.setItem('token', data.sessionToken)
                 submitProps.updateToken(data.sessionToken, true)

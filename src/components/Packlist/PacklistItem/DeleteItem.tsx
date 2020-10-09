@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Button } from '@material-ui/core'
-import APIURL from "../../helpers/environment";
+import APIURL from "../../../helpers/environment";
 
 type DelProps = {
-    plID: number,
+    itemID: number,
     appState: { authenticated: boolean, token: string | null },
     refresh: (newState:boolean) => void,
     refreshState: boolean
 }
-class DeletePacklist extends Component<DelProps> {
+class DeleteItem extends Component<DelProps> {
    
 
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
@@ -17,7 +17,7 @@ class DeletePacklist extends Component<DelProps> {
         this.delPacklistFetch();
     }
     delPacklistFetch = (): any => {
-        fetch(`${APIURL}/packlist/${this.props.plID}`, {
+        fetch(`${APIURL}/item/${this.props.itemID}`, {
             method: 'DELETE',
             headers: this.requestHeaders
         })
@@ -35,10 +35,10 @@ class DeletePacklist extends Component<DelProps> {
     render() {
         return (
             <div>
-                <Button color="secondary" onClick={this.submitClick}>Delete this Packlist</Button>
+                <Button color="secondary" onClick={this.submitClick}>Delete this Item</Button>
                 <hr />
             </div>
         )
     }
 }
-export default DeletePacklist;
+export default DeleteItem;

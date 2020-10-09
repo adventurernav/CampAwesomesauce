@@ -6,12 +6,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import APIURL from "../../helpers/environment";
+import APIURL from "../../../helpers/environment";
 
 
 
 type UpProps = {
-    plID: number,
+    itemID: number,
     appState: { authenticated: boolean, token: string | null },
     refresh: (newState: boolean) => void,
     refreshState: boolean
@@ -21,7 +21,7 @@ type UpState = {
     newTitle: string,
     refreshState: boolean
 }
-class UpdatePacklist extends Component<UpProps, UpState> {
+class UpdateItem extends Component<UpProps, UpState> {
     state = {
         open: false,
         newTitle: '',
@@ -33,7 +33,7 @@ class UpdatePacklist extends Component<UpProps, UpState> {
         this.handleUpdateFetch();
     }
     handleUpdateFetch = () => {
-        fetch(`${APIURL}/packlist/${this.props.plID}`, {
+        fetch(`${APIURL}/packlist/${this.props.itemID}`, {
             method: 'PUT',
             headers: this.requestHeaders,
             body: JSON.stringify({
@@ -68,14 +68,14 @@ class UpdatePacklist extends Component<UpProps, UpState> {
         return (
             <div>
                 <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                    Update Packlist Title
+                    Edit
         </Button>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Update Packlist Title</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Update Item Details</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Please enter a new title for this packlist:
-            </DialogContentText>
+                            Items to update:
+                        </DialogContentText>
                         <TextField
                             autoFocus
                             margin="dense"
@@ -100,4 +100,4 @@ class UpdatePacklist extends Component<UpProps, UpState> {
         )
     }
 }
-export default UpdatePacklist;
+export default UpdateItem;

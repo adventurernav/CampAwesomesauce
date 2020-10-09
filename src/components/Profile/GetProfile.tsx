@@ -38,8 +38,6 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
         })
             .then(res => res.json())
             .then((data: ProfileResults) => {
-                console.log(data);
-
                 if (data.users !== null) {
                     this.setState({
                         newUser: false,
