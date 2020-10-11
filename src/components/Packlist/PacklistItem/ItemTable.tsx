@@ -1,8 +1,10 @@
-import { TableContainer, TableRow, Table, TableHead, TableCell, TableBody, Button, Switch } from "@material-ui/core";
+import { TableContainer, TableRow, Table, TableHead, TableCell, TableBody } from "@material-ui/core";
 import React, { Component } from "react";
 import DeleteItem from "./DeleteItem";
 import UpdateItem from "./UpdateItem";
+import NewItem from './NewItem'
 import Slider from './Slider'
+
 
 type PLitemProps = {
     plID: number,
@@ -32,27 +34,23 @@ class ItemTable extends Component<PLitemProps> {
 
         return (
             <div>
-
                 <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell></TableCell>
-                                <TableCell>Item</TableCell>
+                                <TableCell><NewItem appState={this.props.appState} plID={this.props.plID} />Item</TableCell>
                                 <TableCell>Quantity</TableCell>
                                 <TableCell>Owned?</TableCell>
-                                <TableCell> Packed?</TableCell>
-                                <TableCell>Delete</TableCell>
+                                <TableCell>Packed?</TableCell>
+                                <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.props.items.map((thisItem, i) => (
                                 <TableRow key={thisItem.id}>
-                                    <TableCell><UpdateItem itemID={thisItem.id} appState={this.props.appState} /></TableCell>
+                                    <TableCell><UpdateItem textKey={'itemName'} itemID={thisItem.id} currentValue={thisItem.itemName} appState={this.props.appState} /></TableCell>
 
-                                    <TableCell>{thisItem.itemName}</TableCell>
-
-                                    <TableCell>{thisItem.qty}</TableCell>
+                                    <TableCell><UpdateItem textKey={'qty'}itemID={thisItem.id} currentValue={thisItem.qty} appState={this.props.appState} /></TableCell>
 
                                     <TableCell>
                                         <Slider itemID={thisItem.id} checked={thisItem.isOwned} sliderKey={'isOwned'} appState={this.props.appState}/>
@@ -72,4 +70,5 @@ class ItemTable extends Component<PLitemProps> {
         )
     }
 }
+
 export default ItemTable;

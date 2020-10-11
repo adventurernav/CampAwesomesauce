@@ -6,6 +6,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { EditOutlined } from "@material-ui/icons";
+
 import APIURL from "../../helpers/environment";
 
 
@@ -63,9 +65,7 @@ class UpdatePacklist extends Component<UpProps, UpState> {
     render() {
         return (
             <div>
-                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                    Update Packlist Title
-        </Button>
+                <Button color="secondary" onClick={this.handleClickOpen}><EditOutlined /></Button>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Update Packlist Title</DialogTitle>
                     <DialogContent>

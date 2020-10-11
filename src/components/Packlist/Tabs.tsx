@@ -8,7 +8,8 @@ import NewPacklist from './NewPacklist';
 import DeletePacklist from './DeletePacklist';
 import UpdatePacklist from './UpdatePacklist';
 import PLitem from './PacklistItem/PLitem'
-
+import { Grid } from '@material-ui/core';
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -23,6 +24,7 @@ function TabPanel(props: TabPanelProps) {
     <div
       role="tabpanel"
       hidden={value !== index}
+      className="max-width"
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
@@ -49,11 +51,16 @@ const styles = (theme: any) => ({
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
     height: 'fit-content',
-    width: 'max-width'
+    width: 'max-width',
+    align: 'center'
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
+    width: '20vw'
   },
+  cell: {
+    align: 'center'
+  }
 });
 type tabProps = {
   appState: {authenticated: boolean, token: string | null}
@@ -104,15 +111,19 @@ class VerticalTabs extends Component<tabProps, tabState> {
             return <Tab key={i} label={packlist ? packlist.title : 'Nothing Found'} {...a11yProps(i)} />
 
           })}
-          <Tab label="+ New" {...a11yProps(this.props.PacklistState.data.length)} />
+          <Tab label={<AddCircleOutlineOutlinedIcon/>} {...a11yProps(this.props.PacklistState.data.length)} />
         </Tabs>
 
 
         {this.props.PacklistState.data.map((packlist, i)=>{
           
           return (<TabPanel key={i}value={this.state.value} index={i} >
+            <Grid container justify='center' alignItems='center'>
+
+            <h1>{packlist.title}</h1>
             <UpdatePacklist appState={this.props.appState} plID={packlist.id} />
             <DeletePacklist appState={this.props.appState} plID={packlist.id} />
+            </Grid>
             <PLitem appState={this.props.appState} plID={packlist.id} />
         </TabPanel>)
         })}

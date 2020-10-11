@@ -1,9 +1,8 @@
 
-import { Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import APIURL from '../../../helpers/environment'
 import ItemTable from "./ItemTable";
-import NewItem from "./NewItem";
 
 type PLitemProps = {
     plID: number,
@@ -42,15 +41,16 @@ class GetPacklist extends Component<PLitemProps, PLitemState> {
             .then((results) => {
                 this.setState({ data: results })
             })
-            
+
             .catch(err => console.log(err))
     }
     render() {
 
         return (
             <div>
-                <NewItem appState={this.props.appState} plID={this.props.plID}  />
-                <ItemTable items={this.state.data} appState={this.props.appState} plID={this.props.plID}  />
+                <Grid container direction='column'>
+                        <ItemTable items={this.state.data} appState={this.props.appState} plID={this.props.plID} />
+                </Grid>
             </div>
         )
     }

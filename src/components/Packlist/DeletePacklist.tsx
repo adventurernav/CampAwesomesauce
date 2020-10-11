@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Button } from '@material-ui/core'
 import APIURL from "../../helpers/environment";
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+
 
 type DelProps = {
     plID: number,
@@ -33,8 +35,7 @@ class DeletePacklist extends Component<DelProps> {
     render() {
         return (
             <div>
-                <Button color="secondary" onClick={this.submitClick}>Delete this Packlist</Button>
-                <hr />
+                <Button color="secondary" onClick={this.submitClick}><DeleteOutlinedIcon/></Button>
             </div>
         )
     }

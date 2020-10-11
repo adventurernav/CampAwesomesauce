@@ -12,12 +12,15 @@ import Contact from "./Contact";
 import About from "./About";
 import Donate from "./Donate";
 import Resources from "./Resources";
+import Admin from "../Auth/Admin";
+
 type controllerState = {
 
 }
 type ControllerProps = {
     updateToken: (token: string, authenticated: boolean) => void,
-    appState: { authenticated: boolean, token: string | null }
+    updateAdmin: (admin: boolean) => void,
+    appState: { authenticated: boolean, token: string | null, admin: boolean|null }
 }
 
 class SwitchController extends Component<ControllerProps, controllerState> {
@@ -30,12 +33,13 @@ class SwitchController extends Component<ControllerProps, controllerState> {
             <div>
                 <Switch>
                     <Route exact path="/"><Home /></Route>
+                    <Route exact path="/admin"><Admin /></Route>
                     <Route exact path="/dashboard"><Dashboard /></Route>
                     <Route exact path="/resources"><Resources /></Route>
                     <Route exact path="/contact"><Contact /></Route>
                     <Route exact path="/about"><About /></Route>
                     <Route exact path="/donate"><Donate /></Route>
-                    <Route exact path="/auth"><Auth updateToken={this.props.updateToken} appState={this.props.appState} /></Route>
+                    <Route exact path="/auth"><Auth updateToken={this.props.updateToken} updateAdmin={this.props.updateAdmin} appState={this.props.appState} /></Route>
                     <Route exact path="/logout"><Logout updateToken={this.props.updateToken} /></Route>
                     <Route exact path="/packlist"><Packlist appState={this.props.appState} /></Route>
                     <Route exact path="/profile"><Profile appState={this.props.appState} /></Route>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import APIURL from "../../../helpers/environment";
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Switch, FormGroup, FormControlLabel } from "@material-ui/core";
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Switch, FormGroup, FormControlLabel, IconButton } from "@material-ui/core";
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
 type NewItemProps = {
     plID: number,
@@ -21,15 +22,12 @@ class NewItem extends Component<NewItemProps, NewItemState> {
     constructor(props: NewItemProps) {
         super(props)
         this.state = {
-
             itemName: '',
             qty: 0,
             isOwned: false,
             isPacked: false,
-
             open: false,
         }
-        console.log(props.plID);
         this.newItemSubmit = this.newItemSubmit.bind(this)
     }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
@@ -87,9 +85,7 @@ class NewItem extends Component<NewItemProps, NewItemState> {
     render() {
         return (
             <div>
-                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                    Add an Item
-                </Button>
+                <IconButton color="primary" onClick={this.handleClickOpen}><AddCircleOutlineOutlinedIcon/></IconButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Create Item</DialogTitle>
                     <DialogContent>
@@ -113,8 +109,6 @@ class NewItem extends Component<NewItemProps, NewItemState> {
                                 type="number"
                                 fullWidth
                                 onChange={this.handleChangeQty}
-
-
                             />
                             <FormControlLabel
                                 control={

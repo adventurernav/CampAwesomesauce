@@ -11,6 +11,7 @@ interface Values {
 }
 type LoginFormProps = {
     updateToken: (token:string, authenticated:boolean)=>void
+    updateAdmin: (admin:boolean)=>void
 }
 type stateValues={
     submitted: boolean
@@ -35,6 +36,7 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
                 if (!data.error){
                     window.localStorage.setItem('token', data.sessionToken)
                     loginProps.updateToken(data.sessionToken, true)
+                    loginProps.updateAdmin(data.user.role==='admin'? true: false)
                     this.setState({ submitted: true })
                 } else {
                     alert(`${data.error}`)

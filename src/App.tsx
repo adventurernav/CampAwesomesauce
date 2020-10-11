@@ -7,7 +7,8 @@ import SwitchController from './Site/SwitchController'
 
 type AppState = {
   token: string | null,
-  authenticated: boolean
+  authenticated: boolean,
+  admin: boolean | null
 }
 let currentToken = window.localStorage.getItem('token')
 let authCheck = currentToken ? true : false
@@ -16,14 +17,18 @@ class App extends Component<{}, AppState> {
     super(props)
     this.state = {
       authenticated: authCheck,
-      token: currentToken
+      token: currentToken,
+      admin: null
     }
     this.updateToken = this.updateToken.bind(this)
+    this.updateAdmin = this.updateAdmin.bind(this)
   }
   updateToken(newToken: string, authenticated: boolean): void {
     this.setState({ token: newToken, authenticated: authenticated })
   }
-  
+  updateAdmin(admin: boolean):void {
+    this.setState({admin:admin})
+  }
   componentWillUnmount(): void {
     this.updateToken('', false);
     window.localStorage.removeItem('token')
@@ -33,9 +38,9 @@ class App extends Component<{}, AppState> {
       <div className="App">
         <Router>
           <header className="App-header">
-            <Header />
+            <Header appState={this.state}/>
           </header>
-          <SwitchController updateToken={this.updateToken} appState={this.state} />
+          <SwitchController updateToken={this.updateToken} updateAdmin={this.updateAdmin} appState={this.state} />
           <footer className="App-footer">
             <Footer />
           </footer>

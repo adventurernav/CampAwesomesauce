@@ -9,3 +9,21 @@ h1{
 .getprofileP{
 padding: .5rem;
 }
+#nav-container{
+    font-family: var(--caps);
+    font-size: 2rem;
+    background-color: var(--pink);
+}
+#footer-container{
+    font-family: var(--caps);
+    bottom: 0;
+    width: 100%;
+}
+.max-width{
+    width: 100%;
+}
+#packlist-info{
+    max-width: 80vw;
+    text-align: center;
+    margin: auto;
+}
