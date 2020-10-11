@@ -4,7 +4,9 @@ class Admin extends Component {
 
     render(){
         return(
-            <div></div>
+            <div>
+                <h1>Admin Portal</h1>
+            </div>
         )
     }
 }

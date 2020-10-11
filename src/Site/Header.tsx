@@ -5,9 +5,8 @@ import { Menu, ChevronLeft } from '@material-ui/icons'
 import { Theme } from '@material-ui/core/styles'
 import uniIcon from '../assets/whiteuni.png'
 import clsx from 'clsx';
-
+const authRoute =[['/auth', 'Register or Login']]
 const mainRoutes = [
-    ['/auth', 'Register or Login'],
     ['/', 'Home'],
     ['/resources', 'Resources'],
     ['/about', 'About'],
@@ -115,21 +114,35 @@ class Header extends Component<HeaderProps, headerState> {
     };
     viewController = () => {
         const { classes } = this.state
-
-        mainRoutes.map((thisPath, i) => {
+        let allRoutes = mainRoutes.map((thisPath) => {
             return (<ListItem button>
                 <Link className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
             </ListItem>)
         })
-        if (this.props.appState.admin) {
-            console.log('admin links');
-        }
         if (this.props.appState.authenticated) {
-            console.log('authenticated links')
-        }
-    }
+            allRoutes = allRoutes.concat(authdRoutes.map((thisPath) => {
+                return (<ListItem button>
+                    <Link className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
+                </ListItem>)
+            }))
+        } else {
+            allRoutes = allRoutes.concat(authRoute.map((thisPath) => {
+                return (<ListItem button>
+                    <Link className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
+                </ListItem>)
+            }))}
 
+        if (this.props.appState.admin) {
+            allRoutes = allRoutes.concat(adminRoutes.map((thisPath) => {
+                return (<ListItem button>
+                    <Link className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
+                </ListItem>)
+            }))
+        }
+        return allRoutes;
+    }
     render() {
+
         const { classes } = this.state
         return (
             <div className={classes.root} id="nav-container">
@@ -170,7 +183,8 @@ class Header extends Component<HeaderProps, headerState> {
                     </div>
                     <Divider />
                     <List>
-                        {this.viewController}
+                        {this.viewController()}
+                        <ListItem></ListItem>
                     </List>
                 </Drawer>
 
