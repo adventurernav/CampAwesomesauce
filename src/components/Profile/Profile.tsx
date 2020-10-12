@@ -22,9 +22,7 @@ class Profile extends Component<ProfileProps> {
                     <Grid item>
                         <DeleteProfile appState={this.props.appState} />
                     </Grid>
-                    <Grid item>
-                        <Avatars />
-                    </Grid>
+                    
                 </Grid>
             </div>
         )

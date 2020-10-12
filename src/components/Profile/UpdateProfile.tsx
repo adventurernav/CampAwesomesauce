@@ -1,148 +1,134 @@
 import React, { Component } from "react";
-import { Button, TextField } from "@material-ui/core";
-import { Field, Form, Formik } from "formik";
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { EditOutlined } from "@material-ui/icons";
 import APIURL from "../../helpers/environment";
-import {ProfileResults} from './ProfileInterfaces'
-import { Redirect } from "react-router-dom";
+import { ProfileResults } from './ProfileInterfaces'
+import UpdateAvatar from './UpdateAvatar'
+import { FormControl, Select, MenuItem, InputLabel } from "@material-ui/core";
 
-interface Values {
-    playaname: string,
-    burnsAttended: number,
-    favPrinciple: string,
-    aboutMe: string,
-    status: string,
-    profilePic: string
-}
+
+const principles = ['Radical Inclusion', 'Radical Inclusion', 'Gifting', 'Decommodification', 'Radical Self-reliance', 'Radical Self-expression', 'Communal Effort', 'Civic Responsibility', 'Leave No Trace', 'Participation', 'Immediacy'];
+
 type updateProfileProps = {
-    appState: { authenticated: boolean, token: string|null },
-    fetchResults: ProfileResults 
+    appState: { authenticated: boolean, token: string | null },
+    fetchResults: ProfileResults,
+    textKey: string,
+    currentValue: string | number
 }
 type UpdateState = {
-submitted: boolean
+    newText: string | number,
+    open: boolean
 }
 class UpdateProfile extends Component<updateProfileProps, UpdateState> {
-state={
-    submitted: false
-}
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
-componentDidUpdate(){
-    
-}
-    updateProfileSubmit = (values: Values) => {
+    state = {
+        newText: this.props.currentValue,
+        open: false
+    }
+    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
+    componentDidMount() {
+        console.log('mount')
+        console.log(this.props.currentValue)
+        console.log(`TEXT KEY ${this.props.textKey}`)
+    }
+    dialogContentController = () => {
+        if (this.props.textKey === 'playaname' || this.props.textKey === 'burnsAttended' || this.props.textKey === 'status' || this.props.textKey === 'aboutMe') {
+            console.log(this.props.textKey)
+            return (<TextField
+                autoFocus
+                margin="dense"
+                label={this.props.textKey}
+                type={this.props.textKey === 'burnsAttended' ? 'number' : 'text'}
+                fullWidth
+                value={this.state.newText}
+                onChange={(e) => {
+                    this.handleChange(e);
+                }}
+            />)
+        } else if (this.props.textKey === 'favPrinciple') {
+            console.log(this.props.textKey)
+            return (<TextField
+                id={this.props.textKey}
+                select
+                label="Select"
+                value={this.state.newText}
+                onChange={this.handleChange}
+              >
+                  <MenuItem disabled value=''>--Select One--</MenuItem>
+                {principles.map((principle) => (
+                  <MenuItem key={principle[0]} value={principle}>
+                    {principle}
+                  </MenuItem>
+                ))}
+              </TextField>)
+        } else {console.log('Nothing Found')}
+
+    }
+    updateProfileSubmit = () => {
         fetch(`${APIURL}/profile/`, {
             method: 'PUT',
             headers: this.requestHeaders,
             body: JSON.stringify({
-                aboutMe: values.aboutMe,
-                burnsAttended: values.burnsAttended,
-                favPrinciple: values.favPrinciple,
-                playaname: values.playaname,
-                profilePic: values.profilePic,
-                status: values.status
+                [this.props.textKey]: this.state.newText
             })
         })
             .then(res => res.json())
-            .then(data=>{
-                if (data.message === "Update Failed"){
+            .then(data => {
+                if (data.message === "Update Failed") {
                     alert(data.error.original.detail)
-                }else {
-                    this.setState({submitted: true})
-                    
+                    throw new Error('Profile not updated')
+                } else {
+                    console.log('Fetch ran?');
+                    this.handleClose();
                 }
             })
             .catch(err => console.log(err))
     }
+    handleOpen = () => {
+        this.setState({ open: true });
+        console.log(this.props.textKey)
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+    handleChange = (e: any) => {
+        const val = e.target.value
+        console.log(val)
+        e.persist();
+        this.setState({ newText: val });
+    }
+    submitClick = () => {
+        this.updateProfileSubmit();
+    }
     render() {
         return (
             <div>
-                {(this.state.submitted === true) ? <Redirect to="/profile" /> : null}
-                <h1>Update your Profile</h1>
-                <Formik
-                    initialValues={{
-                        playaname: this.props.fetchResults.users.playaname,
-                        burnsAttended: this.props.fetchResults.users.burnsAttended,
-                        favPrinciple: this.props.fetchResults.users.favPrinciple,
-                        aboutMe: this.props.fetchResults.users.aboutMe,
-                        status: this.props.fetchResults.users.status,
-                        profilePic: this.props.fetchResults.users.profilePic
-                    }}
-                    onSubmit={values => {
-                        this.updateProfileSubmit(values)
-                    }}
-                    >
-                    {({ values, handleChange, handleBlur }) => (
-                        <Form>
+                {this.state.newText}
 
-                            <div>
-                                <TextField
-                                    name="playaname"
-                                    helperText="Playa Name"
-                                    value={values.playaname}
-                                    defaultValue={this.props.fetchResults.users.playaname}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                            <div>
-                                <TextField
-                                    name="burnsAttended"
-                                    helperText="Number of Burns Attended"
-                                    value={values.burnsAttended}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                            <div>
-                                <TextField
-                                    name="aboutMe"
-                                    helperText="About Me"
-                                    value={values.aboutMe}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                            <div>
-                                <TextField
-                                    name="status"
-                                    helperText="Status"
-                                    value={values.status}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                            <div>
-                                <TextField
-                                    name="profilePic"
-                                    helperText="Choose an avatar(TEMP: paste URL)"
-                                    value={values.profilePic}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
+                <IconButton color='secondary' onClick={this.handleOpen}><EditOutlined /></IconButton>
+                <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Update Profile</DialogTitle>
+                    <DialogContent>
+                        {this.dialogContentController()}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="secondary">
+                            Cancel
+                        </Button>
+                        <Button onClick={this.submitClick} color="primary">
+                            Submit Changes
+                        </Button>
+                    </DialogActions>
+                </Dialog>
 
-                            <div>
-                                
-                                <Field name='favPrinciple' as="select" helperText="Your Favorite Principle">
-                                <option value="" disabled>--Your Favorite Principle--</option>
-                                    <option value="Radical Inclusion">Radical Inclusion</option>
-                                    <option value="Gifting">Gifting</option>
-                                    <option value="Decommodification">Decommodification</option>
-                                    <option value="Radical Self-reliance">Radical Self-reliance</option>
-                                    <option value="Radical Self-expression">Radical Self-expression</option>
-                                    <option value="Communal Effort">Communal Effort</option>
-                                    <option value="Civic Responsibility">Civic Responsibility</option>
-                                    <option value="Leave No Trace">Leave No Trace</option>
-                                    <option value="Participation">Participation</option>
-                                    <option value="Immediacy">Immediacy</option>
-                                    
-                                </Field>
-                            </div>
-                            <Button type='submit'>Update Profile</Button>
-                        </Form>
-                    )}
-                </Formik>
             </div>
         )
     }
 }
-export default UpdateProfile
+export default UpdateProfile;

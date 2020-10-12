@@ -1,0 +1,99 @@
+import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import APIURL from '../../helpers/environment';
+import { EditOutlined } from "@material-ui/icons";
+import Avatars from './Avatars'
+
+
+
+type UpProps = {
+    itemID: number,
+    appState: { authenticated: boolean, token: string | null },
+    textKey: string,
+    currentValue: number | string,
+}
+type UpState = {
+    open: boolean,
+    newText: string|number
+}
+class UpdateItem extends Component<UpProps, UpState> {
+    state = {
+        open: false,
+        newText: this.props.currentValue
+    }
+    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
+    submitClick = () => {
+        this.handleUpdateFetch();
+    }
+    handleUpdateFetch = () => {
+        fetch(`${APIURL}/item/${this.props.itemID}`, {
+            method: 'PUT',
+            headers: this.requestHeaders,
+            body: JSON.stringify({
+                [this.props.textKey]: this.state.newText
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.message === "Update Failed") {
+                    alert(data.error.original.detail)
+                    throw new Error('Item not updated')
+                } else {
+                    console.log('Fetch ran?');
+                    this.handleClose();
+                }
+            })
+            .catch(err => console.log(err))
+    }
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+    handleChange = (e: any) => {
+        const val = e.target.value
+        console.log(val)
+        e.persist();
+        this.setState({newText: val});
+    }
+    render() {
+        return (
+            <div>
+                {this.state.newText}
+                <IconButton color='secondary' onClick={this.handleOpen}><EditOutlined /></IconButton>
+                <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Update Item</DialogTitle>
+                    <DialogContent>
+                    <div role="group" aria-labelledby="my-radio-group" className="uniIcons">
+                    {Avatars.map((avatar, i) => {
+                        return (<label key={i}>
+                            <TextField
+                            type="radio" name="profilePic" value={avatar} />
+                            <img src={avatar} alt={avatar} className='avatar' />
+                        </label>)
+                    })}
+                </div>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="secondary">
+                            Cancel
+                        </Button>
+                        <Button onClick={this.submitClick} color="primary">
+                            Submit Changes
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        )
+    }
+}
+export default UpdateItem;
+

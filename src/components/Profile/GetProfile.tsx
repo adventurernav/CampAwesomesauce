@@ -38,6 +38,7 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
         })
             .then(res => res.json())
             .then((data: ProfileResults) => {
+                console.log(data)
                 if (data.users !== null) {
                     this.setState({
                         newUser: false,
@@ -62,21 +63,29 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
         return (
             <div>
                 {(this.state.newUser === true) ? <Redirect to="/profile/new" /> : null}
+                {this.state.users.playaname? 
                 <Grid container direction="row" justify="space-between" alignContent="space-between" spacing={4}>
 
-                    <Grid item>
-                        <h1>Your Current Profile</h1>
-                        <p className="getprofileP">{`Playaname: ${this.state.users.playaname}`}</p>
-                        <p className="getprofileP">{`Burns Attended: ${this.state.users.burnsAttended}`}</p>
-                        <p className="getprofileP">{`Favorite Principle: ${this.state.users.favPrinciple}`}</p>
-                        <p className="getprofileP">{`Status: ${this.state.users.status}`}</p>
-                        <p className="getprofileP">{`About Me: ${this.state.users.aboutMe}`}</p>
-                        <img src={this.state.users.profilePic} alt="Avatar" style={{ height: '50px' }} />
-                    </Grid>
-                    <Grid item>
-                        <UpdateProfile appState={this.props.appState} fetchResults={this.state} />
-                    </Grid>
+                <Grid item>
+                    <p className="getprofileP">Playaname:
+                    <UpdateProfile currentValue={this.state.users.playaname} appState={this.props.appState} fetchResults={this.state} textKey={'playaname'} />
+                    </p>
+                    <p className="getprofileP">Burns Attended:
+                    <UpdateProfile currentValue={this.state.users.burnsAttended}appState={this.props.appState} fetchResults={this.state} textKey={'burnsAttended'} />
+                    </p>
+                    <p className="getprofileP">Favorite Principle: 
+                    <UpdateProfile currentValue={this.state.users.favPrinciple} appState={this.props.appState} fetchResults={this.state} textKey={'favPrinciple'} />
+                    </p>
+                    <p className="getprofileP">Status:
+                    <UpdateProfile currentValue={this.state.users.status}appState={this.props.appState} fetchResults={this.state} textKey={'status'} />
+                    </p>
+                    <p className="getprofileP">About Me:
+                    <UpdateProfile currentValue={this.state.users.aboutMe}appState={this.props.appState} fetchResults={this.state} textKey={'aboutMe'} />
+                    </p>
+                    <img src={this.state.users.profilePic} alt="Avatar" style={{ height: '50px' }} />
                 </Grid>
+            </Grid>
+                :null}
             </div>
         )
     }
