@@ -11,14 +11,17 @@ interface Values {
 }
 type LoginFormProps = {
     updateToken: (token:string, authenticated:boolean)=>void
-    updateAdmin: (admin:boolean)=>void
+    updateAdmin: (admin:boolean)=>void,
+    appState: { authenticated: boolean, token: string | null, admin: boolean},
 }
 type stateValues={
-    submitted: boolean
+    submitted: boolean,
+    admin: boolean
 }
 export class LoginForm extends Component <LoginFormProps,stateValues> {
     state={
-        submitted: false
+        submitted: false,
+        admin: false
     }
     LoginSubmit(values:Values, loginProps: LoginFormProps){
         fetch(`${APIURL}/user/login`, {
@@ -37,7 +40,7 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
                     window.localStorage.setItem('token', data.sessionToken)
                     loginProps.updateToken(data.sessionToken, true)
                     loginProps.updateAdmin(data.user.role==='admin'? true: false)
-                    this.setState({ submitted: true })
+                    this.setState({ submitted: true, admin: (data.user.role==='admin'? true: false) })
                 } else {
                     alert(`${data.error}`)
                 }
@@ -48,7 +51,9 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
     render(){
         return(
         <div>
-            {(this.state.submitted === true) ? <Redirect to='/dashboard' /> : null}
+            {(this.state.submitted === true) ? 
+            ((this.state.admin)?<Redirect to='/admin' />:<Redirect to='/dashboard' />) 
+            : null}
             <h1>Login</h1>
             <Formik 
             initialValues={{email: '', password: ''}} 

@@ -42,7 +42,7 @@ class UpdateItem extends Component<UpProps, UpState> {
             .then(data => {
                 if (data.message === "Update Failed") {
                     alert(data.error.original.detail)
-                    throw 'Item not updated'
+                    throw new Error('Item not updated')
                 } else {
                     console.log('Fetch ran?');
                     this.handleClose();

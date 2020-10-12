@@ -91,7 +91,7 @@ const styles = (theme: Theme) =>
         }
     })
 type HeaderProps = {
-    appState: { authenticated: boolean, token: string | null, admin: boolean | null }
+    appState: { authenticated: boolean, token: string | null, admin: boolean}
 
 }
 type headerState = {

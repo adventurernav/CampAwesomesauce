@@ -35,7 +35,7 @@ handleChange(e:any){
     .then((data)=>{
         if (data.NumberOfItemsUpdated[0]===1){
             this.setState({checked:!this.state.checked})
-        } else {throw 'Item not updated'}
+        } else {throw new Error('Item not updated')}
         
     })
     .catch((err)=>console.log(err))

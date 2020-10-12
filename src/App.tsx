@@ -58,10 +58,10 @@ class App extends Component<{}, AppState> {
       this.tokenChecker(currentToken)
     }
   }
-  componentWillUnmount(): void {
-    this.updateToken('', false);
-    window.localStorage.removeItem('token')
-  }
+  // componentWillUnmount(): void {
+  //   this.updateToken('', false);
+  //   window.localStorage.removeItem('token')
+  // }
   render() {
     return (
       <div className="App">

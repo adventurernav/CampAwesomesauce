@@ -48,9 +48,9 @@ class AdminUpdate extends Component<UpProps, UpState> {
                 console.log(data)
                 if (data.message === "Update Failed") {
                     alert(data.error.original.detail)
-                    throw 'User not updated'
+                    throw new Error('User not updated') 
                 } else if (data.NumberOfUsersUpdated[0]===0){
-                    throw 'User not updated'
+                    throw new Error('User not updated')
                 }
                 else {
                     console.log('Fetch ran?');
