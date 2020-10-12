@@ -3,6 +3,8 @@ import { Button } from "@material-ui/core";
 
 type LogoutProps = {
     updateToken: (token:string, authenticated:boolean)=>void,
+    updateAdmin: (admin: boolean) => void,
+
 }
 
 class Logout extends Component <LogoutProps> {
@@ -10,6 +12,7 @@ class Logout extends Component <LogoutProps> {
     removeToken = ():void => {
         window.localStorage.removeItem('token');
         this.props.updateToken('', false)
+        this.props.updateAdmin(false)
     }
 
     componentDidMount(){

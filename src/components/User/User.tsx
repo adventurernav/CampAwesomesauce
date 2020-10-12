@@ -6,7 +6,8 @@ import DeleteUser from './DeleteUser'
 import { Container, Grid } from '@material-ui/core'
 
 type UserProps = {
-    appState: { authenticated: boolean, token: string | null }
+    appState: { authenticated: boolean, 
+    token: string | null }
 }
 type UserState = {
     user: {

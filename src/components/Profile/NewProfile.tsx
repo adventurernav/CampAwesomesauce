@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField} from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import APIURL from "../../helpers/environment";
 import { Redirect } from "react-router-dom";
+import UniA from '../../assets/Avatars/023-unicorn.png'
 
 interface Values {
     playaname: string,
@@ -123,14 +124,25 @@ class NewProfile extends Component<newProfileProps, stateValues> {
                                     onBlur={handleBlur}
                                 />
                             </div>
-                            <div>
+                            {/* <div>
                                 <TextField
                                     name="profilePic"
-                                    label="Choose an avatar(TEMP: enter a url)"
+                                    label="Choose an avatar(url)"
                                     value={values.profilePic}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
+                            </div> */}
+                            <div role="group" aria-labelledby="my-radio-group">
+                                <label>
+                                    <Field type="radio" name="profilePic" value="UniA" />
+                                <img src={UniA} alt='A' className='avatar'/>
+                                </label>
+                                <label>
+                                    <Field type="radio" name="profilePic" value="Two" />
+                                Two
+                                </label>
+                                <div>Picked: {values.profilePic}</div>
                             </div>
 
                             <Button type='submit'>Create Profile</Button>

@@ -16,6 +16,7 @@ const mainRoutes = [
 const authdRoutes = [
     ['/dashboard', 'Dashboard'],
     ['/packlist', 'Packlist'],
+    ['/profile', 'Profile'],
     ['/account', 'Account'],
     ['/logout', 'Logout'],
 ]

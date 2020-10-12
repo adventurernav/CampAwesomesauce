@@ -39,7 +39,7 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
                 lastName: values.lastName,
                 email: values.email,
                 password: values.password,
-                role: 'test'
+                role: 'campmate'
             })
         })
             .then(res => res.json())

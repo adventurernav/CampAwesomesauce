@@ -1,5 +1,6 @@
 import { Grid } from '@material-ui/core'
 import React, { Component } from 'react'
+import Avatars from './Avatars'
 import DeleteProfile from './DeleteProfile'
 import GetProfile from './GetProfile'
 
@@ -20,6 +21,9 @@ class Profile extends Component<ProfileProps> {
                     </Grid>
                     <Grid item>
                         <DeleteProfile appState={this.props.appState} />
+                    </Grid>
+                    <Grid item>
+                        <Avatars />
                     </Grid>
                 </Grid>
             </div>
