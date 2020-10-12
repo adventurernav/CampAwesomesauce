@@ -44,7 +44,6 @@ class UpdateItem extends Component<UpProps, UpState> {
                     alert(data.error.original.detail)
                     throw new Error('Item not updated')
                 } else {
-                    console.log('Fetch ran?');
                     this.handleClose();
                 }
             })
@@ -59,7 +58,6 @@ class UpdateItem extends Component<UpProps, UpState> {
     };
     handleChange = (e: any) => {
         const val = e.target.value
-        console.log(val)
         e.persist();
         this.setState({newText: val});
     }

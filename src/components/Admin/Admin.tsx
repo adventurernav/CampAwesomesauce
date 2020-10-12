@@ -53,7 +53,6 @@ class Admin extends Component<AdminProps, AdminState> {
         })
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
                 this.setState({
                     users: data
                 })

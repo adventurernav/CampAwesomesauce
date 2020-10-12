@@ -29,9 +29,7 @@ class App extends Component<{}, AppState> {
   }
   requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': currentToken };
   tokenChecker(currentToken:string){
-    console.log(this.state.token)
-    console.log(window.localStorage.getItem('token'))
-    console.log('FETCH')
+    
     fetch(`${APIURL}/tokenchecker/`, {
       headers: this.requestHeaders
   })
@@ -53,7 +51,6 @@ class App extends Component<{}, AppState> {
     this.setState({admin:admin})
   }
   componentDidMount(){
-    console.log('MOUNT')
     if (currentToken){
       this.tokenChecker(currentToken)
     }

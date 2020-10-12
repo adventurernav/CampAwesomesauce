@@ -1,51 +1,37 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import APIURL from '../../helpers/environment';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton} from "@material-ui/core";
 import { EditOutlined } from "@material-ui/icons";
+import React, { Component } from "react";
+import APIURL from "../../helpers/environment";
 import Avatars from './Avatars'
 
-
-
-type UpProps = {
-    itemID: number,
+type updateProfileProps = {
     appState: { authenticated: boolean, token: string | null },
-    textKey: string,
-    currentValue: number | string,
+    currentValue: string
 }
-type UpState = {
-    open: boolean,
-    newText: string|number
+type UpdateState = {
+    newText: string,
+    open: boolean
 }
-class UpdateItem extends Component<UpProps, UpState> {
+class UpdateProfile extends Component<updateProfileProps, UpdateState> {
     state = {
-        open: false,
-        newText: this.props.currentValue
+        newText: this.props.currentValue,
+        open: false
     }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
-    submitClick = () => {
-        this.handleUpdateFetch();
-    }
-    handleUpdateFetch = () => {
-        fetch(`${APIURL}/item/${this.props.itemID}`, {
+    updateProfileSubmit = () => {
+        fetch(`${APIURL}/profile/`, {
             method: 'PUT',
             headers: this.requestHeaders,
             body: JSON.stringify({
-                [this.props.textKey]: this.state.newText
+                profilePic: this.state.newText
             })
         })
             .then(res => res.json())
             .then(data => {
                 if (data.message === "Update Failed") {
                     alert(data.error.original.detail)
-                    throw new Error('Item not updated')
+                    throw new Error('Profile not updated')
                 } else {
-                    console.log('Fetch ran?');
                     this.handleClose();
                 }
             })
@@ -58,32 +44,41 @@ class UpdateItem extends Component<UpProps, UpState> {
     handleClose = () => {
         this.setState({ open: false });
     };
+    handleCancel = () => {
+        this.setState({ newText: this.props.currentValue });
+        this.handleClose()
+    };
     handleChange = (e: any) => {
         const val = e.target.value
         console.log(val)
         e.persist();
-        this.setState({newText: val});
+        this.setState({ newText: val });
+    }
+    submitClick = () => {
+        this.updateProfileSubmit();
     }
     render() {
         return (
             <div>
-                {this.state.newText}
+                <img src={this.state.newText} alt="Avatar" style={{ height: '50px' }} />
                 <IconButton color='secondary' onClick={this.handleOpen}><EditOutlined /></IconButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Update Item</DialogTitle>
-                    <DialogContent>
-                    <div role="group" aria-labelledby="my-radio-group" className="uniIcons">
-                    {Avatars.map((avatar, i) => {
-                        return (<label key={i}>
-                            <TextField
-                            type="radio" name="profilePic" value={avatar} />
-                            <img src={avatar} alt={avatar} className='avatar' />
-                        </label>)
-                    })}
-                </div>
+                    <DialogTitle id="form-dialog-title">Update Profile</DialogTitle>
+                    <DialogContent>   
+                        <div role="group" aria-labelledby="my-radio-group" onChange={this.handleChange}>
+                            {Avatars.map((avatar, i) => {
+                                return (<div className='avatar-radios-div'>
+                                    <label key={i} >
+                                        
+                                        <img src={avatar} alt={avatar} className='avatar' />
+                                        <input className='avatar-radios' type='radio' name='avatar' value={avatar}/>
+                                    </label>
+                                </div>)
+                            })}
+                        </div>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="secondary">
+                        <Button onClick={this.handleCancel} color="secondary">
                             Cancel
                         </Button>
                         <Button onClick={this.submitClick} color="primary">
@@ -91,9 +86,9 @@ class UpdateItem extends Component<UpProps, UpState> {
                         </Button>
                     </DialogActions>
                 </Dialog>
+
             </div>
         )
     }
 }
-export default UpdateItem;
-
+export default UpdateProfile;
