@@ -6,8 +6,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import APIURL from "../../../helpers/environment";
+import APIURL from '../../helpers/environment';
 import { EditOutlined } from "@material-ui/icons";
+import Avatars from './Avatars'
 
 
 
@@ -71,17 +72,15 @@ class UpdateItem extends Component<UpProps, UpState> {
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Update Item</DialogTitle>
                     <DialogContent>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            label={this.props.textKey==='qty'? 'Quantity':'Item'}
-                            type={this.props.textKey==='qty'? 'number':'text'}
-                            fullWidth
-                            value={this.state.newText}
-                            onChange={(e) => {
-                                this.handleChange(e);
-                            }}
-                        />
+                    <div role="group" aria-labelledby="my-radio-group" className="uniIcons">
+                    {Avatars.map((avatar, i) => {
+                        return (<label key={i}>
+                            <TextField
+                            type="radio" name="profilePic" value={avatar} />
+                            <img src={avatar} alt={avatar} className='avatar' />
+                        </label>)
+                    })}
+                </div>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="secondary">
@@ -97,3 +96,4 @@ class UpdateItem extends Component<UpProps, UpState> {
     }
 }
 export default UpdateItem;
+

@@ -1,13 +1,51 @@
-import React, { Component } from "react";
+import UniA from '../../assets/Avatars/001-unicorn.png'
+import UniB from '../../assets/Avatars/002-unicorn.png'
+import UniC from '../../assets/Avatars/004-unicorn.png'
+import UniD from '../../assets/Avatars/005-unicorn.png'
+import UniE from '../../assets/Avatars/006-unicorn.png'
+import UniF from '../../assets/Avatars/007-unicorn.png'
+import UniG from '../../assets/Avatars/008-unicorn.png'
+import UniH from '../../assets/Avatars/010-unicorn.png'
+import UniI from '../../assets/Avatars/011-unicorn.png'
+import UniJ from '../../assets/Avatars/012-unicorn.png'
+import UniK from '../../assets/Avatars/013-unicorn.png'
+import UniL from '../../assets/Avatars/014-unicorn.png'
+import UniM from '../../assets/Avatars/015-unicorn.png'
+import UniN from '../../assets/Avatars/016-unicorn.png'
+import UniO from '../../assets/Avatars/017-unicorn.png'
+import UniP from '../../assets/Avatars/018-unicorn.png'
+import UniQ from '../../assets/Avatars/019-unicorn.png'
+import UniR from '../../assets/Avatars/020-unicorn.png'
+import UniS from '../../assets/Avatars/022-unicorn.png'
+import UniT from '../../assets/Avatars/023-unicorn.png'
+import UniU from '../../assets/Avatars/024-unicorn.png'
+import UniV from '../../assets/Avatars/025-unicorn.png'
+import UniW from '../../assets/Avatars/026-unicorn.png'
+import UniX from '../../assets/Avatars/027-unicorn.png'
+import UniY from '../../assets/Avatars/028-unicorn.png'
+import UniZ from '../../assets/Avatars/029-unicorn.png'
+import UniAA from '../../assets/Avatars/031-unicorn.png'
+import UniBB from '../../assets/Avatars/033-unicorn.png'
+import UniCC from '../../assets/Avatars/035-unicorn.png'
+import UniDD from '../../assets/Avatars/036-unicorn.png'
+import UniEE from '../../assets/Avatars/037-cat.png'
+import UniFF from '../../assets/Avatars/038-unicorn.png'
+import UniGG from '../../assets/Avatars/039-unicorn.png'
+import UniHH from '../../assets/Avatars/040-unicorn.png'
+import UniII from '../../assets/Avatars/041-unicorn.png'
+import UniJJ from '../../assets/Avatars/042-unicorn.png'
+import UniKK from '../../assets/Avatars/043-unicorn.png'
+import UniLL from '../../assets/Avatars/044-unicorn.png'
+import UniMM from '../../assets/Avatars/045-unicorn.png'
+import UniNN from '../../assets/Avatars/046-unicorn.png'
+import UniOO from '../../assets/Avatars/047-unicorn.png'
+import UniPP from '../../assets/Avatars/049-unicorn.png'
+import UniQQ from '../../assets/Avatars/050-unicorn.png'
 
-export default class Avatars extends Component {
-render(){
-    return(
-        <div>
-            <h2>
-                Avatars.tsx
-            </h2>
-        </div>
-    )
+const unicorns = [UniA, UniB, UniC, UniD, UniE, UniF, UniG, UniH, UniI, UniJ, UniK, UniL, UniM, UniN, UniO, UniP, UniQ, UniR, UniS, UniT, UniU, UniV, UniW, UniX, UniY, UniZ, UniAA, UniBB, UniCC, UniDD, UniEE, UniFF, UniGG, UniHH, UniII, UniJJ, UniKK, UniLL, UniMM, UniNN, UniOO, UniPP, UniQQ]
+const Avatars=(avatarIndex:number)=>{
+return(
+    unicorns[avatarIndex]
+)
 }
-}
+export default unicorns

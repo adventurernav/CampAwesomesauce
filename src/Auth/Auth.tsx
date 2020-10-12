@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 type AuthProps = {
     updateToken: (token: string, authenticated: boolean) => void,
     updateAdmin: (admin: boolean) => void,
-    appState: { authenticated: boolean, token: string | null },
+    appState: { authenticated: boolean, token: string | null, admin: boolean },
 
 }
 class Auth extends Component<AuthProps> {
@@ -19,7 +19,7 @@ class Auth extends Component<AuthProps> {
                         <RegisterForm updateToken={this.props.updateToken} appState={this.props.appState} />
                     </Grid>
                     <Grid item>
-                        <LoginForm updateAdmin={this.props.updateAdmin} updateToken={this.props.updateToken} />
+                        <LoginForm updateAdmin={this.props.updateAdmin} updateToken={this.props.updateToken} appState={this.props.appState} />
                     </Grid>
                 </Grid>
                 
