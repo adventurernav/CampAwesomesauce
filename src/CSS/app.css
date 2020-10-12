@@ -34,3 +34,9 @@ padding: .5rem;
     padding-left: .5rem;
     padding-right: .5rem;
 }
+.avatar-radios-div{
+    border: .5px solid var(--pink);
+    height: fit-content;
+    margin: 5px;
+    border-radius: 25px;
+}

@@ -48,7 +48,6 @@ class Dashboard extends Component<DashboardProps> {
         })
             .then(res => res.json())
             .then((results) => {
-                console.log(results)
                 this.setState({
                     packlist: results
                 })

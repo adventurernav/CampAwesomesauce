@@ -33,8 +33,7 @@ class NewItem extends Component<NewItemProps, NewItemState> {
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
     newItemSubmit() {
-        console.log(this.props.plID);
-        console.log('newItemSubmit()')
+
         fetch(`${APIURL}/item/${this.props.plID}`, {
             method: 'POST',
             headers: this.requestHeaders,
@@ -47,14 +46,11 @@ class NewItem extends Component<NewItemProps, NewItemState> {
         })
             .then(res => res.json())
             .then(response => {
-                console.log(response)
                 window.location.reload()
             })
             .catch(err => console.log(err))
     }
-    componentDidUpdate() {
-        console.log('Component Did Update')
-    }
+    
     handleClickOpen = () => {
         this.setState({ open: true });
     };

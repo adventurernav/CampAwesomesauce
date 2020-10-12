@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import APIURL from '../../helpers/environment'
 import { ProfileResults } from './ProfileInterfaces'
 import UpdateProfile from "./UpdateProfile";
+import UpdateAvatar from "./UpdateAvatar";
 
 type getProfileProps = {
     appState: { authenticated: boolean, token: string | null }
@@ -38,7 +39,6 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
         })
             .then(res => res.json())
             .then((data: ProfileResults) => {
-                console.log(data)
                 if (data.users !== null) {
                     this.setState({
                         newUser: false,
@@ -82,7 +82,8 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
                     <p className="getprofileP">About Me:
                     <UpdateProfile currentValue={this.state.users.aboutMe}appState={this.props.appState} fetchResults={this.state} textKey={'aboutMe'} />
                     </p>
-                    <img src={this.state.users.profilePic} alt="Avatar" style={{ height: '50px' }} />
+                    <UpdateAvatar currentValue={this.state.users.profilePic} appState={this.props.appState} />
+                
                 </Grid>
             </Grid>
                 :null}
