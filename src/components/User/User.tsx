@@ -61,6 +61,7 @@ class User extends Component<UserProps, UserState>{
                     }
                 })
             })
+            .catch(err=>console.log(err))
     }
     render() {
         const memberSince = this.state.user.createdAt

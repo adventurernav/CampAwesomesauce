@@ -8,7 +8,7 @@ type DashboardProps = {
     appState: { authenticated: boolean, token: string | null }
 }
 interface DashboardState {
-    data: packlistObject[],
+    packlist: packlistObject[],
     users: {
         aboutMe: string,
         burnsAttended: number,
@@ -26,7 +26,7 @@ type packlistObject = {
 }
 class Dashboard extends Component<DashboardProps> {
     state: DashboardState = {
-        data: [],
+        packlist: [],
         users: {
             aboutMe: '',
             burnsAttended: 0,
@@ -50,7 +50,7 @@ class Dashboard extends Component<DashboardProps> {
             .then((results) => {
                 console.log(results)
                 this.setState({
-                    data: results
+                    packlist: results
                 })
 
             })
@@ -63,15 +63,15 @@ class Dashboard extends Component<DashboardProps> {
             headers: this.requestHeaders
         })
             .then(res => res.json())
-            .then((data: ProfileResults) => {
+            .then((profile: ProfileResults) => {
                     this.setState({
                         users: {
-                            aboutMe: data.users.aboutMe,
-                            burnsAttended: data.users.burnsAttended,
-                            favPrinciple: data.users.favPrinciple,
-                            playaname: data.users.playaname,
-                            profilePic: data.users.profilePic,
-                            status: data.users.status
+                            aboutMe: profile.users.aboutMe,
+                            burnsAttended: profile.users.burnsAttended,
+                            favPrinciple: profile.users.favPrinciple,
+                            playaname: profile.users.playaname,
+                            profilePic: profile.users.profilePic,
+                            status: profile.users.status
                         }
                     })
                 
@@ -86,9 +86,11 @@ class Dashboard extends Component<DashboardProps> {
                 <Button variant='outlined' href='/packlist' color='primary'>
                     <h3>My Packlists:</h3>
                     <ul>
-                        {this.state.data.length===0? <p>Click to start your first packlist!</p>:(this.state.data.map((thisItem) => {
+                        {this.state.packlist.length>0? (this.state.packlist.map((thisItem) => {
                             return (<li>{thisItem.title}</li>)
-                        }))}
+                        }))
+                        :<p>Click to start your first packlist!</p>
+                    }
                     </ul>
                     </Button>
                 <Button variant='outlined' href='/profile' color='primary'>

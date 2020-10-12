@@ -38,7 +38,13 @@ class ItemTable extends Component<PLitemProps> {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell><NewItem appState={this.props.appState} plID={this.props.plID} />Item</TableCell>
+                                <TableCell>
+                                    <NewItem appState={this.props.appState} plID={this.props.plID} />
+                                </TableCell>
+
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>Item</TableCell>
                                 <TableCell>Quantity</TableCell>
                                 <TableCell>Owned?</TableCell>
                                 <TableCell>Packed?</TableCell>
@@ -46,17 +52,18 @@ class ItemTable extends Component<PLitemProps> {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.items.map((thisItem, i) => (
+
+                            {this.props.items.map((thisItem) => (
                                 <TableRow key={thisItem.id}>
                                     <TableCell><UpdateItem textKey={'itemName'} itemID={thisItem.id} currentValue={thisItem.itemName} appState={this.props.appState} /></TableCell>
 
-                                    <TableCell><UpdateItem textKey={'qty'}itemID={thisItem.id} currentValue={thisItem.qty} appState={this.props.appState} /></TableCell>
+                                    <TableCell><UpdateItem textKey={'qty'} itemID={thisItem.id} currentValue={thisItem.qty} appState={this.props.appState} /></TableCell>
 
                                     <TableCell>
-                                        <Slider itemID={thisItem.id} checked={thisItem.isOwned} sliderKey={'isOwned'} appState={this.props.appState}/>
+                                        <Slider itemID={thisItem.id} checked={thisItem.isOwned} sliderKey={'isOwned'} appState={this.props.appState} />
                                     </TableCell>
                                     <TableCell>
-                                    <Slider itemID={thisItem.id} checked={thisItem.isOwned} sliderKey={'isPacked'} appState={this.props.appState}/>
+                                        <Slider itemID={thisItem.id} checked={thisItem.isOwned} sliderKey={'isPacked'} appState={this.props.appState} />
                                     </TableCell>
                                     <TableCell><DeleteItem itemID={thisItem.id} appState={this.props.appState} /></TableCell>
                                 </TableRow>

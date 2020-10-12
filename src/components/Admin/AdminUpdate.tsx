@@ -6,22 +6,23 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import APIURL from "../../../helpers/environment";
+import APIURL from "../../helpers/environment";
 import { EditOutlined } from "@material-ui/icons";
 
 
 
 type UpProps = {
-    itemID: number,
+    userID: number,
     appState: { authenticated: boolean, token: string | null },
     textKey: string,
     currentValue: number | string,
+    path: string
 }
 type UpState = {
     open: boolean,
     newText: string|number
 }
-class UpdateItem extends Component<UpProps, UpState> {
+class AdminUpdate extends Component<UpProps, UpState> {
     state = {
         open: false,
         newText: this.props.currentValue
@@ -31,7 +32,11 @@ class UpdateItem extends Component<UpProps, UpState> {
         this.handleUpdateFetch();
     }
     handleUpdateFetch = () => {
-        fetch(`${APIURL}/item/${this.props.itemID}`, {
+        console.log(`${APIURL}/admin/${this.props.path}/${this.props.userID}`)
+        console.log(this.props.textKey)
+        console.log(this.state.newText)
+
+        fetch(`${APIURL}/admin/${this.props.path}/${this.props.userID}`, {
             method: 'PUT',
             headers: this.requestHeaders,
             body: JSON.stringify({
@@ -40,10 +45,14 @@ class UpdateItem extends Component<UpProps, UpState> {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 if (data.message === "Update Failed") {
                     alert(data.error.original.detail)
-                    throw 'Item not updated'
-                } else {
+                    throw 'User not updated'
+                } else if (data.NumberOfUsersUpdated[0]===0){
+                    throw 'User not updated'
+                }
+                else {
                     console.log('Fetch ran?');
                     this.handleClose();
                 }
@@ -69,13 +78,13 @@ class UpdateItem extends Component<UpProps, UpState> {
                 {this.state.newText}
                 <IconButton color='secondary' onClick={this.handleOpen}><EditOutlined /></IconButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Update Item</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Update User</DialogTitle>
                     <DialogContent>
                         <TextField
                             autoFocus
                             margin="dense"
-                            label={this.props.textKey==='qty'? 'Quantity':'Item'}
-                            type={this.props.textKey==='qty'? 'number':'text'}
+                            label={this.props.textKey}
+                            type='text'
                             fullWidth
                             value={this.state.newText}
                             onChange={(e) => {
@@ -96,4 +105,4 @@ class UpdateItem extends Component<UpProps, UpState> {
         )
     }
 }
-export default UpdateItem;
+export default AdminUpdate;

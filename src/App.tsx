@@ -4,30 +4,59 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Header from './Site/Header'
 import Footer from './Site/Footer'
 import SwitchController from './Site/SwitchController'
+import APIURL from './helpers/environment'
 
 type AppState = {
   token: string | null,
   authenticated: boolean,
-  admin: boolean | null
+  admin: boolean
+}
+type tokenResponse = {
+message: string
+user: {role:string}
 }
 let currentToken = window.localStorage.getItem('token')
-let authCheck = currentToken ? true : false
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props)
     this.state = {
-      authenticated: authCheck,
+      authenticated: false,
       token: currentToken,
-      admin: null
+      admin: false
     }
     this.updateToken = this.updateToken.bind(this)
     this.updateAdmin = this.updateAdmin.bind(this)
+  }
+  requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': currentToken };
+  tokenChecker(currentToken:string){
+    console.log(this.state.token)
+    console.log(window.localStorage.getItem('token'))
+    console.log('FETCH')
+    fetch(`${APIURL}/tokenchecker/`, {
+      headers: this.requestHeaders
+  })
+      .then(res => res.json())
+      .then((data:tokenResponse) => {
+          if (data.message==='Success'){
+            this.setState({authenticated:true})
+          }
+          if (data.user.role==='admin'){
+            this.setState({admin:true})
+          }
+      })
+      .catch(err=>console.log(err))
   }
   updateToken(newToken: string, authenticated: boolean): void {
     this.setState({ token: newToken, authenticated: authenticated })
   }
   updateAdmin(admin: boolean):void {
     this.setState({admin:admin})
+  }
+  componentDidMount(){
+    console.log('MOUNT')
+    if (currentToken){
+      this.tokenChecker(currentToken)
+    }
   }
   componentWillUnmount(): void {
     this.updateToken('', false);

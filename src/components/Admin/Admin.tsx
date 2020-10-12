@@ -1,7 +1,8 @@
-import { Grid, Button, Table } from "@material-ui/core";
+import { Grid, Button, Table, TableHead, TableCell,TableBody, TableRow, Paper, Card, CardContent } from "@material-ui/core";
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import APIURL from '../../helpers/environment'
+import AdminUpdate from './AdminUpdate'
 
 type AdminProps = {
     appState: {
@@ -49,19 +50,37 @@ componentDidMount(){
     render() {
         return (
             <div>
-                {this.props.appState.admin===false? <Redirect to='/' /> : null}
+                {/* {this.props.appState.admin===false? <Redirect to='/' /> : null} */}
                 <h1>Admin Portal</h1>
-                <Grid container>
-                    <p>users/profiles edit/delete</p>
-                    <p>Number of users:</p>
-                    {this.state.users.length}
-                    <Table></Table>
-                    <ol>
+                <Grid container justify='center'>
+                    <Card id='number-of-users'>
+                        <CardContent>
+
+                    <h1>Number of users:</h1>
+                    <h1>
+                        {this.state.users.length}
+                    </h1>
+                        </CardContent>
+                    </Card>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>User</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
                         {this.state.users.map((thisUser)=>{
                             return(
-                            <li key={thisUser.id}><Button>{thisUser.email}</Button></li>
+                            <TableRow key={thisUser.id}>
+                                <TableCell><Button>{thisUser.email}</Button></TableCell>
+                                <TableCell><AdminUpdate path={'users'} textKey={'firstName'} userID={thisUser.id} currentValue={thisUser.firstName} appState={this.props.appState} /></TableCell>
+                            </TableRow>
                             )
                         })}
+                        </TableBody>
+                    </Table>
+                    <ol>
+                        
                     </ol>
                 </Grid>
                 

@@ -85,7 +85,7 @@ class NewItem extends Component<NewItemProps, NewItemState> {
     render() {
         return (
             <div>
-                <IconButton color="primary" onClick={this.handleClickOpen}><AddCircleOutlineOutlinedIcon/></IconButton>
+                <IconButton color="primary" onClick={this.handleClickOpen}><AddCircleOutlineOutlinedIcon/>Add Item</IconButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Create Item</DialogTitle>
                     <DialogContent>
