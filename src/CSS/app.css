@@ -1,8 +1,36 @@
 body{
-    background-color: var(--blush);
+    background-color: var(--purple);
     font-family: var(--text);
     text-align: center;
 }
 h1{
     font-family: var(--head);
+}
+.getprofileP{
+padding: .5rem;
+}
+#nav-container{
+    font-family: var(--caps);
+    font-size: 2rem;
+    background-color: var(--pink);
+}
+#footer-container{
+    font-family: var(--caps);
+    bottom: 0;
+    width: 100%;
+}
+.max-width{
+    width: 100%;
+}
+#packlist-info{
+    max-width: 80vw;
+    text-align: center;
+    margin: auto;
+}
+.avatar{
+    height: 50px;
+}
+#number-of-users{
+    padding-left: .5rem;
+    padding-right: .5rem;
 }

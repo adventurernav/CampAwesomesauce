@@ -1,26 +1,62 @@
+import React, { Component } from 'react'
 import { Button, TextField } from "@material-ui/core";
 import { Form, Formik } from "formik";
-import React, { Component } from "react";
-import RegisterSubmit from './RegisterSubmit'
+import APIURL from "../../helpers/environment";
+import { Redirect } from 'react-router-dom';
 
-type RegisterFormProps = {
-    updateToken: (token:string, authenticated:boolean)=>void
+interface Values {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
 }
 
-export class RegisterForm extends Component <RegisterFormProps> {
-    
-    render(){return (
-        <div>
-            <h1>Register</h1>
+type UpdateUserProps = {
+    appState: { authenticated: boolean, token: string | null }
+}
+type UpdateUserState= {
+submitted: boolean
+}
+
+class UpdateUser extends Component<UpdateUserProps, UpdateUserState>{
+    state={
+        submitted: false
+    }
+    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
+    render(){
+        return(
+            <div>
+                {this.state.submitted===true? <Redirect to='/account'/>: null}
+                <h1>Update User</h1>
             <Formik
                 initialValues={{ 
                     firstName: '', 
                     lastName: '', 
                     email: '', 
-                    password: '', 
-                    role: '' }}
-                onSubmit={values => {
-                    RegisterSubmit(values, this.props)
+                    password: '' }}
+                onSubmit={(values:Values) => {
+                    
+                        fetch(`${APIURL}/user/`, {
+                            method: 'PUT',
+                            headers: this.requestHeaders,
+                            body: JSON.stringify({
+                                firstName: values.firstName,
+                                lastName: values.lastName,
+                                email: values.email,
+                                password: values.password
+                            })
+                        })
+                            .then(res => res.json())
+                            .then((data) => {
+                                if (!data.error){
+                                    this.setState({submitted:true})
+                                } else{
+                                    alert(`${data.error.errors[0].message}`)
+                                }
+                                
+                            })
+                            .catch(err=>console.log(err))
+                    
                 }}
             >
                 {({ values, handleChange, handleBlur }) => (
@@ -65,10 +101,12 @@ export class RegisterForm extends Component <RegisterFormProps> {
                             />
                         </div>
                     
-                        <Button type='submit'>Create Account</Button>
+                        <Button type='submit'>Update Account</Button>
                     </Form>
                 )}
             </Formik>
         </div>
     )}
+            
 }
+export default UpdateUser;

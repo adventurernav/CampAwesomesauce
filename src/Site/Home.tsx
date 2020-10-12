@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Banner from '../assets/pinkbanner.png'
-import Balls from '../assets/awesomeballs.jpg'
-import Group from '../assets/group2019.jpg'
+import { Button } from "@material-ui/core";
 
 class Home extends Component {
 
@@ -9,8 +8,18 @@ class Home extends Component {
         return (
             <div>
                 <img src={Banner} alt="Banner"/>
-                <img src={Balls} alt="Banner"/>
-                <img src={Group} alt="Group"/>
+                <br/>
+                <br/>
+                <Button href='/auth' color='primary' variant='outlined'>Login or Signup</Button> 
+                <br/>               
+                <br/>               
+                <Button href='/resources' color='primary' variant='outlined'>Resources</Button> 
+                <br/>               
+                <br/>               
+                <Button href='/about' color='primary' variant='outlined'>About Us</Button> 
+                <br/>               
+                <br/>               
+                <br/>               
             </div>
         )
     }

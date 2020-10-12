@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField} from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import APIURL from "../../helpers/environment";
+import { Redirect } from "react-router-dom";
+import UniA from '../../assets/Avatars/023-unicorn.png'
 
 interface Values {
     playaname: string,
@@ -12,20 +14,18 @@ interface Values {
     profilePic: string
 }
 type newProfileProps = {
-    appState: { appState: { authenticated: boolean, token: string|null } }
+    appState: { authenticated: boolean, token: string | null }
 }
-
-class NewProfile extends Component<newProfileProps> {
-    constructor(props: newProfileProps){
-        super(props)
-        console.log(props);
-        
+type stateValues = {
+    submitted: boolean
+}
+class NewProfile extends Component<newProfileProps, stateValues> {
+    state = {
+        submitted: false
     }
-    token:string|null = this.props.appState.appState.token
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.token};
+    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
     newProfileSubmit = (values: Values) => {
-        console.log(values);
         let id: number = 1
         fetch(`${APIURL}/profile/register/${id}`, {
             method: 'POST',
@@ -41,12 +41,19 @@ class NewProfile extends Component<newProfileProps> {
         })
             .then(res => res.json())
             .then((data) => {
-                console.log('DATA----->', data)
+                if (!data.error) {
+                    this.setState({ submitted: true })
+                } else {
+                    alert(`${data.error.errors[0].message}`)
+                }
             })
+            .catch(err => console.log(err))
     }
     render() {
         return (
             <div>
+                {(this.state.submitted === true) ? <Redirect to='/profile' /> : null}
+
                 <h1>Create your Profile</h1>
                 <Formik
                     initialValues={{
@@ -60,7 +67,7 @@ class NewProfile extends Component<newProfileProps> {
                     onSubmit={values => {
                         this.newProfileSubmit(values)
                     }}
-                    >
+                >
                     {({ values, handleChange, handleBlur }) => (
                         <Form>
 
@@ -83,9 +90,9 @@ class NewProfile extends Component<newProfileProps> {
                                 />
                             </div>
                             <div>
-                                
+
                                 <Field name='favPrinciple' as="select" label="Your Favorite Principle">
-                                <option value="" disabled>--Your Favorite Principle--</option>
+                                    <option value="" disabled>--Your Favorite Principle--</option>
                                     <option value="Radical Inclusion">Radical Inclusion</option>
                                     <option value="Gifting">Gifting</option>
                                     <option value="Decommodification">Decommodification</option>
@@ -96,7 +103,7 @@ class NewProfile extends Component<newProfileProps> {
                                     <option value="Leave No Trace">Leave No Trace</option>
                                     <option value="Participation">Participation</option>
                                     <option value="Immediacy">Immediacy</option>
-                                    
+
                                 </Field>
                             </div>
                             <div>
@@ -117,14 +124,25 @@ class NewProfile extends Component<newProfileProps> {
                                     onBlur={handleBlur}
                                 />
                             </div>
-                            <div>
+                            {/* <div>
                                 <TextField
                                     name="profilePic"
-                                    label="Choose an avatar(TEMP: enter a url)"
+                                    label="Choose an avatar(url)"
                                     value={values.profilePic}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
+                            </div> */}
+                            <div role="group" aria-labelledby="my-radio-group">
+                                <label>
+                                    <Field type="radio" name="profilePic" value="UniA" />
+                                <img src={UniA} alt='A' className='avatar'/>
+                                </label>
+                                <label>
+                                    <Field type="radio" name="profilePic" value="Two" />
+                                Two
+                                </label>
+                                <div>Picked: {values.profilePic}</div>
                             </div>
 
                             <Button type='submit'>Create Profile</Button>
