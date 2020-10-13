@@ -37,6 +37,8 @@ class App extends Component<{}, AppState> {
       .then((data:tokenResponse) => {
           if (data.message==='Success'){
             this.setState({authenticated:true})
+          } else {
+            window.localStorage.removeItem('Authorization')
           }
           if (data.user.role==='admin'){
             this.setState({admin:true})
