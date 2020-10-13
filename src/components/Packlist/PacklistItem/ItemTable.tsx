@@ -23,13 +23,6 @@ class ItemTable extends Component<PLitemProps> {
 
 
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
-    componentDidMount() {
-    }
-    componentDidUpdate() {
-    }
-    updateItemDetail() {
-
-    }
     render() {
 
         return (
@@ -63,7 +56,7 @@ class ItemTable extends Component<PLitemProps> {
                                         <Slider itemID={thisItem.id} checked={thisItem.isOwned} sliderKey={'isOwned'} appState={this.props.appState} />
                                     </TableCell>
                                     <TableCell>
-                                        <Slider itemID={thisItem.id} checked={thisItem.isOwned} sliderKey={'isPacked'} appState={this.props.appState} />
+                                        <Slider itemID={thisItem.id} checked={thisItem.isPacked} sliderKey={'isPacked'} appState={this.props.appState} />
                                     </TableCell>
                                     <TableCell><DeleteItem itemID={thisItem.id} appState={this.props.appState} /></TableCell>
                                 </TableRow>

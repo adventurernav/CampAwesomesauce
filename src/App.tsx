@@ -28,7 +28,7 @@ class App extends Component<{}, AppState> {
     this.updateAdmin = this.updateAdmin.bind(this)
   }
   requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': currentToken };
-  tokenChecker(currentToken:string){
+  tokenChecker(){
     
     fetch(`${APIURL}/tokenchecker/`, {
       headers: this.requestHeaders
@@ -52,7 +52,7 @@ class App extends Component<{}, AppState> {
   }
   componentDidMount(){
     if (currentToken){
-      this.tokenChecker(currentToken)
+      this.tokenChecker()
     }
   }
   // componentWillUnmount(): void {

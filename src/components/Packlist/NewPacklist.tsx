@@ -23,7 +23,9 @@ class NewPacklist extends Component<newPacklistProps> {
             submitted: false
         }
     }
- 
+    componentDidUpdate(){
+        console.log('Component Did Update')
+    }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
     newPacklistSubmit(values: Values) {

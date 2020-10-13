@@ -82,6 +82,7 @@ class UpdateProfile extends Component<updateProfileProps, UpdateState> {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 if (data.message === "Update Failed") {
                     alert(data.error.original.detail)
                     throw new Error('Profile not updated')

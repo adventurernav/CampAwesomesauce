@@ -1,4 +1,6 @@
 import { Grid, Button, Table, TableHead, TableCell, TableBody, TableRow, Card, CardContent } from "@material-ui/core";
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import APIURL from '../../helpers/environment'
@@ -58,7 +60,21 @@ class Admin extends Component<AdminProps, AdminState> {
                 })
             })
     }
-    
+    deleteUser (thisUser:usersObject) {
+        fetch(`${APIURL}/admin/users/${thisUser.id}`, {
+            method: 'DELETE',
+            headers: this.requestHeaders
+        })
+            .then(res => res.json())
+            .then(response => {
+                if (!response.error) {
+                    this.setState({users:response.user})
+                } else {
+                    alert(`${response.error.errors[0].message}`)
+                }
+            })
+            .catch(err => console.log(err))
+    }
     render() {
         return (
             <div>
@@ -88,6 +104,7 @@ class Admin extends Component<AdminProps, AdminState> {
                                         <TableCell><AdminUpdate path={'users/password'} textKey={'password'} userID={thisUser.id} currentValue={'Update Password'} appState={this.props.appState} /></TableCell>
                                         <TableCell><AdminUpdate path={'users'} textKey={'firstName'} userID={thisUser.id} currentValue={thisUser.firstName} appState={this.props.appState} /></TableCell>
                                         <TableCell><AdminUpdate path={'users'} textKey={'lastName'} userID={thisUser.id} currentValue={thisUser.lastName} appState={this.props.appState} /></TableCell>
+                                        <TableCell><Button color="secondary" onClick={(e)=>{e.preventDefault();this.deleteUser(thisUser)}}><DeleteOutlinedIcon/></Button></TableCell>
                                     </TableRow>
                                 )
                             })}
