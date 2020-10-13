@@ -74,25 +74,27 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
                     {({ values, handleChange, handleBlur }) => (
                         <Form>
 
-                            <div>
+                            <div className="div-padding">
                                 <TextField
                                     name="firstName"
                                     label="First Name"
                                     value={values.firstName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    fullWidth
                                 />
                             </div>
-                            <div>
+                            <div className="div-padding">
                                 <TextField
                                     name="lastName"
                                     label="Last Name"
                                     value={values.lastName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    fullWidth
                                 />
                             </div>
-                            <div>
+                            <div className="div-padding">
                                 <TextField
                                     name="email"
                                     label="E-mail"
@@ -100,9 +102,10 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
                                     value={values.email}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    fullWidth
                                 />
                             </div>
-                            <div>
+                            <div className="div-padding">
                                 <TextField
                                     name="password"
                                     label="Password"
@@ -110,10 +113,12 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
                                     value={values.password}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    fullWidth
+                                    helperText='Password must be at least 8 characters long.'
                                 />
                             </div>
 
-                            <Button type='submit'>Create Account</Button>
+                            <Button color="primary" variant='outlined' type='submit'>Create Account</Button>
                         </Form>
                     )}
                 </Formik>

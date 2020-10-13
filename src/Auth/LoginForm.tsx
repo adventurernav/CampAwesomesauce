@@ -63,7 +63,7 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
             >
                 {({values, handleChange, handleBlur}) => (
                 <Form>
-                <div>
+                <div className="div-padding">
                     <TextField 
                     name="email" 
                     label="E-mail"
@@ -71,9 +71,10 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
                     value={values.email} 
                     onChange={handleChange} 
                     onBlur={handleBlur}
+                    fullWidth
                     />
                 </div>
-                <div>
+                <div className="div-padding">
                     <TextField 
                     name="password" 
                     label="Password"
@@ -81,9 +82,10 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
                     value={values.password} 
                     onChange={handleChange} 
                     onBlur={handleBlur}
+                    fullWidth
                     />
                 </div>
-                <Button type='submit'>Login</Button>
+                <Button color="primary" variant='outlined' type='submit'>Login</Button>
                 </Form>
             )}
             </Formik>

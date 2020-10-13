@@ -68,19 +68,19 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
 
                 <Grid item>
                     <p className="getprofileP">Playaname:
-                    <UpdateProfile currentValue={this.state.users.playaname} appState={this.props.appState} fetchResults={this.state} textKey={'playaname'} />
+                    <UpdateProfile currentValue={this.state.users.playaname} appState={this.props.appState}  textKey={'playaname'} />
                     </p>
                     <p className="getprofileP">Burns Attended:
-                    <UpdateProfile currentValue={this.state.users.burnsAttended}appState={this.props.appState} fetchResults={this.state} textKey={'burnsAttended'} />
+                    <UpdateProfile currentValue={this.state.users.burnsAttended}appState={this.props.appState}  textKey={'burnsAttended'} />
                     </p>
                     <p className="getprofileP">Favorite Principle: 
-                    <UpdateProfile currentValue={this.state.users.favPrinciple} appState={this.props.appState} fetchResults={this.state} textKey={'favPrinciple'} />
+                    <UpdateProfile currentValue={this.state.users.favPrinciple} appState={this.props.appState}  textKey={'favPrinciple'} />
                     </p>
                     <p className="getprofileP">Status:
-                    <UpdateProfile currentValue={this.state.users.status}appState={this.props.appState} fetchResults={this.state} textKey={'status'} />
+                    <UpdateProfile currentValue={this.state.users.status}appState={this.props.appState}  textKey={'status'} />
                     </p>
                     <p className="getprofileP">About Me:
-                    <UpdateProfile currentValue={this.state.users.aboutMe}appState={this.props.appState} fetchResults={this.state} textKey={'aboutMe'} />
+                    <UpdateProfile currentValue={this.state.users.aboutMe}appState={this.props.appState}  textKey={'aboutMe'} />
                     </p>
                     <UpdateAvatar currentValue={this.state.users.profilePic} appState={this.props.appState} />
                 
