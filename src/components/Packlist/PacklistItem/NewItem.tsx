@@ -109,6 +109,8 @@ class NewItem extends Component<NewItemProps, NewItemState> {
                             <FormControlLabel
                                 control={
                                     <Switch
+                                    color='primary'
+
                                         checked={this.state.isPacked}
                                         name="isPacked"
                                         inputProps={{ 'aria-label': 'isPacked' }}
@@ -121,6 +123,7 @@ class NewItem extends Component<NewItemProps, NewItemState> {
                             <FormControlLabel
                                 control={
                                     <Switch
+                                        color='primary'
                                         checked={this.state.isOwned}
                                         name="isOwned"
                                         inputProps={{ 'aria-label': 'isOwned' }}

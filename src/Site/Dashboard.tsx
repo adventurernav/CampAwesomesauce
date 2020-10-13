@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import APIURL from '../helpers/environment'
 import { ProfileResults } from '../components/Profile/ProfileInterfaces'
@@ -79,10 +79,15 @@ class Dashboard extends Component<DashboardProps> {
     }
     render() {
         return (
-            <div>
-                <h1>Hello, {this.state.users.playaname}</h1>
-                <div>
-                <Button variant='outlined' href='/packlist' color='primary'>
+            <Grid container direction='column'>
+                <Grid item className='max-width'>
+                <h1>Hello, {this.state.users.playaname}!</h1>
+                <img src={this.state.users.profilePic} alt='avatar' className='avatar' />
+                <h3>Welcome back.</h3>
+                </Grid>
+                <Grid container direction='column' justify='space-between' className='max-width'>
+                <Grid item className='max-width'>
+                    <Button variant='outlined' href='/packlist' color='primary' className='max-width'>
                     <h3>My Packlists:</h3>
                     <ul>
                         {this.state.packlist.length>0? (this.state.packlist.map((thisItem) => {
@@ -92,14 +97,23 @@ class Dashboard extends Component<DashboardProps> {
                     }
                     </ul>
                     </Button>
-                <Button variant='outlined' href='/profile' color='primary'>
-                <h3>My Status:</h3>
-                    <h5>{this.state.users.status}</h5>
+                    </Grid>
+                    <Grid item className='max-width'>
+                <Button variant='outlined' href='/profile' color='primary' className='max-width'>
+                <h3>My Status: <br/>{this.state.users.status}</h3>
                 </Button>
+                </Grid>
+                <Grid container justify='center'>
+
+                <Grid item>
                 <Button variant='outlined' href='/account' color='primary'>My Account</Button>
+                </Grid>
+                <Grid item>
                 <Button variant='outlined' href='/resources' color='primary'>Resources</Button>
-                </div>
-            </div>
+                </Grid>
+                </Grid>
+                </Grid>
+            </Grid>
         )
     }
 }

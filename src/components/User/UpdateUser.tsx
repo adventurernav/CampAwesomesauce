@@ -18,6 +18,7 @@ class UpdateUser extends Component<UpdateUserProps, UpdateState> {
         open: false
     }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
+    password: string = this.props.textKey==='password'? 'password' : ''
     dialogContentController = () => {
         if (this.props.textKey === 'firstName' || this.props.textKey === 'lastName') {
             return (<TextField
@@ -47,7 +48,7 @@ class UpdateUser extends Component<UpdateUserProps, UpdateState> {
 
     }
     UpdateUserSubmit = () => {
-        fetch(`${APIURL}/user/`, {
+        fetch(`${APIURL}/user/${this.password}`, {
             method: 'PUT',
             headers: this.requestHeaders,
             body: JSON.stringify({

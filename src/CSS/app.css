@@ -6,6 +6,14 @@ body{
 h1{
     font-family: var(--head);
 }
+a{
+    text-decoration: none;
+    color: var(--purple);
+    font-weight: bold;
+}
+a:hover{
+    font-weight: normal;
+}
 .getprofileP{
 padding: .5rem;
 }
