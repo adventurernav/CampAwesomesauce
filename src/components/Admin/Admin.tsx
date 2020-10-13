@@ -15,7 +15,6 @@ type AdminProps = {
 }
 type AdminState = {
     users: usersObject[]
-    profiles: profilesObject[]
 }
 type usersObject = {
     firstName: string,
@@ -25,24 +24,14 @@ type usersObject = {
     createdAt: string,
     id: number
 }
-type profilesObject = {
-    id: number,
-    userId: number,
-    aboutMe: string,
-    burnsAttended: number,
-    favPrinciple: string,
-    playaname: string,
-    profilePic: string,
-    status: string
-}
+
 
 class Admin extends Component<AdminProps, AdminState> {
     constructor(props: AdminProps) {
         super(props)
         this.state = {
-            users: [],
-            profiles: []
-        }
+            users: []
+                }
     }
     componentDidMount() {
         this.getUsers()

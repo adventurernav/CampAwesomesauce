@@ -2,6 +2,7 @@ import { MenuItem, Button, Dialog, DialogActions, DialogContent, DialogTitle, Ic
 import { EditOutlined } from "@material-ui/icons";
 import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
+import { ProfileResults } from './ProfileInterfaces';
 
 
 const principles = ['Radical Inclusion', 'Radical Inclusion', 'Gifting', 'Decommodification', 'Radical Self-reliance', 'Radical Self-expression', 'Communal Effort', 'Civic Responsibility', 'Leave No Trace', 'Participation', 'Immediacy'];
