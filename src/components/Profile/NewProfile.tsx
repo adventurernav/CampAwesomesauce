@@ -51,7 +51,7 @@ class NewProfile extends Component<newProfileProps, stateValues> {
     }
     render() {
         return (
-            <div>
+            <div className="max-width">
                 {(this.state.submitted === true) ? <Redirect to='/profile' /> : null}
 
                 <h1>Create your Profile</h1>
@@ -71,16 +71,18 @@ class NewProfile extends Component<newProfileProps, stateValues> {
                     {({ values, handleChange, handleBlur }) => (
                         <Form>
 
-                            <div>
+                            <div className='div-padding'>
                                 <TextField
                                     name="playaname"
                                     label="Playa Name"
                                     value={values.playaname}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    autoFocus
+                                    
                                 />
                             </div>
-                            <div>
+                            <div className='div-padding'>
                                 <TextField
                                     name="burnsAttended"
                                     label="Number of Burns Attended"
@@ -89,7 +91,7 @@ class NewProfile extends Component<newProfileProps, stateValues> {
                                     onBlur={handleBlur}
                                 />
                             </div>
-                            <div>
+                            <div className='div-padding'>
 
                                 <Field name='favPrinciple' as="select" label="Your Favorite Principle">
                                     <option value="" disabled>--Your Favorite Principle--</option>
@@ -106,16 +108,19 @@ class NewProfile extends Component<newProfileProps, stateValues> {
 
                                 </Field>
                             </div>
-                            <div>
+                            <div className='div-padding'>
                                 <TextField
                                     name="aboutMe"
                                     label="About Me"
                                     value={values.aboutMe}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    multiline
+                                    rows={3}
+                                    variant='outlined'
                                 />
                             </div>
-                            <div>
+                            <div className='div-padding'>
                                 <TextField
                                     name="status"
                                     label="Status"
@@ -125,16 +130,19 @@ class NewProfile extends Component<newProfileProps, stateValues> {
                                 />
                             </div>
                             
-                            <div role="group" aria-labelledby="my-radio-group">
+                            <div role="group" aria-labelledby="my-radio-group" className='div-padding max-width'>
+                                <label>Select an Avatar</label>
                                 {Avatars.map((avatar, i) => {
-                                    return(<label key={i}>
-                                        <Field type="radio" name="profilePic" value={avatar} />
-                                        <img src={avatar} alt={avatar} className='avatar'/>
-                                    </label>)
+                                    return(<div className='max-width'>
+                                        <label key={i} >
+                                            <Field type="radio" name="profilePic" value={avatar} />
+                                            <img src={avatar} alt={avatar} className='avatar'/>
+                                        </label>
+                                    </div>)
                                 })}
                             </div>
 
-                            <Button type='submit'>Create Profile</Button>
+                            <Button color='primary' type='submit'>Create Profile</Button>
                         </Form>
                     )}
                 </Formik>

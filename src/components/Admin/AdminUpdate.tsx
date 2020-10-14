@@ -66,7 +66,7 @@ class AdminUpdate extends Component<UpProps, UpState> {
     handleClose = () => {
         this.setState({ open: false });
     };
-    handleChange = (e: any) => {
+    handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const val = e.target.value
         console.log(val)
         e.persist();

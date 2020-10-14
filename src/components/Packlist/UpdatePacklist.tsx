@@ -57,7 +57,7 @@ class UpdatePacklist extends Component<UpProps, UpState> {
     handleClose = () => {
         this.setState({ open: false });
     };
-    handleChange = (e: any) => {
+    handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         this.setState({
             newTitle: e.target.value
         });

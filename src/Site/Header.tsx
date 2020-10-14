@@ -25,17 +25,13 @@ const adminRoutes = [
 
 ]
 
-const drawerWidth = 240;
+const drawerWidth = 100;
 
 const styles = (theme: Theme) =>
     ({
         root: {
             display: 'flex',
 
-        },
-        link: {
-            underline: 'none',
-            color: 'secondary'
         },
         appBar: {
             transition: theme.transitions.create(['margin', 'width'], {
@@ -116,27 +112,27 @@ class Header extends Component<HeaderProps, headerState> {
     viewController = () => {
         const { classes } = this.state
         let allRoutes = mainRoutes.map((thisPath) => {
-            return (<ListItem button>
-                <Link className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
+            return (<ListItem button className={classes.link}>
+                <Link  className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
             </ListItem>)
         })
         if (this.props.appState.authenticated) {
             allRoutes = allRoutes.concat(authdRoutes.map((thisPath) => {
                 return (<ListItem button>
-                    <Link className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
+                    <Link   className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
                 </ListItem>)
             }))
         } else {
             allRoutes = allRoutes.concat(authRoute.map((thisPath) => {
                 return (<ListItem button>
-                    <Link className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
+                    <Link  className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
                 </ListItem>)
             }))}
 
         if (this.props.appState.admin) {
             allRoutes = allRoutes.concat(adminRoutes.map((thisPath) => {
                 return (<ListItem button>
-                    <Link className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
+                    <Link  className={classes.link} onClick={this.handleDrawerClose} to={thisPath[0]} >{thisPath[1]}</Link>
                 </ListItem>)
             }))
         }
@@ -185,7 +181,6 @@ class Header extends Component<HeaderProps, headerState> {
                     <Divider />
                     <List>
                         {this.viewController()}
-                        <ListItem></ListItem>
                     </List>
                 </Drawer>
 

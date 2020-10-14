@@ -1,44 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Description of the project
+A list of features
+Documentation
+Resources
 
-## Available Scripts
 
-In the project directory, you can run:
+# Heading
+## Heading 2
+### Heading 3
 
-### `npm start`
+Emphasis _asterisks_ or _underscores_
+Strong Emphasis **asterisks** or **underscores**
+~~Scratch this.~~
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# **Camp Awesomesauce**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Welcome to the Camp Awesomesauce App Client. 
+You can use this app to make and manage packlists for your next burn. You can create an account, add some profile information, and find resources to ensure next year was better. 
 
-### `npm test`
+You can find the deployed project [here](https://campawesomesauce.herokuapp.com/).
+It pairs with the server side, found [here](https://github.com/adventurernav/CampAwesomesauce).
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+####  In honor of the Principles Radical Inclusion, Radical Self-Expression, Communal Effort, and Participation, your contributions are always welcome.
 
-### `npm run build`
+### Features
+- Unregistered Guests can view general information about our theme camp, learn more about Burning Man and the 10 Principles, or make donations. 
+- Users can register for an account, then view or update their information later. They can choose to delete their account. 
+- Users can create a profile, then view or update their information later. They can choose to delete their profile. 
+- Users can create any number of packlists. They can update or delete them later. 
+- Users can add items to each packlist and update or delete them.
+- Admins can manage the users' accounts, updating name, email, passwords or deleting users entirely.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Technologies
+#### This client is built with: 
+- JavaScript
+- React (legacy)
+- Typescript
+- Material UI
+- Formik
+- React-Router-DOM
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Cloning this project
+Navigate to where you want the project cloned to in the command line. The client and server are seperate repos, so I suggest making a new folder. Let's make a few commands:
+$ git clone https://github.com/adventurernav/CampAwesomesauce
+$ npm i
+$ npm start
 
-### `npm run eject`
+Be sure to check out the readme on the server app if you want to clone that as well. 
+For Demo purposes, I have the server already running. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

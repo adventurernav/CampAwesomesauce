@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import APIURL from '../../helpers/environment'
 import { ProfileResults } from './ProfileInterfaces'
 import UpdateProfile from "./UpdateProfile";
+import DeleteModal from '../DeleteModal'
 import UpdateAvatar from "./UpdateAvatar";
 
 type getProfileProps = {
@@ -20,7 +21,8 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
                 favPrinciple: '',
                 playaname: '',
                 profilePic: '',
-                status: ''
+                status: '',
+                userId: 0
             },
             newUser: false,
             upSubmitted: false
@@ -48,7 +50,8 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
                             favPrinciple: data.users.favPrinciple,
                             playaname: data.users.playaname,
                             profilePic: data.users.profilePic,
-                            status: data.users.status
+                            status: data.users.status,
+                            userId: data.users.userId
                         }
                     })
                 } else {
@@ -63,30 +66,57 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
         return (
             <div>
                 {(this.state.newUser === true) ? <Redirect to="/profile/new" /> : null}
-                {this.state.users.playaname? 
-                <Grid container direction="row" justify="space-between" alignContent="space-between" spacing={4}>
+                {this.state.users.playaname ?
+                    <Grid container direction="row" justify="center" alignContent="space-between" spacing={3}>
+                        <Grid container direction='column'>
+                            <Grid item>
+                                <h1>My Profile</h1>
+                            </Grid>
+                            <Grid item>
+                                <UpdateAvatar currentValue={this.state.users.profilePic} appState={this.props.appState} />
+                            </Grid>
+                        </Grid>
+                        <Grid container direction="row" justify="center" alignContent="space-between" spacing={3}>
+                            <Grid item>
+                                <p className="getprofileP">Playaname:
+                    <UpdateProfile currentValue={this.state.users.playaname} appState={this.props.appState} textKey={'playaname'} />
+                                </p>
+                            </Grid>
+                            <Grid item>
+                                <p className="getprofileP">Burns Attended:
+                    <UpdateProfile currentValue={this.state.users.burnsAttended} appState={this.props.appState} textKey={'burnsAttended'} />
+                                </p>
+                            </Grid>
+                            <Grid item>
 
-                <Grid item>
-                    <p className="getprofileP">Playaname:
-                    <UpdateProfile currentValue={this.state.users.playaname} appState={this.props.appState} fetchResults={this.state} textKey={'playaname'} />
-                    </p>
-                    <p className="getprofileP">Burns Attended:
-                    <UpdateProfile currentValue={this.state.users.burnsAttended}appState={this.props.appState} fetchResults={this.state} textKey={'burnsAttended'} />
-                    </p>
-                    <p className="getprofileP">Favorite Principle: 
-                    <UpdateProfile currentValue={this.state.users.favPrinciple} appState={this.props.appState} fetchResults={this.state} textKey={'favPrinciple'} />
-                    </p>
-                    <p className="getprofileP">Status:
-                    <UpdateProfile currentValue={this.state.users.status}appState={this.props.appState} fetchResults={this.state} textKey={'status'} />
-                    </p>
-                    <p className="getprofileP">About Me:
-                    <UpdateProfile currentValue={this.state.users.aboutMe}appState={this.props.appState} fetchResults={this.state} textKey={'aboutMe'} />
-                    </p>
-                    <UpdateAvatar currentValue={this.state.users.profilePic} appState={this.props.appState} />
-                
-                </Grid>
-            </Grid>
-                :null}
+                                <p className="getprofileP">Favorite Principle:
+                    <UpdateProfile currentValue={this.state.users.favPrinciple} appState={this.props.appState} textKey={'favPrinciple'} />
+                                </p>
+                            </Grid>
+
+                            <Grid item>
+
+                                <p className="getprofileP">Status:
+                    <UpdateProfile currentValue={this.state.users.status} appState={this.props.appState} textKey={'status'} />
+                                </p>
+                            </Grid>
+
+                            <Grid item>
+
+                                <p className="getprofileP">About Me:
+                    <UpdateProfile currentValue={this.state.users.aboutMe} appState={this.props.appState} textKey={'aboutMe'} />
+                                </p>
+                            </Grid>
+                        </Grid>
+                        <Grid container direction="row" justify="center" alignContent="space-between" spacing={3}>
+                            <Grid item>
+                                <DeleteModal appState={this.props.appState} path={`profile/${this.state.users.userId}`} buttonLabel={'Delete My Profile'} confirmLabel={'Yes, Delete my Profile'} title={'Are you sure you want to delete your profile? This CANNOT be undone. '} />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+
+                    : null}
             </div>
         )
     }

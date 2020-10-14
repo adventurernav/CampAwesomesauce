@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import Auth from '../Auth/Auth'
 import Packlist from '../components/Packlist/Packlist'
-import Profile from '../components/Profile/Profile'
+import GetProfile from '../components/Profile/GetProfile'
 import User from '../components/User/User'
 import Logout from "../Auth/Logout";
 import NewProfile from "../components/Profile/NewProfile";
@@ -44,7 +44,7 @@ class SwitchController extends Component<ControllerProps, controllerState> {
                     </Route>
                     <Route exact path="/logout"><Logout updateAdmin={this.props.updateAdmin}updateToken={this.props.updateToken} /></Route>
                     <Route exact path="/packlist"><Packlist appState={this.props.appState} /></Route>
-                    <Route exact path="/profile"><Profile appState={this.props.appState} /></Route>
+                    <Route exact path="/profile"><GetProfile appState={this.props.appState} /></Route>
                     <Route exact path="/account"><User appState={this.props.appState} /></Route>
                     <Route exact path="/profile/new"><NewProfile appState={this.props.appState} /></Route>
 

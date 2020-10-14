@@ -1,112 +1,114 @@
-import React, { Component } from 'react'
-import { Button, TextField } from "@material-ui/core";
-import { Form, Formik } from "formik";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, TextField } from "@material-ui/core";
+import { EditOutlined } from "@material-ui/icons";
+import React, { Component } from "react";
 import APIURL from "../../helpers/environment";
-import { Redirect } from 'react-router-dom';
-
-interface Values {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-}
 
 type UpdateUserProps = {
-    appState: { authenticated: boolean, token: string | null }
+    appState: { authenticated: boolean, token: string | null },
+    textKey: string,
+    currentValue: string
 }
-type UpdateUserState= {
-submitted: boolean
+type UpdateState = {
+    newText: string,
+    open: boolean
 }
-
-class UpdateUser extends Component<UpdateUserProps, UpdateUserState>{
-    state={
-        submitted: false
+class UpdateUser extends Component<UpdateUserProps, UpdateState> {
+    state = {
+        newText: this.props.currentValue,
+        open: false
     }
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
-    render(){
-        return(
-            <div>
-                {this.state.submitted===true? <Redirect to='/account'/>: null}
-                <h1>Update User</h1>
-            <Formik
-                initialValues={{ 
-                    firstName: '', 
-                    lastName: '', 
-                    email: '', 
-                    password: '' }}
-                onSubmit={(values:Values) => {
-                    
-                        fetch(`${APIURL}/user/`, {
-                            method: 'PUT',
-                            headers: this.requestHeaders,
-                            body: JSON.stringify({
-                                firstName: values.firstName,
-                                lastName: values.lastName,
-                                email: values.email,
-                                password: values.password
-                            })
-                        })
-                            .then(res => res.json())
-                            .then((data) => {
-                                if (!data.error){
-                                    this.setState({submitted:true})
-                                } else{
-                                    alert(`${data.error.errors[0].message}`)
-                                }
-                                
-                            })
-                            .catch(err=>console.log(err))
-                    
+    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
+    password: string = this.props.textKey==='password'? 'password' : ''
+    dialogContentController = () => {
+        if (this.props.textKey === 'firstName' || this.props.textKey === 'lastName') {
+            return (<TextField
+                autoFocus
+                label={this.props.textKey}
+                type='text'
+                fullWidth
+                variant="outlined"
+                value={this.state.newText}
+                onChange={(e) => {
+                    this.handleChange(e);
                 }}
-            >
-                {({ values, handleChange, handleBlur }) => (
-                    <Form>
+            />)
+        } else if (this.props.textKey === 'email' || this.props.textKey === 'password') {
+            return (<TextField
+                autoFocus
+                label={this.props.textKey}
+                type={this.props.textKey}
+                fullWidth
+                variant="outlined"
+                value={this.state.newText}
+                onChange={(e) => {
+                    this.handleChange(e);
+                }}
+            />)
+        } else { console.log('Nothing Found') }
 
-                        <div>
-                            <TextField
-                                name="firstName"
-                                label="First Name"
-                                value={values.firstName}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                name="lastName"
-                                label="Last Name"
-                                value={values.lastName}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                name="email"
-                                label="E-mail"
-                                type="email"
-                                value={values.email}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                name="password"
-                                label="Password"
-                                type="password"
-                                value={values.password}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        </div>
-                    
-                        <Button type='submit'>Update Account</Button>
-                    </Form>
-                )}
-            </Formik>
-        </div>
-    )}
-            
+    }
+    UpdateUserSubmit = () => {
+        fetch(`${APIURL}/user/${this.password}`, {
+            method: 'PUT',
+            headers: this.requestHeaders,
+            body: JSON.stringify({
+                [this.props.textKey]: this.state.newText
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.message === "Update Failed") {
+                    alert(data.error.original.detail)
+                    throw new Error('Account not updated')
+                } else {
+                    this.handleClose();
+                }
+            })
+            .catch(err => console.log(err))
+    }
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+    handleCancel = () => {
+        this.setState({ newText: this.props.currentValue });
+        this.handleClose()
+    };
+    handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const val = e.target.value
+        e.persist();
+        this.setState({ newText: val });
+    }
+    submitClick = () => {
+        this.UpdateUserSubmit();
+    }
+    render() {
+        return (
+            <div>
+                {this.state.newText}
+
+                <IconButton color='secondary' onClick={this.handleOpen}><EditOutlined /></IconButton>
+                <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Update Account</DialogTitle>
+                    <DialogContent>
+                        {this.dialogContentController()}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleCancel} color="secondary">
+                            Cancel
+                        </Button>
+                        <Button onClick={this.submitClick} color="primary">
+                            Submit Changes
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+            </div>
+        )
+    }
 }
 export default UpdateUser;

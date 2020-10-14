@@ -1,24 +1,31 @@
 import React, { Component } from "react";
-import { Link, List, ListItem } from "@material-ui/core";
+import { Link, Grid, ListItem } from "@material-ui/core";
 import FacebookIcon from '@material-ui/icons/Facebook';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+import FormSpree from './FormSpree'
 
 class Contact extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Contact Us</h1>
-                <List>
-                    <ListItem>
-                        <Link href='https://www.facebook.com/campawesomesauce/' target='_blank'><FacebookIcon /></Link>
-                    </ListItem>
-                    <ListItem>
-                        <Link href='http://www.campawesomesauce.org/#' target='_blank'><EmailOutlinedIcon />  Email us </Link>
-                    </ListItem>
-                </List>
-            </div>
+            <Grid container justify='center'>
+                <Grid item>
+                    <h1>Contact Us</h1>
+                </Grid>
+                <Grid container direction='column' justify='center'>
+                    <Grid item>
+                        <Link href='https://www.facebook.com/campawesomesauce/' target='_blank'><FacebookIcon fontSize='large'/></Link>
+                    </Grid>
+                    <Grid item>
+                    <h3>-or-</h3>
+                </Grid>
+                </Grid>
+
+
+                <FormSpree />
+            </Grid>
         )
     }
 }
 export default Contact;
+

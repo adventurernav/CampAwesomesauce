@@ -6,6 +6,14 @@ body{
 h1{
     font-family: var(--head);
 }
+a{
+    text-decoration: none;
+    color: var(--purple);
+    font-weight: bold;
+}
+a:hover{
+    font-weight: normal;
+}
 .getprofileP{
 padding: .5rem;
 }
@@ -35,8 +43,11 @@ padding: .5rem;
     padding-right: .5rem;
 }
 .avatar-radios-div{
-    border: .5px solid var(--pink);
+    border: 1px solid var(--pink);
     height: fit-content;
     margin: 5px;
     border-radius: 25px;
+}
+.div-padding{
+    padding: .5rem;
 }

@@ -56,7 +56,7 @@ class UpdateItem extends Component<UpProps, UpState> {
     handleClose = () => {
         this.setState({ open: false });
     };
-    handleChange = (e: any) => {
+    handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const val = e.target.value
         e.persist();
         this.setState({newText: val});

@@ -1,19 +1,21 @@
 import { Button, DialogTitle, DialogActions, Dialog } from "@material-ui/core";
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import APIURL from '../../helpers/environment'
+import APIURL from '../helpers/environment'
+import requestHeaders from "./RequestHeaders";
 
-type delUserProps = {
-    appState: { authenticated: boolean, token: string|null } 
-}
-type delUserState = {
+
+type delProps = {
+    appState: { authenticated: boolean, token: string|null } ,
+    path: string, 
+    buttonLabel: string, 
+    confirmLabel: string,
+    title: string}
+type delState = {
     open: boolean,
-submitted: boolean
 }
-class DeleteUser extends Component<delUserProps, delUserState> {
+class DeleteModal extends Component<delProps, delState> {
 state={
-    open: false,
-    submitted:false
+    open: false
 }
     requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
     handleOpen = () => {
@@ -24,42 +26,41 @@ state={
         this.setState({ open: false });
     };
     
-    delUser = (): void => {
-        fetch(`${APIURL}/user/`, {
+    delFetch = () => {
+       if (this.props.appState.token) {
+            fetch(`${APIURL}/${this.props.path}`, {
             method: 'DELETE',
             headers: this.requestHeaders
         })
             .then(res => res.json())
             .then(data=>{
                 if (!data.error){
-                    this.setState({submitted:true})
-                    alert('Your account has been permanently deleted.')
+                    alert('This was permanently deleted.')
                     this.handleClose()
+                    window.location.reload()
                 } else{
                     alert(`${data.error.errors[0].message}`)
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err))}
     }
     render() {
         return (
             <div>
-                {this.state.submitted===true? <Redirect to='/logout'/>:null}
-                <br />
                 <Dialog open={this.state.open} onClose={this.handleClose} >
-                    <DialogTitle>Are you sure you want to delete your ENTIRE account? This cannot be undone.</DialogTitle>
+                    <DialogTitle>{this.props.title}</DialogTitle>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="secondary">
                             Cancel
                         </Button>
-                        <Button onClick={this.delUser} color="primary">
-                        Yes, Delete My Account Forever
+                        <Button onClick={this.delFetch} color="primary">
+                        {this.props.confirmLabel}
                         </Button>
                     </DialogActions>
                 </Dialog>
-                <Button color="secondary" onClick={this.handleOpen}>Delete My Account</Button>
+                <Button color="secondary" onClick={this.handleOpen}>{this.props.buttonLabel}</Button>
             </div>
         )
     }
 }
-export default DeleteUser;
+export default DeleteModal;

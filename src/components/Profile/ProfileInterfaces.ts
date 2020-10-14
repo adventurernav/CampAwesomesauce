@@ -9,6 +9,7 @@ export interface Users {
         favPrinciple: string,
         playaname: string,
         profilePic: string,
-        status: string
+        status: string,
+        userId: number
     
 }

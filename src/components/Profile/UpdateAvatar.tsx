@@ -48,7 +48,7 @@ class UpdateProfile extends Component<updateProfileProps, UpdateState> {
         this.setState({ newText: this.props.currentValue });
         this.handleClose()
     };
-    handleChange = (e: any) => {
+    handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const val = e.target.value
         console.log(val)
         e.persist();
@@ -65,7 +65,7 @@ class UpdateProfile extends Component<updateProfileProps, UpdateState> {
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Update Profile</DialogTitle>
                     <DialogContent>   
-                        <div role="group" aria-labelledby="my-radio-group" onChange={this.handleChange}>
+                        <div role="group" aria-labelledby="my-radio-group">
                             {Avatars.map((avatar, i) => {
                                 return (<div className='avatar-radios-div'>
                                     <label key={i} >

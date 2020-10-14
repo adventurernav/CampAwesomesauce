@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, ReactHTMLElement } from "react";
 import APIURL from "../../../helpers/environment";
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Switch, FormGroup, FormControlLabel, IconButton } from "@material-ui/core";
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
@@ -11,7 +11,7 @@ type NewItemProps = {
 type NewItemState = {
 
     itemName: string,
-    qty: number,
+    qty: number|string,
     isOwned: boolean,
     isPacked: boolean,
 
@@ -58,22 +58,22 @@ class NewItem extends Component<NewItemProps, NewItemState> {
     handleClose = () => {
         this.setState({ open: false });
     };
-    handleChangeDesc = (e: any) => {
+    handleChangeDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             itemName: e.target.value
         })
     }
-    handleChangeQty =(e:any) => {
+    handleChangeQty =(e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             qty: e.target.value
         })
     }
-    handleChangePack =(e:any) => {
+    handleChangePack =(e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             isPacked: e.target.checked
         })
     }
-    handleChangeOwn =(e:any) => {
+    handleChangeOwn =(e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             isOwned: e.target.checked
         })
@@ -109,6 +109,8 @@ class NewItem extends Component<NewItemProps, NewItemState> {
                             <FormControlLabel
                                 control={
                                     <Switch
+                                    color='primary'
+
                                         checked={this.state.isPacked}
                                         name="isPacked"
                                         inputProps={{ 'aria-label': 'isPacked' }}
@@ -121,6 +123,7 @@ class NewItem extends Component<NewItemProps, NewItemState> {
                             <FormControlLabel
                                 control={
                                     <Switch
+                                        color='primary'
                                         checked={this.state.isOwned}
                                         name="isOwned"
                                         inputProps={{ 'aria-label': 'isOwned' }}
