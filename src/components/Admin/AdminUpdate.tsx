@@ -20,44 +20,46 @@ type UpProps = {
 }
 type UpState = {
     open: boolean,
-    newText: string|number
+    newText: string | number
 }
 class AdminUpdate extends Component<UpProps, UpState> {
     state = {
         open: false,
         newText: this.props.currentValue
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     submitClick = () => {
         this.handleUpdateFetch();
     }
-    handleUpdateFetch = () => {
-        console.log(`${APIURL}/admin/${this.props.path}/${this.props.userID}`)
-        console.log(this.props.textKey)
-        console.log(this.state.newText)
+    handleUpdateFetch = ():void => {
 
-        fetch(`${APIURL}/admin/${this.props.path}/${this.props.userID}`, {
-            method: 'PUT',
-            headers: this.requestHeaders,
-            body: JSON.stringify({
-                [this.props.textKey]: this.state.newText
+        if (this.props.appState.token !== null) {
+
+            fetch(`${APIURL}/admin/${this.props.path}/${this.props.userID}`, {
+                method: 'PUT',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    Authorization: this.props.appState.token
+                }),
+                body: JSON.stringify({
+                    [this.props.textKey]: this.state.newText
+                })
             })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.message === "Update Failed") {
-                    alert(data.error.original.detail)
-                    throw new Error('User not updated') 
-                } else if (data.NumberOfUsersUpdated[0]===0){
-                    throw new Error('User not updated')
-                }
-                else {
-                    console.log('Fetch ran?');
-                    this.handleClose();
-                }
-            })
-            .catch(err => console.log(err))
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.message === "Update Failed") {
+                        alert(data.error.original.detail)
+                        throw new Error('User not updated')
+                    } else if (data.NumberOfUsersUpdated[0] === 0) {
+                        throw new Error('User not updated')
+                    }
+                    else {
+                        console.log('Fetch ran?');
+                        this.handleClose();
+                    }
+                })
+                .catch(err => console.log(err))
+        }
     }
     handleOpen = () => {
         this.setState({ open: true });
@@ -70,7 +72,7 @@ class AdminUpdate extends Component<UpProps, UpState> {
         const val = e.target.value
         console.log(val)
         e.persist();
-        this.setState({newText: val});
+        this.setState({ newText: val });
     }
     render() {
         return (

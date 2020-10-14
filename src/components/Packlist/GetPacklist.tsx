@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import APIURL from '../../helpers/environment'
 import VerticalTabs from './Tabs'
 type getPacklistProps = {
-    appState:{ authenticated: boolean, token: string | null },
-    
+    appState: { authenticated: boolean, token: string | null },
+
 }
 export interface PacklistState {
     data: packlistObject[]
@@ -19,25 +19,27 @@ class GetPacklist extends Component<getPacklistProps, PacklistState> {
     state: PacklistState = {
         data: []
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     componentDidMount() {
         this.packlistFetch()
     }
-    componentDidUpdate(){
+    componentDidUpdate() {
     }
     packlistFetch = (): void => {
-        fetch(`${APIURL}/packlist/`, {
-            method: 'GET',
-            headers: this.requestHeaders
-        })
-            .then(res => res.json())
-            .then((results) => {
-                this.setState({
-                    data: results
-                })
+        if (this.props.appState.token !== null) {
 
+            fetch(`${APIURL}/packlist/`, {
+                method: 'GET',
+                headers: new Headers({ 'Content-Type': 'application/json', Authorization: this.props.appState.token }),
             })
-            .catch(err => console.log(err))
+                .then(res => res.json())
+                .then((results) => {
+                    this.setState({
+                        data: results
+                    })
+
+                })
+                .catch(err => console.log(err))
+        }
     }
     render() {
 

@@ -28,11 +28,7 @@ class App extends Component<{}, AppState> {
     this.updateToken = this.updateToken.bind(this)
     this.updateAdmin = this.updateAdmin.bind(this)
   }
-  requestHeaders: requestHeaders = {
-    'Content-Type': 'application/json',
-    'Authorization': currentToken
-  };
-  tokenChecker() {
+  tokenChecker():void {
     if (currentToken && this.state.authenticated===false) {
       console.log('TOKEN CHECKER')
       fetch(`${APIURL}/tokenchecker/`, {

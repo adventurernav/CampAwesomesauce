@@ -13,15 +13,14 @@ class DeleteProfile extends Component<delProfileProps,delState> {
 state={
     submitted: false
 }
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
 
     
     delProfileFetch = (): void => {
-        let id:number = 14; //this should be the user's ID
-        fetch(`${APIURL}/profile/${id}`, {
+        if(this.props.appState.token!==null){
+
+        fetch(`${APIURL}/profile/`, {
             method: 'DELETE',
-            headers: this.requestHeaders
-        })
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),        })
             .then(res => res.json())
             .then(data=>{
                 if (!data.error){
@@ -32,7 +31,7 @@ state={
             })
 
             .catch(err => console.log(err))
-    }
+    }}
     render() {
         return (
             <div>

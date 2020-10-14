@@ -30,14 +30,13 @@ class NewItem extends Component<NewItemProps, NewItemState> {
         }
         this.newItemSubmit = this.newItemSubmit.bind(this)
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
-    newItemSubmit() {
+    newItemSubmit():void {
+        if(this.props.appState.token!==null){
 
         fetch(`${APIURL}/item/${this.props.plID}`, {
             method: 'POST',
-            headers: this.requestHeaders,
-            body: JSON.stringify({
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),            body: JSON.stringify({
                 itemName: this.state.itemName,
                 isOwned: this.state.isOwned,
                 isPacked: this.state.isPacked,
@@ -49,7 +48,7 @@ class NewItem extends Component<NewItemProps, NewItemState> {
                 window.location.reload()
             })
             .catch(err => console.log(err))
-    }
+    }}
     
     handleClickOpen = () => {
         this.setState({ open: true });

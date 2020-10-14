@@ -26,24 +26,24 @@ class GetPacklist extends Component<PLitemProps, PLitemState> {
         data: []
     }
 
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     componentDidMount() {
         this.itemsFetch()
     }
     componentDidUpdate() {
     }
     itemsFetch = (): void => {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/item/${this.props.plID}`, {
             method: 'GET',
-            headers: this.requestHeaders
-        })
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),        })
             .then(res => res.json())
             .then((results) => {
                 this.setState({ data: results })
             })
 
             .catch(err => console.log(err))
-    }
+    }}
     render() {
 
         return (

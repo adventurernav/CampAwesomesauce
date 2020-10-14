@@ -26,16 +26,16 @@ class UpdatePacklist extends Component<UpProps, UpState> {
         open: false,
         newTitle: '',
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     submitClick = () => {
         this.handleClose();
         this.handleUpdateFetch();
     }
-    handleUpdateFetch = () => {
+    handleUpdateFetch = ():void => {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/packlist/${this.props.plID}`, {
             method: 'PUT',
-            headers: this.requestHeaders,
-            body: JSON.stringify({
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),            body: JSON.stringify({
                 title: this.state.newTitle
             })
         })
@@ -49,7 +49,7 @@ class UpdatePacklist extends Component<UpProps, UpState> {
 
             })
             .catch(err => console.log(err))
-    }
+    }}
     handleClickOpen = () => {
         this.setState({ open: true });
     };

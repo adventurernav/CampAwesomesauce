@@ -22,7 +22,6 @@ type itemObject = {
 class ItemTable extends Component<PLitemProps> {
 
 
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     render() {
 
         return (

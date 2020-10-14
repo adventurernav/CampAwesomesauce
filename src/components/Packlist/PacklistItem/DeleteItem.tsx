@@ -12,15 +12,16 @@ type DelProps = {
 class DeleteItem extends Component<DelProps> {
    
 
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     
     submitClick = () => {
         this.delPacklistFetch();
     }
     delPacklistFetch = (): void => {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/item/${this.props.itemID}`, {
             method: 'DELETE',
-            headers: this.requestHeaders
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),
         })
             .then(res => res.json())
             .then(response => {
@@ -31,7 +32,7 @@ class DeleteItem extends Component<DelProps> {
                 }
             })
             .catch(err => console.log(err))
-    }
+    }}
     render() {
         return (
             <div>

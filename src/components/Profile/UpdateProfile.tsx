@@ -21,7 +21,6 @@ class UpdateProfile extends Component<updateProfileProps, UpdateState> {
         newText: this.props.currentValue,
         open: false
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     dialogContentController = () => {
         if (this.props.textKey === 'playaname' || this.props.textKey === 'burnsAttended' || this.props.textKey === 'status') {
             return (<TextField
@@ -71,11 +70,12 @@ class UpdateProfile extends Component<updateProfileProps, UpdateState> {
         } else { console.log('Nothing Found') }
 
     }
-    updateProfileSubmit = () => {
+    updateProfileSubmit = ():void => {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/profile/`, {
             method: 'PUT',
-            headers: this.requestHeaders,
-            body: JSON.stringify({
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),            body: JSON.stringify({
                 [this.props.textKey]: this.state.newText
             })
         })
@@ -90,7 +90,7 @@ class UpdateProfile extends Component<updateProfileProps, UpdateState> {
                 }
             })
             .catch(err => console.log(err))
-    }
+    }}
     handleOpen = () => {
         this.setState({ open: true });
     };
