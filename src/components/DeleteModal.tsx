@@ -1,7 +1,6 @@
 import { Button, DialogTitle, DialogActions, Dialog } from "@material-ui/core";
 import React, { Component } from "react";
 import APIURL from '../helpers/environment'
-import requestHeaders from "./RequestHeaders";
 
 
 type delProps = {

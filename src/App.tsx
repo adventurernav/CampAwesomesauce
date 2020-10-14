@@ -5,7 +5,6 @@ import Header from './Site/Header'
 import Footer from './Site/Footer'
 import SwitchController from './Site/SwitchController'
 import APIURL from './helpers/environment'
-import requestHeaders from './components/RequestHeaders'
 
 type AppState = {
   token: string | null,
@@ -40,12 +39,15 @@ class App extends Component<{}, AppState> {
       })
         .then(res => res.json())
         .then((data: tokenResponse) => {
+          console.log(data)
           if (data.message === 'Success') {
             this.setState({ authenticated: true })
-
+console.log('check token message success')
           }
           if (data.user.role === 'admin') {
             this.setState({ admin: true })
+            console.log('check admin')
+
           }
         })
         .catch(err => console.log(err))
