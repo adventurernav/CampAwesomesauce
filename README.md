@@ -1,17 +1,3 @@
-Description of the project
-A list of features
-Documentation
-Resources
-
-
-# Heading
-## Heading 2
-### Heading 3
-
-Emphasis _asterisks_ or _underscores_
-Strong Emphasis **asterisks** or **underscores**
-~~Scratch this.~~
-
 # **Camp Awesomesauce**
 
 ### Welcome to the Camp Awesomesauce App Client. 

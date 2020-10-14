@@ -3,8 +3,8 @@ import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import React, { Component } from "react";
 import {Redirect} from 'react-router-dom'
 import APIURL from '../../helpers/environment'
-import requestHeaders from "../RequestHeaders";
 import AdminUpdate from './AdminUpdate'
+import MakeAdmin from './MakeAdmin'
 
 
 type AdminProps = {
@@ -23,7 +23,8 @@ type usersObject = {
     email: string,
     password: string,
     createdAt: string,
-    id: number
+    id: number,
+    role: string
 }
 class Admin extends Component<AdminProps, AdminState> {
     constructor(props: AdminProps) {
@@ -46,6 +47,7 @@ class Admin extends Component<AdminProps, AdminState> {
             })
             .then(res => res.json())
             .then((data) => {
+                console.log(data)
                 this.setState({
                     users: data
                 })
@@ -74,7 +76,7 @@ class Admin extends Component<AdminProps, AdminState> {
     render() {
         return (
             <div>
-                {this.props.appState.admin===false? <Redirect to='/' /> : null}
+                {/* {this.props.appState.admin===false? <Redirect to='/' /> : null} */}
                 <h1>Admin Portal</h1>
                 <Grid container justify='center'>
                     <Card id='number-of-users'>
@@ -89,7 +91,12 @@ class Admin extends Component<AdminProps, AdminState> {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>User</TableCell>
+                                <TableCell>E-mail</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell>First Name</TableCell>
+                                <TableCell>Last Name</TableCell>
+                                <TableCell>User Role</TableCell>
+                                <TableCell>Delete</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -100,6 +107,7 @@ class Admin extends Component<AdminProps, AdminState> {
                                         <TableCell><AdminUpdate path={'users/password'} textKey={'password'} userID={thisUser.id} currentValue={'Update Password'} appState={this.props.appState} /></TableCell>
                                         <TableCell><AdminUpdate path={'users'} textKey={'firstName'} userID={thisUser.id} currentValue={thisUser.firstName} appState={this.props.appState} /></TableCell>
                                         <TableCell><AdminUpdate path={'users'} textKey={'lastName'} userID={thisUser.id} currentValue={thisUser.lastName} appState={this.props.appState} /></TableCell>
+                                        <TableCell><MakeAdmin path={'users'} textKey={'role'} userID={thisUser.id} currentValue={thisUser.role} appState={this.props.appState} /></TableCell>
                                         <TableCell><Button color="secondary" onClick={(e)=>{e.preventDefault();this.deleteUser(thisUser)}}><DeleteOutlinedIcon/></Button></TableCell>
                                     </TableRow>
                                 )
