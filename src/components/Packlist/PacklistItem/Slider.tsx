@@ -22,7 +22,7 @@ constructor(props:SliderProps){
 }
 requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
-handleChange(e:any){
+handleChange(e: React.ChangeEvent<HTMLInputElement>){
 
     fetch(`${APIURL}/item/${this.props.itemID}`,{
         method: 'PUT',

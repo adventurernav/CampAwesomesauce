@@ -16,7 +16,7 @@ state={
     requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
 
     
-    delProfileFetch = (): any => {
+    delProfileFetch = (): void => {
         let id:number = 14; //this should be the user's ID
         fetch(`${APIURL}/profile/${id}`, {
             method: 'DELETE',

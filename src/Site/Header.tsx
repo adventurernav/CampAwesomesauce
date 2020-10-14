@@ -141,7 +141,6 @@ class Header extends Component<HeaderProps, headerState> {
     render() {
 
         const { classes } = this.state
-        console.log(classes)
         return (
             <div className={classes.root} id="nav-container">
                 <CssBaseline />

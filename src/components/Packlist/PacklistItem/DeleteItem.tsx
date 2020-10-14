@@ -17,7 +17,7 @@ class DeleteItem extends Component<DelProps> {
     submitClick = () => {
         this.delPacklistFetch();
     }
-    delPacklistFetch = (): any => {
+    delPacklistFetch = (): void => {
         fetch(`${APIURL}/item/${this.props.itemID}`, {
             method: 'DELETE',
             headers: this.requestHeaders

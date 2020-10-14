@@ -24,7 +24,7 @@ state={
         this.setState({ open: false });
     };
     
-    delUser = (): any => {
+    delUser = (): void => {
         fetch(`${APIURL}/user/`, {
             method: 'DELETE',
             headers: this.requestHeaders

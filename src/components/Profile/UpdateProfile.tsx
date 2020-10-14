@@ -59,6 +59,7 @@ class UpdateProfile extends Component<updateProfileProps, UpdateState> {
                 label={this.props.textKey}
                 type='text'
                 multiline
+                rows={3}
                 fullWidth
                 variant="outlined"
 
@@ -101,7 +102,7 @@ class UpdateProfile extends Component<updateProfileProps, UpdateState> {
         this.setState({ newText: this.props.currentValue });
         this.handleClose()
     };
-    handleChange = (e: any) => {
+    handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const val = e.target.value
         e.persist();
         this.setState({ newText: val });

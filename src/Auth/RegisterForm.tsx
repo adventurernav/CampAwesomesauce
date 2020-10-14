@@ -82,6 +82,9 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     fullWidth
+                                    inputProps={{ pattern: '[a-zA-Z]+' }}
+                                    helperText='Can only contain letters'
+
                                 />
                             </div>
                             <div className="div-padding">
@@ -92,6 +95,9 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     fullWidth
+                                    inputProps={{ pattern: '[a-zA-Z]+' }}
+                                    helperText='Can only contain letters'
+
                                 />
                             </div>
                             <div className="div-padding">
@@ -103,6 +109,9 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     fullWidth
+                                    inputProps={{ pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' }}
+
+                                    
                                 />
                             </div>
                             <div className="div-padding">
@@ -114,7 +123,8 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     fullWidth
-                                    helperText='Password must be at least 8 characters long.'
+                                    inputProps={{ minLength: 8, pattern: '[a-zA-Z0-9]+' }}
+                                    helperText='Password must be at least 8 characters long and contain only numbers and letters.'
                                 />
                             </div>
 

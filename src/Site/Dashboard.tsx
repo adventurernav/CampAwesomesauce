@@ -55,7 +55,7 @@ class Dashboard extends Component<DashboardProps> {
             })
             .catch(err => console.log(err))
     }
-    profileFetch = (): any => {
+    profileFetch = (): void => {
 
         fetch(`${APIURL}/profile/`, {
             method: 'GET',
@@ -81,8 +81,10 @@ class Dashboard extends Component<DashboardProps> {
         return (
             <Grid container direction='column'>
                 <Grid item className='max-width'>
-                <h1>Hello, {this.state.users.playaname}!</h1>
-                <img src={this.state.users.profilePic} alt='avatar' className='avatar' />
+                {this.state.users.playaname? (<div>
+                    <h1>Hello, {this.state.users.playaname}!</h1>
+                    <img src={this.state.users.profilePic} alt='avatar' className='avatar' />
+                </div>):null}
                 <h3>Welcome back.</h3>
                 </Grid>
                 <Grid container direction='column' justify='space-between' className='max-width'>

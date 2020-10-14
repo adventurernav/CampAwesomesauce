@@ -1,10 +1,11 @@
 import { Grid, Button, Table, TableHead, TableCell, TableBody, TableRow, Card, CardContent } from "@material-ui/core";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import {Redirect} from 'react-router-dom'
 import APIURL from '../../helpers/environment'
+import requestHeaders from "../RequestHeaders";
 import AdminUpdate from './AdminUpdate'
+
 
 type AdminProps = {
     appState: {
@@ -24,8 +25,6 @@ type usersObject = {
     createdAt: string,
     id: number
 }
-
-
 class Admin extends Component<AdminProps, AdminState> {
     constructor(props: AdminProps) {
         super(props)
@@ -38,7 +37,8 @@ class Admin extends Component<AdminProps, AdminState> {
     }
     requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     getUsers() {
-        fetch(`${APIURL}/admin/users`, {
+        if(this.props.appState.token!==null){
+            fetch(`${APIURL}/admin/users`, {
             method: 'GET',
             headers: this.requestHeaders
         })
@@ -48,6 +48,7 @@ class Admin extends Component<AdminProps, AdminState> {
                     users: data
                 })
             })
+        }
     }
     deleteUser (thisUser:usersObject) {
         fetch(`${APIURL}/admin/users/${thisUser.id}`, {
@@ -67,7 +68,7 @@ class Admin extends Component<AdminProps, AdminState> {
     render() {
         return (
             <div>
-                {/* {this.props.appState.admin===false? <Redirect to='/' /> : null} */}
+                {this.props.appState.admin===false? <Redirect to='/' /> : null}
                 <h1>Admin Portal</h1>
                 <Grid container justify='center'>
                     <Card id='number-of-users'>

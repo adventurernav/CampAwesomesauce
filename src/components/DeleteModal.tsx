@@ -1,6 +1,8 @@
 import { Button, DialogTitle, DialogActions, Dialog } from "@material-ui/core";
 import React, { Component } from "react";
 import APIURL from '../helpers/environment'
+import requestHeaders from "./RequestHeaders";
+
 
 type delProps = {
     appState: { authenticated: boolean, token: string|null } ,
@@ -24,8 +26,9 @@ state={
         this.setState({ open: false });
     };
     
-    delFetch = (): any => {
-        fetch(`${APIURL}/${this.props.path}`, {
+    delFetch = () => {
+       if (this.props.appState.token) {
+            fetch(`${APIURL}/${this.props.path}`, {
             method: 'DELETE',
             headers: this.requestHeaders
         })
@@ -39,7 +42,7 @@ state={
                     alert(`${data.error.errors[0].message}`)
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err))}
     }
     render() {
         return (

@@ -78,7 +78,7 @@ class UpdateUser extends Component<UpdateUserProps, UpdateState> {
         this.setState({ newText: this.props.currentValue });
         this.handleClose()
     };
-    handleChange = (e: any) => {
+    handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const val = e.target.value
         e.persist();
         this.setState({ newText: val });
