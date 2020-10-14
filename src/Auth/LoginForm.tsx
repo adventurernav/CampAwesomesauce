@@ -23,7 +23,7 @@ export class LoginForm extends Component <LoginFormProps,stateValues> {
         submitted: false,
         admin: false
     }
-    LoginSubmit(values:Values, loginProps: LoginFormProps){
+    LoginSubmit(values:Values, loginProps: LoginFormProps):void{
         fetch(`${APIURL}/user/login`, {
             method: 'POST',
             headers: {

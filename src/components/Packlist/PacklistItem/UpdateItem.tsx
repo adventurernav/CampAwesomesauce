@@ -26,15 +26,15 @@ class UpdateItem extends Component<UpProps, UpState> {
         open: false,
         newText: this.props.currentValue
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     submitClick = () => {
         this.handleUpdateFetch();
     }
-    handleUpdateFetch = () => {
+    handleUpdateFetch = ():void => {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/item/${this.props.itemID}`, {
             method: 'PUT',
-            headers: this.requestHeaders,
-            body: JSON.stringify({
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),            body: JSON.stringify({
                 [this.props.textKey]: this.state.newText
             })
         })
@@ -48,7 +48,7 @@ class UpdateItem extends Component<UpProps, UpState> {
                 }
             })
             .catch(err => console.log(err))
-    }
+    }}
     handleOpen = () => {
         this.setState({ open: true });
     };

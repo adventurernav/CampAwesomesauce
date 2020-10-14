@@ -15,7 +15,6 @@ state={
     open: false,
     submitted:false
 }
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
     handleOpen = () => {
         this.setState({ open: true });
     };
@@ -25,10 +24,11 @@ state={
     };
     
     delUser = (): void => {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/user/`, {
             method: 'DELETE',
-            headers: this.requestHeaders
-        })
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),        })
             .then(res => res.json())
             .then(data=>{
                 if (!data.error){
@@ -40,7 +40,7 @@ state={
                 }
             })
             .catch(err => console.log(err))
-    }
+    }}
     render() {
         return (
             <div>

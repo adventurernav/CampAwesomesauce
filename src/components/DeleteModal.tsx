@@ -17,7 +17,7 @@ class DeleteModal extends Component<delProps, delState> {
 state={
     open: false
 }
-    requestHeaders: any = { 'Content-Type': 'application/json' , 'Authorization': this.props.appState.token};
+    
     handleOpen = () => {
         this.setState({ open: true });
     };
@@ -26,11 +26,14 @@ state={
         this.setState({ open: false });
     };
     
-    delFetch = () => {
+    delFetch = ():void => {
        if (this.props.appState.token) {
             fetch(`${APIURL}/${this.props.path}`, {
             method: 'DELETE',
-            headers: this.requestHeaders
+            headers: new Headers({
+                'Content-Type': 'application/json' , 
+                Authorization: this.props.appState.token
+            })
         })
             .then(res => res.json())
             .then(data=>{

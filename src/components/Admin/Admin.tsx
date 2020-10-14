@@ -35,13 +35,15 @@ class Admin extends Component<AdminProps, AdminState> {
     componentDidMount() {
         this.getUsers()
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
-    getUsers() {
+    getUsers():void {
         if(this.props.appState.token!==null){
             fetch(`${APIURL}/admin/users`, {
             method: 'GET',
-            headers: this.requestHeaders
-        })
+            headers: new Headers({
+                'Content-Type': 'application/json' , 
+                Authorization: this.props.appState.token
+            })
+            })
             .then(res => res.json())
             .then((data) => {
                 this.setState({
@@ -50,11 +52,15 @@ class Admin extends Component<AdminProps, AdminState> {
             })
         }
     }
-    deleteUser (thisUser:usersObject) {
+    deleteUser (thisUser:usersObject):void {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/admin/users/${thisUser.id}`, {
             method: 'DELETE',
-            headers: this.requestHeaders
-        })
+            headers: new Headers({
+                'Content-Type': 'application/json' , 
+                Authorization: this.props.appState.token
+            })        })
             .then(res => res.json())
             .then(response => {
                 if (!response.error) {
@@ -64,7 +70,7 @@ class Admin extends Component<AdminProps, AdminState> {
                 }
             })
             .catch(err => console.log(err))
-    }
+    }}
     render() {
         return (
             <div>

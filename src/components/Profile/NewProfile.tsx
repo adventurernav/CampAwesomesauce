@@ -23,14 +23,14 @@ class NewProfile extends Component<newProfileProps, stateValues> {
     state = {
         submitted: false
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
-    newProfileSubmit = (values: Values) => {
+    newProfileSubmit = (values: Values):void => {
+        if(this.props.appState.token!==null){
+
         let id: number = 1
         fetch(`${APIURL}/profile/register/${id}`, {
             method: 'POST',
-            headers: this.requestHeaders,
-            body: JSON.stringify({
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),            body: JSON.stringify({
                 aboutMe: values.aboutMe,
                 burnsAttended: values.burnsAttended,
                 favPrinciple: values.favPrinciple,
@@ -48,7 +48,7 @@ class NewProfile extends Component<newProfileProps, stateValues> {
                 }
             })
             .catch(err => console.log(err))
-    }
+    }}
     render() {
         return (
             <div className="max-width">

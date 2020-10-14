@@ -27,7 +27,7 @@ class RegisterForm extends Component<RegisterFormProps, stateValues> {
         this.RegisterSubmit=this.RegisterSubmit.bind(this)
     }
     
-    RegisterSubmit(values: Values, submitProps: RegisterFormProps) {
+    RegisterSubmit(values: Values, submitProps: RegisterFormProps):void {
         
         fetch(`${APIURL}/user/register`, {
             method: 'POST',

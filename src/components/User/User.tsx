@@ -44,7 +44,6 @@ class User extends Component<UserProps, UserState>{
             },
         }
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     componentDidMount() {
             this.getUser()
        
@@ -53,11 +52,12 @@ class User extends Component<UserProps, UserState>{
         console.log(this.state.user.id)
     }
 
-    getUser() {
+    getUser():void {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/user/`, {
             method: 'GET',
-            headers: this.requestHeaders
-        })
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),        })
             .then(res => res.json())
             .then((data: UserResults) => {
                 console.log(data)
@@ -74,7 +74,7 @@ class User extends Component<UserProps, UserState>{
 
             })
             .catch(err => console.log(err))
-    }
+    }}
     render() {
         const memberSince = this.state.user.createdAt.slice(0, 4)
         return (

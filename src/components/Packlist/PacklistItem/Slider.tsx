@@ -20,13 +20,13 @@ constructor(props:SliderProps){
     }
     this.handleChange = this.handleChange.bind(this)
 }
-requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
-handleChange(e: React.ChangeEvent<HTMLInputElement>){
+handleChange(e: React.ChangeEvent<HTMLInputElement>):void{
+    if(this.props.appState.token!==null){
 
     fetch(`${APIURL}/item/${this.props.itemID}`,{
         method: 'PUT',
-        headers: this.requestHeaders,
+        headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),
         body: JSON.stringify({
             [this.props.sliderKey]: e.target.checked
         })
@@ -40,7 +40,7 @@ handleChange(e: React.ChangeEvent<HTMLInputElement>){
     })
     .catch((err)=>console.log(err))
 
-}
+}}
     render() {
         return (
             <div>

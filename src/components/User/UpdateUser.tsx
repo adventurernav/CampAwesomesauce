@@ -17,7 +17,6 @@ class UpdateUser extends Component<UpdateUserProps, UpdateState> {
         newText: this.props.currentValue,
         open: false
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     password: string = this.props.textKey==='password'? 'password' : ''
     dialogContentController = () => {
         if (this.props.textKey === 'firstName' || this.props.textKey === 'lastName') {
@@ -47,11 +46,12 @@ class UpdateUser extends Component<UpdateUserProps, UpdateState> {
         } else { console.log('Nothing Found') }
 
     }
-    UpdateUserSubmit = () => {
+    UpdateUserSubmit = ():void => {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/user/${this.password}`, {
             method: 'PUT',
-            headers: this.requestHeaders,
-            body: JSON.stringify({
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),            body: JSON.stringify({
                 [this.props.textKey]: this.state.newText
             })
         })
@@ -66,7 +66,7 @@ class UpdateUser extends Component<UpdateUserProps, UpdateState> {
                 }
             })
             .catch(err => console.log(err))
-    }
+    }}
     handleOpen = () => {
         this.setState({ open: true });
     };

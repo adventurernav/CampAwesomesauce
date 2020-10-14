@@ -28,17 +28,16 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
             upSubmitted: false
         }
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
     componentDidMount() {
         this.profileFetch()
     }
-    profileFetch = (): any => {
+    profileFetch = ():void => {
+        if(this.props.appState.token!==null){
 
         fetch(`${APIURL}/profile/`, {
             method: 'GET',
-            headers: this.requestHeaders
-        })
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),        })
             .then(res => res.json())
             .then((data: ProfileResults) => {
                 if (data.users !== null) {
@@ -59,7 +58,7 @@ class GetProfile extends Component<getProfileProps, ProfileResults> {
                 }
             })
             .catch(err => console.log(err))
-    }
+    }}
 
 
     render() {

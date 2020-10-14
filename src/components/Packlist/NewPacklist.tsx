@@ -19,31 +19,31 @@ type newPacklistState = {
 class NewPacklist extends Component<newPacklistProps> {
     constructor(props: newPacklistProps) {
         super(props)
-        this.state={
+        this.state = {
             submitted: false
         }
     }
-    componentDidUpdate(){
+    componentDidUpdate() {
         console.log('Component Did Update')
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
 
-    newPacklistSubmit(values: Values) {
+    newPacklistSubmit(values: Values):void {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/packlist/`, {
             method: 'POST',
-            headers: this.requestHeaders,
-            body: JSON.stringify({
+            headers: new Headers({ 'Content-Type': 'application/json', Authorization: this.props.appState.token }), body: JSON.stringify({
                 title: values.title
             })
         })
             .then(res => res.json())
             .then(response => {
-                this.setState({submitted: true})
+                this.setState({ submitted: true })
                 window.location.reload()
 
             })
             .catch(err => console.log(err))
-    }
+    }}
 
     render() {
         return (

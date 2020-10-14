@@ -40,12 +40,12 @@ class Dashboard extends Component<DashboardProps> {
         this.packlistFetch();
         this.profileFetch();
     }
-    requestHeaders: any = { 'Content-Type': 'application/json', 'Authorization': this.props.appState.token };
     packlistFetch = (): void => {
+        if(this.props.appState.token!==null){
+
         fetch(`${APIURL}/packlist/`, {
             method: 'GET',
-            headers: this.requestHeaders
-        })
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),        })
             .then(res => res.json())
             .then((results) => {
                 this.setState({
@@ -54,13 +54,13 @@ class Dashboard extends Component<DashboardProps> {
 
             })
             .catch(err => console.log(err))
-    }
+    }}
     profileFetch = (): void => {
+        if(this.props.appState.token!==null){
 
         fetch(`${APIURL}/profile/`, {
             method: 'GET',
-            headers: this.requestHeaders
-        })
+            headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),        })
             .then(res => res.json())
             .then((profile: ProfileResults) => {
                     this.setState({
@@ -76,7 +76,7 @@ class Dashboard extends Component<DashboardProps> {
                 
             })
             .catch(err => console.log(err))
-    }
+    }}
     render() {
         return (
             <Grid container direction='column'>
