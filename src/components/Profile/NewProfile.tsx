@@ -27,8 +27,7 @@ class NewProfile extends Component<newProfileProps, stateValues> {
     newProfileSubmit = (values: Values):void => {
         if(this.props.appState.token!==null){
 
-        let id: number = 1
-        fetch(`${APIURL}/profile/register/${id}`, {
+        fetch(`${APIURL}/profile/register/`, {
             method: 'POST',
             headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),            body: JSON.stringify({
                 aboutMe: values.aboutMe,

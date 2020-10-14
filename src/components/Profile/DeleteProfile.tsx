@@ -18,8 +18,7 @@ state={
     delProfileFetch = (): void => {
         if(this.props.appState.token!==null){
 
-        let id:number = 14; //this should be the user's ID
-        fetch(`${APIURL}/profile/${id}`, {
+        fetch(`${APIURL}/profile/`, {
             method: 'DELETE',
             headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),        })
             .then(res => res.json())
