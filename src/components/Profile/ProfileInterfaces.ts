@@ -1,9 +1,9 @@
 export interface ProfileResults {
-    users: Users
+    profile: Profiles
     newUser: boolean
     upSubmitted: boolean
 }
-export interface Users {
+export interface Profiles {
         aboutMe: string,
         burnsAttended: number,
         favPrinciple: string,

@@ -13,6 +13,8 @@ import About from "./About";
 import Donate from "./Donate";
 import Resources from "./Resources";
 import Admin from "../components/Admin/Admin";
+import BMAPI from "./BMAPI";
+import Campmates from "../components/Profile/Campmates";
 
 type controllerState = {
 
@@ -39,12 +41,14 @@ class SwitchController extends Component<ControllerProps, controllerState> {
                     <Route exact path="/contact"><Contact /></Route>
                     <Route exact path="/about"><About /></Route>
                     <Route exact path="/donate"><Donate /></Route>
+                    <Route exact path="/art"><BMAPI /></Route>
                     <Route exact path="/auth">
                         <Auth updateToken={this.props.updateToken} updateAdmin={this.props.updateAdmin} appState={this.props.appState} />
                     </Route>
                     <Route exact path="/logout"><Logout updateAdmin={this.props.updateAdmin}updateToken={this.props.updateToken} /></Route>
                     <Route exact path="/packlist"><Packlist appState={this.props.appState} /></Route>
                     <Route exact path="/profile"><GetProfile appState={this.props.appState} /></Route>
+                    <Route exact path="/campmates"><Campmates appState={this.props.appState} /></Route>
                     <Route exact path="/account"><User appState={this.props.appState} /></Route>
                     <Route exact path="/profile/new"><NewProfile appState={this.props.appState} /></Route>
 
