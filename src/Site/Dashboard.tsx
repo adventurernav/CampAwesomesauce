@@ -9,7 +9,7 @@ type DashboardProps = {
 }
 interface DashboardState {
     packlist: packlistObject[],
-    users: {
+    profile: {
         aboutMe: string,
         burnsAttended: number,
         favPrinciple: string,
@@ -27,7 +27,7 @@ type packlistObject = {
 class Dashboard extends Component<DashboardProps> {
     state: DashboardState = {
         packlist: [],
-        users: {
+        profile: {
             aboutMe: '',
             burnsAttended: 0,
             favPrinciple: '',
@@ -64,13 +64,13 @@ class Dashboard extends Component<DashboardProps> {
             .then(res => res.json())
             .then((profile: ProfileResults) => {
                     this.setState({
-                        users: {
-                            aboutMe: profile.users.aboutMe,
-                            burnsAttended: profile.users.burnsAttended,
-                            favPrinciple: profile.users.favPrinciple,
-                            playaname: profile.users.playaname,
-                            profilePic: profile.users.profilePic,
-                            status: profile.users.status
+                        profile: {
+                            aboutMe: profile.profile.aboutMe,
+                            burnsAttended: profile.profile.burnsAttended,
+                            favPrinciple: profile.profile.favPrinciple,
+                            playaname: profile.profile.playaname,
+                            profilePic: profile.profile.profilePic,
+                            status: profile.profile.status
                         }
                     })
                 
@@ -81,9 +81,9 @@ class Dashboard extends Component<DashboardProps> {
         return (
             <Grid container direction='column'>
                 <Grid item className='max-width'>
-                {this.state.users.playaname? (<div>
-                    <h1>Hello, {this.state.users.playaname}!</h1>
-                    <img src={this.state.users.profilePic} alt='avatar' className='avatar' />
+                {this.state.profile.playaname? (<div>
+                    <h1>Hello, {this.state.profile.playaname}!</h1>
+                    <img src={this.state.profile.profilePic} alt='avatar' className='avatar' />
                 </div>):null}
                 <h3>Welcome back.</h3>
                 </Grid>
@@ -102,7 +102,7 @@ class Dashboard extends Component<DashboardProps> {
                     </Grid>
                     <Grid item className='max-width'>
                 <Button variant='outlined' href='/profile' color='primary' className='max-width'>
-                <h3>My Status: <br/>{this.state.users.status}</h3>
+                <h3>My Status: <br/>{this.state.profile.status}</h3>
                 </Button>
                 </Grid>
                 <Grid container justify='center'>

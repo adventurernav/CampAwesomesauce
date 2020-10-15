@@ -8,6 +8,7 @@ import clsx from 'clsx';
 const authRoute =[['/auth', 'Register or Login']]
 const mainRoutes = [
     ['/', 'Home'],
+    // ['/art', 'Art'],
     ['/resources', 'Resources'],
     ['/about', 'About'],
     ['/donate', 'Donate'],

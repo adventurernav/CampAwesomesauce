@@ -10,6 +10,9 @@ class Resources extends Component {
                 <h1>Resources</h1>
                 <List>
                     <ListItem>
+                        <Link href='https://www.facebook.com/groups/1467255686848807'><FacebookIcon />  Camp Awesomesauce Group</Link>
+                    </ListItem>
+                    <ListItem>
                         <Link href='https://burningman.org/'>The Official Burning Man Website</Link>
                     </ListItem>
                     <ListItem>
@@ -19,7 +22,10 @@ class Resources extends Component {
                         <Link href='https://burningman.org/event/preparation/first-timers-guide/'>First Timer's Guide</Link>
                     </ListItem>
                     <ListItem>
-                        <Link href='https://www.facebook.com/groups/1467255686848807'><FacebookIcon />  Camp Awesomesauce Group</Link>
+                        <Link href='https://regionals.burningman.org/'>Find a Regional Burn</Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link href='https://burningman.org/culture/history/brc-history/event-archives/2019-event-archive/'>See what happened in 2019</Link>
                     </ListItem>
 
                 </List>
