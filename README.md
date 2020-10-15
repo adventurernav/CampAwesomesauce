@@ -35,3 +35,35 @@ $ npm start
 Be sure to check out the readme on the server app if you want to clone that as well. 
 For Demo purposes, I have the server already running. 
 
+### Walkthrough
+#### Home page
+![Landing](./src/assets/README/landing.jpg)
+
+#### Navigation
+![navdrawer](./src/assets/README/navdrawer.jpg)
+The top left hamburger icon expands the left drawer to reveal the navigation links. 
+
+#### Authorization
+![Auth](./src/assets/README/auth.jpg)
+Users can sign up for a new account or login to an existing account. Admins will use this page to log in. 
+
+#### Dashboard
+![dashboard](./src/assets/README/dashboard.jpg)
+From the dashboard, the user can see their recent packlists and their current status. These are also links to the packlist/profile pages respectively. 
+
+#### Packlist 
+![packlist](./src/assets/README/packlist.jpg)
+Users can create packlists and add items to them. The user has the ability to edit or delete all packlists and items. The sliders update the items as they are flipped. 
+
+
+#### Profile
+![profile](./src/assets/README/profile.jpg)
+From the profile page, the user can update their avatar, status, or other profile details. They may also choose to delete their profile. They will be re-routed back to the new profile page.
+
+#### Account
+![account](./src/assets/README/account.jpg)
+Users can change their name, email, or update their password. 
+
+#### Admin
+![admin](./src/assets/README/admin.jpg)
+Admin users may edit or delete user accounts. Any admin can promote other users to admin. 
