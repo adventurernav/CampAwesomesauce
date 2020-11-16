@@ -50,7 +50,7 @@ class AdminUpdate extends Component<UpProps, UpState> {
                     if (data.message === "Update Failed") {
                         alert(data.error.original.detail)
                         throw new Error('User not updated')
-                    } else if (data.NumberOfUsersUpdated[0] === 0) {
+                    } else if (data.NumberOfPasswordsUpdated[0] === 0) {
                         throw new Error('User not updated')
                     }
                     else {

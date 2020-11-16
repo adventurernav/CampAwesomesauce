@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import Group from '../assets/group2019.jpg';
 import Zoom from '../assets/nosegoes.jpg';
 import Dome from '../assets/dome.jpg';
-import One from '../assets/1.jpg';
-import Two from '../assets/2.jpg'
-import Three from '../assets/3.jpg'
 import awesomeballs from '../assets/awesomeballs.jpg'
 import balls1 from '../assets/balls1.jpg'
 import bar from '../assets/bar.jpg'
@@ -18,7 +15,6 @@ import garrett from '../assets/garrett.jpg'
 import genderbender from '../assets/genderbender.jpg'
 import genderbenderdome from '../assets/genderbenderdome.jpg'
 import kristel from '../assets/kristel.jpg'
-import lights from '../assets/lights.jpg'
 import quincycamera from '../assets/quincycamera.jpg'
 import temple from '../assets/temple.jpg'
 import templeburn from '../assets/templeburn.jpg'
@@ -44,7 +40,7 @@ class About extends Component {
                 <p>We are a diverse group of friends and family from all over the world. What might draw you to the camp are our huge Awesomeballs! They are large air-filled balls you get inside, strap on, and do combat against each other in! We also have a monkey hut and two domes: one bar and one hangout space. We are infamous for our rocking gender bender party. We like to interact with our community and with denizens of the city as they pass through our neighborhood on a near constant basis.  Camp members are up at all hours of the day and night and we’ve been known to serve food, offer lights to the unlit, and will always share our company. In 2020 we made some adjustments and used Zoom to interact. Here's some more photos of us and our camp from previous burns! </p>
                 <hr />
 
-                <h1>2020</h1>
+                <h1>2020: Multiverse</h1>
                 <img style={{ width: '80vw' }} src={Zoom} alt="Zoom" />
                 <img style={{ width: '80vw' }} src={bar} alt="bar" />
                 <img style={{ width: '80vw' }} src={daftpunk} alt="daftpunk" />
@@ -52,7 +48,7 @@ class About extends Component {
                 <img style={{ width: '80vw' }} src={VR2} alt="VR2" />
                 <img style={{ width: '80vw' }} src={VR3} alt="VR3" />
                 <hr />
-                <h1>2019</h1>
+                <h1>2019: Metamorphosis</h1>
                 <img style={{ width: '80vw' }} src={crystal} alt="crystal" />
                 <img style={{ width: '80vw' }} src={Dome} alt="Dome" />
                 <img style={{ width: '80vw' }} src={wedding} alt="wedding" />
@@ -66,16 +62,13 @@ class About extends Component {
                 <img style={{ width: '80vw' }} src={genderbenderdome} alt="genderbenderdome" />
                 <img style={{ width: '80vw' }} src={balls1} alt="balls1" />
                 <img style={{ width: '80vw' }} src={kristel} alt="kristel" />
-                <img style={{ width: '80vw' }} src={lights} alt="lights" />
                 <img style={{ width: '80vw' }} src={quincycamera} alt="quincycamera" />
                 <img style={{ width: '80vw' }} src={temple} alt="temple" />
                 <img style={{ width: '80vw' }} src={templeburn} alt="templeburn" />
                 <img style={{ width: '80vw' }} src={truckdust} alt="truckdust" />
                 <img style={{ width: '80vw' }} src={wide} alt="wide" />
                 <img style={{ width: '80vw' }} src={burn} alt="burn" />
-                <img style={{ width: '80vw' }} src={One} alt="1" />
-                <img style={{ width: '80vw' }} src={Two} alt="2" />
-                <img style={{ width: '80vw' }} src={Three} alt="3" />
+                
                 
 
             </div>

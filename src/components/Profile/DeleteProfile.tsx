@@ -23,10 +23,12 @@ state={
             headers: new Headers({'Content-Type': 'application/json' , Authorization: this.props.appState.token}),        })
             .then(res => res.json())
             .then(data=>{
+                console.log(data)
                 if (!data.error){
-                    this.setState({submitted:true})
+                    // this.setState({submitted:true})
                 } else{
-                    alert(`${data.error.errors[0].message}`)
+                    console.log('success?')
+                    // alert(`${data.error.errors[0].message}`)
                 }
             })
 
